@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Material - Samarth Kolge</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+
+  <!-- Top Header -->
+  <header class="bg-gray-800 sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-green-400 animate-pulse">📚 Study Material by Samarth</h1>
+      <nav class="space-x-6 hidden md:block">
+        <a href="index.html#top" class="text-white hover:text-green-400 transition">Home</a>
+        <a href="dashboard.html" class="text-white hover:text-green-400 transition">Dashboard</a>
+        <a href="index.html#contact" class="text-white hover:text-green-400 transition">Contact</a>
+      </nav>
+    </div>
+  </header>
+<section id="study" class="px-6 py-20 bg-gradient-to-br from-gray-900 to-black text-white">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-4xl font-extrabold text-center text-green-400 mb-4">📚 Study Materials for Aspiring Data Analyst</h2>
+    <p class="text-center text-gray-300 text-lg mb-4">
+      Here is my personal curated collection of cheat sheets and study guides. I struggled to find these early in my learning—so I’m sharing them here for free. Hope it helps you too 💚
+    </p>
+    <p class="text-center text-green-300 italic text-md mb-10">
+      — From one learner to another, Best of luck! 💫
+    </p>
+
+    <!-- Search Bar -->
+    <div class="flex justify-center mb-10">
+      <input id="pdfSearch" type="text" placeholder="Search PDFs..." class="w-full max-w-md px-4 py-2 rounded-lg bg-gray-800 border border-gray-600 text-white focus:ring focus:ring-green-400" />
+    </div>
+
+    <!-- PDF Cards -->
+    <div id="pdfGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Cards dynamically added via JS -->
+    </div>
+  </div>
+</section>
+
+
+<script>
+  const pdfs = [
+    { title: "Cheatsheet Tableau", file: "assets/Cheatsheet_Tableau.pdf", size: "102 KB" },
+    { title: "Data Viz Cheat Sheet Final", file: "assets/Data Viz Cheat Sheet Final.pdf", size: "150 KB" },
+    { title: "Excel Cheat Sheet", file: "assets/Excel Cheat Sheet.pdf", size: "95 KB" },
+    { title: "Hypothesis Testing", file: "assets/Hypothesis Testing.pdf", size: "110 KB" },
+    { title: "Numpy Cheat Sheet Final", file: "assets/Numpy Cheat Sheet Final.pdf", size: "120 KB" },
+    { title: "Pandas Cheat Sheet Final", file: "assets/Pandas Cheat Sheet Final.pdf", size: "130 KB" },
+    { title: "Prob_statistics_final", file: "assets/Prob_statistics_final.pdf", size: "145 KB" },
+    { title: "Python Beginner 2", file: "assets/Python Beginner 2.pdf", size: "160 KB" },
+    { title: "Python Beginner", file: "assets/Python Beginner.pdf", size: "155 KB" },
+    { title: "Python Intermediate 1", file: "assets/Python Intermediate 1.pdf", size: "170 KB" },
+    { title: "Python Intermediate 2", file: "assets/Python Intermediate 2.pdf", size: "165 KB" },
+    { title: "SQL Cheat Sheet", file: "assets/SQL Cheat Sheet.pdf", size: "140 KB" },
+  ];
+
+  const pdfGrid = document.getElementById('pdfGrid');
+
+  function renderPDFs(filter = "") {
+    pdfGrid.innerHTML = "";
+    const filtered = pdfs.filter(p => p.title.toLowerCase().includes(filter.toLowerCase()));
+    filtered.forEach(pdf => {
+      const card = document.createElement('div');
+      card.className = "bg-gray-800 rounded-lg shadow-lg p-5 hover:shadow-2xl transition-all transform hover:scale-105 border border-gray-700 animate-fadeIn";
+      card.innerHTML = `
+        <h3 class="text-xl font-bold mb-2 text-green-300">${pdf.title}</h3>
+        <p class="text-sm text-gray-400 mb-4">📄 ${pdf.size}</p>
+        <a href="${pdf.file}" download class="inline-block bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition">
+          ⬇️ Download PDF
+        </a>
+      `;
+      pdfGrid.appendChild(card);
+    });
+}
+
+  renderPDFs();
+
+  document.getElementById("pdfSearch").addEventListener("input", e => {
+    renderPDFs(e.target.value);
+  });
+</script>
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fadeIn {
+    animation: fadeIn 0.5s ease-in-out both;
+  }
+</style>
+
+
+
+</body>
+</html>

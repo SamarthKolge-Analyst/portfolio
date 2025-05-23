@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Samarth Kolge - Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#0b0f1c] text-white">
+
+  <!-- 🔄 Marquee Banner -->
+  <div class="bg-green-600 text-white text-sm py-2">
+    <marquee behavior="scroll" direction="left" scrollamount="6">
+      🚀 I AM OPEN TO WORK AS A DATA ANALYST AND BUSINESS ANALYST — LET'S CONNECT!
+    </marquee>
+  </div>
+
+  <!-- 🔝 Navigation Bar (Same as main site) -->
+  <nav class="bg-gray-900 shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto flex justify-center items-center px-4 py-3 space-x-6 text-lg">
+      <a href="index.html" class="text-white hover:text-green-400 transition">Home</a>
+      <a href="index.html#about" class="text-white hover:text-green-400 transition">About Me</a>
+      <a href="index.html#projects" class="text-white hover:text-green-400 transition">Projects</a>
+      <a href="index.html#certifications" class="text-white hover:text-green-400 transition">Certifications</a>
+      <a href="dashboard.html" class="text-green-500 font-bold">Dashboard</a>
+      <a href="programmer.html" class="text-white hover:text-green-400 transition">Programmer</a>
+      <a href="index.html#contact" class="text-white hover:text-green-400 transition">Contact</a>
+    </div>
+  </nav>
+
+  <!-- 📊 Embedded Tableau Dashboard -->
+  <section class="w-full px-4 py-10 bg-gray-950">
+    <div class="max-w-7xl mx-auto">
+      <div class='tableauPlaceholder' id='viz1747833349318' style='position: relative'>
+        <noscript>
+          <a href='#'><img alt=' ' src='https://public.tableau.com/static/images/Su/Superstore_Profit_Analysis_17085838734660/Dashboard/1_rss.png' style='border: none' /></a>
+        </noscript>
+        <object class='tableauViz' style='display:none;'>
+          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+          <param name='embed_code_version' value='3' />
+          <param name='site_root' value='' />
+          <param name='name' value='Superstore_Profit_Analysis_17085838734660/Dashboard' />
+          <param name='tabs' value='yes' />
+          <param name='toolbar' value='yes' />
+          <param name='static_image' value='https://public.tableau.com/static/images/Su/Superstore_Profit_Analysis_17085838734660/Dashboard/1.png' />
+          <param name='animate_transition' value='yes' />
+          <param name='display_static_image' value='yes' />
+          <param name='display_spinner' value='yes' />
+          <param name='display_overlay' value='yes' />
+          <param name='display_count' value='yes' />
+          <param name='language' value='en-US' />
+        </object>
+      </div>
+      <script type='text/javascript'>
+        var divElement = document.getElementById('viz1747833349318');
+        var vizElement = divElement.getElementsByTagName('object')[0];
+        
+        vizElement.style.width = '100%';
+        vizElement.style.height = '550px'; // ✅ Reduced height here
+        
+        var scriptElement = document.createElement('script');
+        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+      </script>
+
+    </div>
+  </section>
+    
+  <!-- Social sidebar (fixed on left for desktop, hidden on mobile) -->
+<div class="hidden sm:flex fixed top-1/2 -translate-y-1/2 left-0 flex-col items-center space-y-6
+            bg-gray-100 p-4 rounded-tr-lg rounded-br-lg shadow z-50">
+  <!-- LinkedIn Icon -->
+  <a href="https://www.linkedin.com/in/samarth-kolge-134929285" target="_blank" aria-label="LinkedIn"
+     class="text-gray-600 hover:text-[#0A66C2] transition-colors duration-300">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" class="w-8 h-8">
+      <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 
+               1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 
+               15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 
+               0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 
+               3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 
+               8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 
+               1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 
+               0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 
+               7.225 0 7.225z"/>
+    </svg>
+  </a>
+  <!-- GitHub Icon -->
+  <a href="https://github.com/samarthkolge" target="_blank" aria-label="GitHub"
+     class="text-gray-600 hover:text-gray-900 transition-colors duration-300">
+    <svg xmlns="https://github.com/SamarthKolge-Analyst" fill="currentColor" viewBox="0 0 16 16" class="w-8 h-8">
+      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 
+               7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 
+               1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 
+               0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 
+               0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 
+               .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 
+               2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 
+               3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 
+               2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
+    </svg>
+  </a>
+  <!-- WhatsApp Icon -->
+  <a href="https://wa.me/9518905490" target="_blank" aria-label="WhatsApp"
+     class="text-gray-600 hover:text-green-500 transition-colors duration-300">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" class="w-8 h-8">
+      <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 
+               3.558.064 7.926c0 1.399.366 2.76 1.057 
+               3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 
+               3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 
+               7.9 0 0 0 13.6 2.326zM7.994 
+               14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 
+               6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 
+               6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 
+               6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 
+               6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 
+               1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 
+               3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 
+               1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+    </svg>
+  </a>
+  <!-- Email Icon -->
+  <a href="mailto:kolgesamarth@gmail.com" target="_blank" aria-label="Email"
+     class="text-gray-600 hover:text-red-500 transition-colors duration-300">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" class="w-8 h-8">
+      <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 
+               2v8a2 2 0 0 1-2 
+               2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 
+               1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 
+               2.383-4.708 2.825L15 11.105zm-.034 
+               6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 
+               3.47A1 1 0 0 0 2 
+               13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
+    </svg>
+  </a>
+</div>
+
+
+
+<!-- Talk with Samarth's Bot -->
+<div id="chatWidget" class="fixed bottom-0 right-4 text-base z-50 mb-2">
+
+  <!-- Chat toggle button -->
+  <!-- Chat toggle button with larger image and no background -->
+<button id="chatToggle" class="w-40 h-40 p-0 border-none bg-transparent shadow-none hover:scale-105 transition-transform">
+  <img src="assets/Bot_Photo.png" alt="Chatbot Icon" class="w-full h-full object-contain" />
+</button>
+
+
+
+
+  <!-- Chat window -->
+  <div id="chatWindow" class="hidden flex flex-col bg-gray-900 border border-gray-700 rounded-lg shadow-lg w-72" style="max-height: 600px;">
+    <div class="p-4 border-b border-gray-700 flex items-center justify-between">
+      <h3 class="font-bold text-white">Talk with Samarth's Bot</h3>
+      <button id="chatClose" class="text-xl text-white">&times;</button>
+    </div>
+
+    <!-- Message area -->
+    <div id="chatMessages"
+         class="p-4 overflow-y-auto text-sm space-y-3 text-gray-300"
+         style="height: 400px; max-height: 400px; scrollbar-width: thin; scrollbar-color: #4b5563 #1f2937;">
+      <div class="text-gray-400 italic">Ask me anything about skills, tools, education or say hi 👋</div>
+    </div>
+
+    <!-- Input area -->
+    <form id="chatForm" class="p-3 border-t border-gray-700 flex gap-2">
+      <input
+        type="text"
+        id="chatInput"
+        class="flex-1 px-3 py-2 text-sm bg-gray-800 text-white rounded outline-none"
+        placeholder="Type a question..." />
+      <button
+        type="submit"
+        class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded">
+        Send
+      </button>
+    </form>
+  </div>
+</div>
+
+
+<!-- DataBot Full Feature Script -->
+<!-- DataBot Manual-Only Script for Dashboard -->
+<script>
+const chatToggle = document.getElementById("chatToggle");
+const chatWindow = document.getElementById("chatWindow");
+const chatClose = document.getElementById("chatClose");
+const chatForm = document.getElementById("chatForm");
+const chatInput = document.getElementById("chatInput");
+const chatMessages = document.getElementById("chatMessages");
+
+function getTimeStamp() {
+  const now = new Date();
+  return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
+function speak(text) {
+  if ('speechSynthesis' in window) {
+    const msg = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.speak(msg);
+  }
+}
+
+function addMessage(content, type = 'bot') {
+  const wrapper = document.createElement("div");
+  wrapper.className = type === 'user' ? 'text-right' : 'text-left';
+  const msgDiv = document.createElement("div");
+  msgDiv.className = type === 'user'
+    ? 'inline-block px-4 py-2 my-2 rounded-xl bg-blue-600 text-white'
+    : 'inline-block px-4 py-2 my-2 rounded-xl bg-green-600 text-white';
+  msgDiv.innerHTML = `<div>${content}</div><div class="text-xs text-gray-300 mt-1">${getTimeStamp()}</div>`;
+  wrapper.appendChild(msgDiv);
+  chatMessages.appendChild(wrapper);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+  if (type === 'bot') speak(content);
+}
+
+// Manual toggle only
+function openChat() {
+  chatWindow.classList.remove("hidden");
+}
+
+function closeChat() {
+  chatWindow.classList.add("hidden");
+}
+
+chatToggle.addEventListener("click", () => {
+  const isHidden = chatWindow.classList.contains("hidden");
+  isHidden ? openChat() : closeChat();
+});
+
+chatClose.addEventListener("click", () => closeChat());
+
+// Handle message submission
+chatForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const userMessage = chatInput.value.trim();
+  if (!userMessage) return;
+
+  addMessage(userMessage, 'user');
+  chatInput.value = "";
+
+  // Simulate bot response logic
+  setTimeout(() => {
+    let reply = "I'm still learning! Try asking about skills, tools, or projects.";
+    if (/hi|hello|hey/i.test(userMessage)) reply = "Hello! How can I help you today?";
+    else if (/skills|tools|technologies/i.test(userMessage)) reply = "I'm skilled in SQL, Python, Power BI, Tableau, Excel.";
+    else if (/education|college|university/i.test(userMessage)) reply = "I'm pursuing MSc AI/ML from Woolf University.";
+    else if (/experience|internship/i.test(userMessage)) reply = "I worked as a Data Analyst Intern at Borgward Technology.";
+    addMessage(reply, 'bot');
+  }, 1000);
+});
+</script>
+
+
+
+
+
+</body>
+</html>

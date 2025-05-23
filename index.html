@@ -1,0 +1,1149 @@
+<!-- Updated Full HTML with Fixes and Your Data -->
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Samarth Kolge - Portfolio</title>
+
+  <!-- ✅ Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+
+
+
+  <!-- ✅ DaisyUI as standalone CSS (safer alternative to plugin) -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.8.0/dist/full.css" rel="stylesheet" type="text/css" />
+
+  <!-- ✅ FontAwesome for icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <style>
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in-up        { animation: fadeInUp 1s ease-out forwards; }
+    .fade-in-up-delay1 { animation: fadeInUp 1s ease-out forwards 0.3s; }
+    .fade-in-up-delay2 { animation: fadeInUp 1s ease-out forwards 0.6s; }
+    .fade-in-up-delay3 { animation: fadeInUp 1s ease-out forwards 0.9s; }
+
+  .tooltip {
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: black;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .group:hover .tooltip {
+    opacity: 1;
+  }
+
+
+  html {
+  scroll-behavior: smooth;
+}
+
+  </style>
+</head>
+
+
+<body class="font-sans text-white bg-gradient-to-br from-gray-900 to-black">
+  <!-- Marquee Banner -->
+<section id="top" class="bg-green-600 text-white text-sm py-2">
+  <marquee behavior="scroll" direction="left" scrollamount="6">
+    🚀 I AM OPEN TO WORK AS A DATA ANALYST AND BUSINESS ANALYST — LET'S CONNECT!
+  </marquee>
+</section>
+  
+
+  <!-- Navigation -->
+  <nav class="bg-gray-900 shadow sticky top-0 z-50">
+
+
+      <div class="max-w-7xl mx-auto flex justify-center items-center px-4 py-3">
+  <div class="hidden sm:flex space-x-8 text-lg">
+    <a href="#top" class="nav-link text-white hover:text-green-400 transition">Home</a>
+    <a href="#about" class="nav-link text-white hover:text-green-400 transition">About Me</a>
+    <a href="#projects" class="nav-link text-white hover:text-green-400 transition">Projects</a>
+    <a href="#certifications" class="nav-link text-white hover:text-green-400 transition">Certifications</a>
+    <a href="dashboard.html" class="text-white hover:text-green-400 transition">Dashboard</a>
+    <a href="programmer.html" class="text-white hover:text-green-400 transition">Programmer</a>
+    <a href="#contact" class="nav-link text-white hover:text-green-400 transition">Contact</a>
+  </div>
+</div>
+
+
+
+
+
+    </div>
+  </nav>
+
+  
+
+    
+  <!-- Social sidebar (fixed on left for desktop, hidden on mobile) -->
+<div class="hidden sm:flex fixed top-1/2 -translate-y-1/2 left-0 flex-col items-center space-y-6
+            bg-gray-100 p-4 rounded-tr-lg rounded-br-lg shadow z-50">
+  <!-- LinkedIn Icon -->
+  <a href="https://www.linkedin.com/in/samarth-kolge-134929285" target="_blank" aria-label="LinkedIn"
+     class="text-gray-600 hover:text-[#0A66C2] transition-colors duration-300">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" class="w-8 h-8">
+      <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 
+               1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 
+               15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 
+               0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 
+               3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 
+               8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 
+               1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 
+               0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 
+               7.225 0 7.225z"/>
+    </svg>
+  </a>
+  <!-- GitHub Icon -->
+  <a href="https://github.com/samarthkolge" target="_blank" aria-label="GitHub"
+     class="text-gray-600 hover:text-gray-900 transition-colors duration-300">
+    <svg xmlns="https://github.com/SamarthKolge-Analyst" fill="currentColor" viewBox="0 0 16 16" class="w-8 h-8">
+      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 
+               7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 
+               1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 
+               0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 
+               0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 
+               .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 
+               2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 
+               3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 
+               2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
+    </svg>
+  </a>
+  <!-- WhatsApp Icon -->
+  <a href="https://wa.me/9518905490" target="_blank" aria-label="WhatsApp"
+     class="text-gray-600 hover:text-green-500 transition-colors duration-300">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" class="w-8 h-8">
+      <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 
+               3.558.064 7.926c0 1.399.366 2.76 1.057 
+               3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 
+               3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 
+               7.9 0 0 0 13.6 2.326zM7.994 
+               14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 
+               6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 
+               6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 
+               6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 
+               6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 
+               1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 
+               3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 
+               1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+    </svg>
+  </a>
+  <!-- Email Icon -->
+  <a href="mailto:kolgesamarth@gmail.com" target="_blank" aria-label="Email"
+     class="text-gray-600 hover:text-red-500 transition-colors duration-300">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" class="w-8 h-8">
+      <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 
+               2v8a2 2 0 0 1-2 
+               2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 
+               1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 
+               2.383-4.708 2.825L15 11.105zm-.034 
+               6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 
+               3.47A1 1 0 0 0 2 
+               13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
+    </svg>
+  </a>
+</div>
+
+
+<!-- Talk with Samarth's Bot -->
+<div id="chatWidget" class="fixed bottom-0 right-4 text-base z-50 mb-2">
+
+  <!-- Chat toggle button -->
+  <!-- Chat toggle button with larger image and no background -->
+<button id="chatToggle" class="w-40 h-40 p-0 border-none bg-transparent shadow-none hover:scale-105 transition-transform">
+  <img src="assets/Bot_Photo.png" alt="Chatbot Icon" class="w-full h-full object-contain" />
+</button>
+
+
+
+
+  <!-- Chat window -->
+  <div id="chatWindow" class="hidden flex flex-col bg-gray-900 border border-gray-700 rounded-lg shadow-lg w-72" style="max-height: 600px;">
+    <div class="p-4 border-b border-gray-700 flex items-center justify-between">
+      <h3 class="font-bold text-white">Talk with Samarth's Bot</h3>
+      <button id="chatClose" class="text-xl text-white">&times;</button>
+    </div>
+
+    <!-- Message area -->
+    <div id="chatMessages"
+         class="p-4 overflow-y-auto text-sm space-y-3 text-gray-300"
+         style="height: 400px; max-height: 400px; scrollbar-width: thin; scrollbar-color: #4b5563 #1f2937;">
+      <div class="text-gray-400 italic">Ask me anything about skills, tools, education or say hi 👋</div>
+    </div>
+
+    <!-- Input area -->
+    <form id="chatForm" class="p-3 border-t border-gray-700 flex gap-2">
+      <input
+        type="text"
+        id="chatInput"
+        class="flex-1 px-3 py-2 text-sm bg-gray-800 text-white rounded outline-none"
+        placeholder="Type a question..." />
+      <button
+        type="submit"
+        class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded">
+        Send
+      </button>
+    </form>
+  </div>
+</div>
+
+
+
+
+  <!-- Hero Section -->
+  <section id="home" class="min-h-[calc(100vh-3.5rem)] flex items-start justify-center text-center px-6 pt-16">
+    <div class="space-y-6 mt-12">
+      <h1 class="text-5xl sm:text-6xl font-extrabold fade-in-up">Samarth Kolge</h1>
+      <h2 class="text-3xl sm:text-4xl font-semibold text-green-400 fade-in-up-delay1">Data Analyst</h2>
+      <p class="max-w-2xl mx-auto text-lg text-gray-300 fade-in-up-delay2">
+        From Pune, with a Master's in Computer Science and a passion for chess. Skilled in SQL, Python, Tableau, Power BI, Excel — and proud of hands-on experience at Borgward Technology.
+      </p>
+      <div class="flex justify-center gap-6 fade-in-up-delay3">
+        <a href="https://drive.google.com/file/d/1QdGj6H0BQclEjZ8ZBTn_PHF0JeiyfuFz/view?usp=sharing" class="bg-green-500 text-white px-6 py-3 rounded-full hover:bg-green-600 transition shadow-lg">Download Resume</a>
+        <a href="dashboard.html" class="border-2 border-green-500 text-green-500 px-6 py-3 rounded-full hover:bg-green-500 hover:text-white transition shadow-lg">View Dashboard</a>
+      </div>
+    </div>
+  </section>
+
+<!-- About Me Section -->
+<section id="about" class="px-4 py-16 bg-[#f3f4f6] text-gray-800">
+  <div class="max-w-4xl mx-auto bg-slate-200 p-8 rounded-lg shadow-md flex flex-col md:flex-row items-center gap-8">
+    <!-- Image Section -->
+    <div class="w-full md:w-1/3 flex justify-center">
+      <img src="assets/Samarth_pic.jpg" alt="Samarth Kolge" class="rounded-lg border-4 border-green-500 max-w-[200px] md:max-w-[250px] shadow-lg" />
+    </div>
+
+    <!-- Text Section -->
+      <!-- Text Section -->
+      <div class="w-full md:w-2/3">
+        <h3 class="text-3xl font-bold mb-6 text-green-600 text-center md:text-left border-b-2 border-green-600 pb-2">About Me</h3>
+        <ul class="list-disc pl-5 space-y-4 text-justify text-[17px]">
+          <li>
+            I'm Samarth Vijay Kolge, a Data Analyst from Hadapsar with a Master's in Computer Science and a passion for chess.
+          </li>
+          <li>
+            Skilled in SQL, Python, Tableau, Power BI, and Excel, with hands-on experience from my internship at Borgward Technology.
+          </li>
+          <li>
+            Currently specializing in Data Science & Machine Learning at Scaler, I’ve led impactful projects across e-commerce, entertainment, and retail analytics.
+          </li>
+        </ul>
+      </div>
+
+  </div>
+</section>
+
+
+  <!-- Projects Section -->
+  <section id="projects" class="px-4 py-16 bg-gray-800" >
+    <div class="max-w-5xl mx-auto">
+      <h3 class="text-3xl font-bold mb-8 text-green-400 text-center">Projects</h3>
+      <div class="grid gap-8 sm:grid-cols-2">
+        <div class="bg-gray-700 p-6 rounded-lg shadow hover:shadow-xl transition duration-300">
+          <h4 class="text-xl font-semibold mb-2 text-white">CardioFlex Aerofit Treadmill Analysis</h4>
+          <p class="text-gray-300 mb-2">Analysis of treadmill product performance and customer behavior.</p>
+          <a href="https://github.com/SamarthKolge-Analyst/CardioFlex-Aerofit-Treadmill-Analysis" target="_blank" class="inline-block px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">View on GitHub</a>
+        </div>
+        <div class="bg-gray-700 p-6 rounded-lg shadow hover:shadow-xl transition duration-300">
+          <h4 class="text-xl font-semibold mb-2 text-white">Walmart Purchase Analysis CI and CLT</h4>
+          <p class="text-gray-300 mb-2">Confidence interval analysis of customer purchase data at Walmart.</p>
+          <a href="https://github.com/SamarthKolge-Analyst/Walmart-Purchase-Analysis-Confidence-Interval-CLT" target="_blank" class="inline-block px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">View on GitHub</a>
+        </div>
+        <div class="bg-gray-700 p-6 rounded-lg shadow hover:shadow-xl transition duration-300">
+          <h4 class="text-xl font-semibold mb-2 text-white">Yulu MicroMobility Hypothesis Testing</h4>
+          <p class="text-gray-300 mb-2">Hypothesis testing for Yulu bike-sharing service usage trends.</p>
+          <a href="https://github.com/SamarthKolge-Analyst/Yulu_MicroMobility_Hypothesis_Testing" target="_blank" class="inline-block px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">View on GitHub</a>
+        </div>
+        <div class="bg-gray-700 p-6 rounded-lg shadow hover:shadow-xl transition duration-300">
+          <h4 class="text-xl font-semibold mb-2 text-white">Airbnb Analytics Case Study</h4>
+          <p class="text-gray-300 mb-2">Data-driven analysis of Airbnb property trends and pricing.</p>
+          <a href="https://github.com/SamarthKolge-Analyst/Airbnb_Analytics_Case_Study" target="_blank" class="inline-block px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">View on GitHub</a>
+        </div>
+        <div class="bg-gray-700 p-6 rounded-lg shadow hover:shadow-xl transition duration-300">
+          <h4 class="text-xl font-semibold mb-2 text-white">Netflix Data Analysis Continent Strategy</h4>
+          <p class="text-gray-300 mb-2">Strategic analysis of Netflix content by continent for market insights.</p>
+          <a href="https://github.com/SamarthKolge-Analyst/Netflix-Data-Analysis-Continent-Strategy" target="_blank" class="inline-block px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">View on GitHub</a>
+        </div>
+        <div class="bg-gray-700 p-6 rounded-lg shadow hover:shadow-xl transition duration-300">
+          <h4 class="text-xl font-semibold mb-2 text-white">E-Commerce Trend Brazil Retail Store</h4>
+          <p class="text-gray-300 mb-2">Trend analysis of retail performance in Brazilian e-commerce.</p>
+          <a href="https://github.com/SamarthKolge-Analyst/E-Commerce-Trend-Brazil-Retail-Store" target="_blank" class="inline-block px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">View on GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+<!-- Certifications Section -->
+<section id="certifications" class="px-4 py-16">
+  <div class="max-w-6xl mx-auto">
+    <h3 class="text-3xl font-bold mb-8 text-green-400 text-center">Certifications</h3>
+    <!-- Certifications Grid with Mobile Carousel -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-auto gap-6 overflow-x-auto sm:overflow-visible flex sm:grid snap-x snap-mandatory sm:flex-none">
+
+
+  <!-- Certificates (11 entries) -->
+
+
+  <div class="relative group cursor-pointer min-w-[80%] sm:min-w-0 snap-center sm:snap-none">
+    <img src="assets/SQL.png" alt="SQL Certificate"
+         class="w-full rounded-lg shadow-lg border border-gray-300 transition-transform group-hover:scale-105"
+         onclick="openModal('assets/SQL.png')">
+    <a href="assets/SQL.png" download
+       class="absolute top-2 right-2 bg-white text-black rounded-full p-2 shadow hover:bg-green-200 transition">
+      ⬇️
+    </a>
+  </div>
+
+  <div class="relative group cursor-pointer min-w-[80%] sm:min-w-0 snap-center sm:snap-none">
+    <img src="assets/Python_Libraries.png" alt="Python Libraries Certificate"
+         class="w-full rounded-lg shadow-lg border border-gray-300 transition-transform group-hover:scale-105"
+         onclick="openModal('assets/Python_Libraries.png')">
+    <a href="assets/Python_Libraries.png" download
+       class="absolute top-2 right-2 bg-white text-black rounded-full p-2 shadow hover:bg-green-200 transition">
+      ⬇️
+    </a>
+  </div>
+
+  <div class="relative group cursor-pointer min-w-[80%] sm:min-w-0 snap-center sm:snap-none">
+    <img src="assets/EDA_Fundamentals.png" alt="EDA Fundamentals Certificate"
+         class="w-full rounded-lg shadow-lg border border-gray-300 transition-transform group-hover:scale-105"
+         onclick="openModal('assets/EDA_Fundamentals.png')">
+    <a href="assets/EDA_Fundamentals.png" download
+       class="absolute top-2 right-2 bg-white text-black rounded-full p-2 shadow hover:bg-green-200 transition">
+      ⬇️
+    </a>
+  </div>
+
+  <div class="relative group cursor-pointer min-w-[80%] sm:min-w-0 snap-center sm:snap-none">
+    <img src="assets/Supervised_Learning.png" alt="Supervised Learning Certificate"
+         class="w-full rounded-lg shadow-lg border border-gray-300 transition-transform group-hover:scale-105"
+         onclick="openModal('assets/Supervised_Learning.png')">
+    <a href="assets/Supervised_Learning.png" download
+       class="absolute top-2 right-2 bg-white text-black rounded-full p-2 shadow hover:bg-green-200 transition">
+      ⬇️
+    </a>
+  </div>
+
+  <div class="relative group cursor-pointer min-w-[80%] sm:min-w-0 snap-center sm:snap-none">
+    <img src="assets/Unsupervised_Learning.png" alt="Unsupervised Learning Certificate"
+         class="w-full rounded-lg shadow-lg border border-gray-300 transition-transform group-hover:scale-105"
+         onclick="openModal('assets/Unsupervised_Learning.png')">
+    <a href="assets/Unsupervised_Learning.png" download
+       class="absolute top-2 right-2 bg-white text-black rounded-full p-2 shadow hover:bg-green-200 transition">
+      ⬇️
+    </a>
+  </div>
+
+  <div class="relative group cursor-pointer min-w-[80%] sm:min-w-0 snap-center sm:snap-none">
+    <img src="assets/SQL_ADV.png" alt="Advanced SQL Certificate"
+         class="w-full rounded-lg shadow-lg border border-gray-300 transition-transform group-hover:scale-105"
+         onclick="openModal('assets/SQL_ADV.png')">
+    <a href="assets/SQL_ADV.png" download
+       class="absolute top-2 right-2 bg-white text-black rounded-full p-2 shadow hover:bg-green-200 transition">
+      ⬇️
+    </a>
+  </div>
+
+  <div class="relative group cursor-pointer min-w-[80%] sm:min-w-0 snap-center sm:snap-none">
+    <img src="assets/Pob_Sol_In.png" alt="Problem Solving Certificate"
+         class="w-full rounded-lg shadow-lg border border-gray-300 transition-transform group-hover:scale-105"
+         onclick="openModal('assets/Pob_Sol_In.png')">
+    <a href="assets/Pob_Sol_In.png" download
+       class="absolute top-2 right-2 bg-white text-black rounded-full p-2 shadow hover:bg-green-200 transition">
+      ⬇️
+    </a>
+  </div>
+
+<div class="relative group cursor-pointer row-span-2 min-w-[80%] sm:min-w-0 snap-center sm:snap-none">
+  <img src="assets/Government.png" alt="Government Certificate"
+       class="w-full h-full object-cover rounded-lg shadow-lg border border-gray-300 transition-transform group-hover:scale-105"
+       onclick="openModal('assets/Government.png')">
+  <a href="assets/Government.png" download
+     class="absolute top-2 right-2 bg-white text-black rounded-full p-2 shadow hover:bg-green-200 transition">
+    ⬇️
+  </a>
+</div>
+
+
+  <div class="relative group cursor-pointer min-w-[80%] sm:min-w-0 snap-center sm:snap-none">
+    <img src="assets/Python_Basic.png" alt="Python Basic Certificate"
+         class="w-full rounded-lg shadow-lg border border-gray-300 transition-transform group-hover:scale-105"
+         onclick="openModal('assets/Python_Basic.png')">
+    <a href="assets/Python_Basic.png" download
+       class="absolute top-2 right-2 bg-white text-black rounded-full p-2 shadow hover:bg-green-200 transition">
+      ⬇️
+    </a>
+  </div>
+
+  <div class="relative group cursor-pointer min-w-[80%] sm:min-w-0 snap-center sm:snap-none">
+    <img src="assets/Python_SQL_ScalerTopic.png" alt="Python SQL Scaler Topic Certificate"
+         class="w-full rounded-lg shadow-lg border border-gray-300 transition-transform group-hover:scale-105"
+         onclick="openModal('assets/Python_SQL_ScalerTopic.png')">
+    <a href="assets/Python_SQL_ScalerTopic.png" download
+       class="absolute top-2 right-2 bg-white text-black rounded-full p-2 shadow hover:bg-green-200 transition">
+      ⬇️
+    </a>
+  </div>
+
+  <div class="relative group cursor-pointer min-w-[80%] sm:min-w-0 snap-center sm:snap-none">
+    <img src="assets/Supervsied Learning.png" alt="Supervised Learning Extra Certificate"
+         class="w-full rounded-lg shadow-lg border border-gray-300 transition-transform group-hover:scale-105"
+         onclick="openModal('assets/Supervsied Learning.png')">
+    <a href="assets/Supervsied Learning.png" download
+       class="absolute top-2 right-2 bg-white text-black rounded-full p-2 shadow hover:bg-green-200 transition">
+      ⬇️
+    </a>
+  </div>
+
+</div>
+
+  </div>
+</section>
+
+
+
+
+<!-- Achievements Section -->
+<section id="achievements" class="px-4 py-16 bg-gray-800">
+  <div class="max-w-5xl mx-auto">
+    <h3 class="text-3xl font-bold mb-8 text-green-400 text-center">Achievements</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div class="rounded-lg overflow-hidden shadow-lg border border-gray-700">
+        <img src="assets/Streek.png" alt="Streak Achievement" class="w-full h-auto object-cover">
+      </div>
+      <div class="rounded-lg overflow-hidden shadow-lg border border-gray-700">
+        <img src="assets/top_rank.jpeg" alt="Top Rank Achievement" class="w-full h-auto object-cover">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+  <!-- Dashboard Section -->
+  <section id="dashboard" class="px-4 py-16">
+    <div class="max-w-3xl mx-auto text-center">
+      <h3 class="text-3xl font-bold mb-4 text-green-400">Dashboard</h3>
+      <p class="text-gray-300 text-lg mb-6">
+        Visit my Tableau dashboard showcasing key metrics and analytics of my portfolio and performance.
+      </p>
+      <a href="dashboard.html" target="_blank" class="inline-block px-6 py-3 bg-green-500 text-white rounded shadow hover:bg-green-600 transition">Go to Dashboard</a>
+    </div>
+  </section>
+
+
+  <!-- Study Material Section -->
+  <section id="study" class="px-4 py-16 bg-gray-900 text-white">
+    <div class="max-w-3xl mx-auto text-center">
+      <h3 class="text-3xl font-bold mb-4 text-green-400">Study Material</h3>
+      <p class="text-gray-300 text-lg mb-6">
+        Hey fellow learners 👋, Here is my study material for data analyst role. I struggled to find good resources—so you don’t have to. Best of luck! 🌟
+      </p>
+      <a href="study-material.html" class="inline-block px-6 py-3 bg-green-500 text-white rounded shadow hover:bg-green-600 transition">
+        📥 View & Download PDFs
+      </a>
+    </div>
+  </section>
+
+
+
+<!-- Contact Section -->
+<section id="contact" class="px-4 py-16 bg-gray-950 text-white">
+  <div class="max-w-4xl mx-auto">
+    <h3 class="text-3xl font-bold mb-6 text-green-400 text-center">Contact</h3>
+    <p class="text-gray-300 text-lg mb-10 text-center">
+      Want to get in touch? Send me a message below.
+    </p>
+
+    <!-- Success message -->
+               <div id="successMessage" class="hidden text-center text-green-500 font-semibold mb-6">
+            ✅ Message sent successfully!
+          </div>
+
+    <form id="contactForm" action="https://formspree.io/f/mrbqddqk" method="POST" class="grid gap-6 bg-gray-800 p-8 rounded-lg shadow-lg">
+      <div>
+        <label class="block text-sm font-semibold mb-2">Name</label>
+        <input type="text" name="name" required class="w-full px-4 py-3 rounded bg-gray-700 border border-gray-600 text-white focus:outline-none focus:border-green-500">
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold mb-2">Email</label>
+        <input type="email" name="email" required class="w-full px-4 py-3 rounded bg-gray-700 border border-gray-600 text-white focus:outline-none focus:border-green-500">
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold mb-2">Subject</label>
+        <input type="text" name="subject" class="w-full px-4 py-3 rounded bg-gray-700 border border-gray-600 text-white focus:outline-none focus:border-green-500">
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold mb-2">Message</label>
+        <textarea name="message" rows="5" required class="w-full px-4 py-3 rounded bg-gray-700 border border-gray-600 text-white focus:outline-none focus:border-green-500"></textarea>
+      </div>
+
+      <!-- Google reCAPTCHA -->
+      <div class="text-center">
+        <div class="g-recaptcha inline-block" data-sitekey="6LfzLUIrAAAAAMIClLQZBlJ-slZ8X1DxUC7NyDXC"></div>
+      </div>
+
+      <button type="submit" class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition">
+        Send Message
+      </button>
+
+
+
+      <!-- Social & Profile Links -->
+<!-- Social Profiles Section -->
+<div class="mt-12 text-center">
+  <h4 class="text-xl font-semibold text-green-400 mb-6">Find me on:</h4>
+  <div class="flex justify-center flex-wrap gap-6">
+
+    <!-- LinkedIn -->
+    <a href="https://www.linkedin.com/in/samarth-kolge-134929285" target="_blank"
+       class="relative group w-10 h-10 sm:w-12 sm:h-12 animate-pulse hover:animate-none transform transition duration-300 hover:scale-110 hover:shadow-[0_0_15px_#0A66C2]">
+      <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" class="w-full h-full object-contain" />
+      <span class="tooltip">LinkedIn</span>
+    </a>
+
+    <!-- GitHub -->
+    <a href="https://github.com/SamarthKolge-Analyst" target="_blank"
+       class="relative group w-10 h-10 sm:w-12 sm:h-12 animate-pulse hover:animate-none transform transition duration-300 hover:scale-110 hover:shadow-[0_0_15px_#ffffff]">
+      <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" class="w-full h-full object-contain" />
+      <span class="tooltip">GitHub</span>
+    </a>
+
+    <!-- Scaler -->
+    <a href="https://www.scaler.com/academy/profile/295c762bef94" target="_blank"
+       class="relative group w-10 h-10 sm:w-12 sm:h-12 animate-pulse hover:animate-none transform transition duration-300 hover:scale-110 hover:shadow-[0_0_15px_#0033FF]">
+      <img src="assets/Scaler_logo.png" alt="Scaler Academy" class="w-full h-full object-contain" />
+      <span class="tooltip">Scaler</span>
+    </a>
+
+    <!-- LeetCode -->
+    <a href="https://leetcode.com/u/Samarth_Kolge" target="_blank"
+       class="relative group w-10 h-10 sm:w-12 sm:h-12 animate-pulse hover:animate-none transform transition duration-300 hover:scale-110 hover:shadow-[0_0_15px_#FFA116]">
+      <img src="https://cdn.iconscout.com/icon/free/png-256/leetcode-3521542-2944960.png" alt="LeetCode" class="w-full h-full object-contain" />
+      <span class="tooltip">LeetCode</span>
+    </a>
+
+    <!-- HackerRank -->
+    <a href="https://www.hackerrank.com/profile/kolgesamarth" target="_blank"
+       class="relative group w-10 h-10 sm:w-12 sm:h-12 animate-pulse hover:animate-none transform transition duration-300 hover:scale-110 hover:shadow-[0_0_15px_#2EC866]">
+      <img src="https://cdn.iconscout.com/icon/free/png-256/hackerrank-3628885-3030008.png" alt="HackerRank" class="w-full h-full object-contain" />
+      <span class="tooltip">HackerRank</span>
+    </a>
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/9518905490" target="_blank"
+       class="relative group w-10 h-10 sm:w-12 sm:h-12 animate-pulse hover:animate-none transform transition duration-300 hover:scale-110 hover:shadow-[0_0_15px_#25D366]">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" class="w-full h-full object-contain" />
+      <span class="tooltip">WhatsApp</span>
+    </a>
+
+    <!-- Email -->
+    <a href="mailto:kolgesamarth@gmail.com" target="_blank"
+       class="relative group w-10 h-10 sm:w-12 sm:h-12 animate-pulse hover:animate-none transform transition duration-300 hover:scale-110 hover:shadow-[0_0_15px_#4FC3F7]">
+      <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email" class="w-full h-full object-contain" />
+      <span class="tooltip">Email</span>
+    </a>
+
+  </div>
+</div>
+
+
+
+
+
+    </form>
+  </div>
+</section>
+
+<!-- Load reCAPTCHA script -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<!-- JavaScript: form submit, toast, and reCAPTCHA reset -->
+<script>
+  const form = document.getElementById('contactForm');
+  const success = document.getElementById('successMessage');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    // Check if reCAPTCHA is complete
+    const token = grecaptcha.getResponse();
+    if (!token) {
+      alert("Please complete the reCAPTCHA.");
+      return;
+    }
+
+    const formData = new FormData(form);
+    formData.append("g-recaptcha-response", token); // ensure it's submitted
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        form.reset();
+        grecaptcha.reset();
+        success.classList.remove('hidden');
+
+        // Instant scroll
+        window.scrollTo({ top: document.getElementById('contact').offsetTop, behavior: 'auto' });
+
+
+        setTimeout(() => {
+          success.classList.add('hidden');
+          window.location.href = "#contact";
+        }, 1000);
+      } else {
+        alert("❌ There was an error submitting the form.");
+      }
+    } catch (error) {
+      alert("❌ An error occurred. Please try again.");
+    }
+
+ 
+  });
+</script>
+
+
+
+
+<!-- DataBot Full Feature Script -->
+<script>
+const chatToggle = document.getElementById("chatToggle");
+const chatWindow = document.getElementById("chatWindow");
+const chatClose = document.getElementById("chatClose");
+const chatForm = document.getElementById("chatForm");
+const chatInput = document.getElementById("chatInput");
+const chatMessages = document.getElementById("chatMessages");
+
+let inactivityTimer;
+
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    openChat();
+    startInactivityTimer();
+  }, 6000);
+});
+
+window.addEventListener('scroll', () => {
+  closeChat();
+});
+
+function openChat() {
+  chatWindow.classList.remove("hidden");
+}
+
+function closeChat() {
+  chatWindow.classList.add("hidden");
+  clearTimeout(inactivityTimer);
+}
+
+function startInactivityTimer() {
+  clearTimeout(inactivityTimer);
+  inactivityTimer = setTimeout(() => {
+    closeChat();
+  }, 9000);
+}
+
+chatToggle.addEventListener("click", () => {
+  const isHidden = chatWindow.classList.contains("hidden");
+  if (isHidden) {
+    openChat();
+    startInactivityTimer();
+  } else {
+    closeChat();
+  }
+});
+
+chatClose.addEventListener("click", () => {
+  closeChat();
+});
+
+chatInput.addEventListener("input", startInactivityTimer);
+chatWindow.addEventListener("click", startInactivityTimer);
+
+function getTimeStamp() {
+  const now = new Date();
+  return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
+function speak(text) {
+  if ('speechSynthesis' in window) {
+    const msg = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.speak(msg);
+  }
+}
+
+function addMessage(content, type = 'bot') {
+  const wrapper = document.createElement("div");
+  wrapper.className = type === 'user' ? 'text-right' : 'text-left';
+  const msgDiv = document.createElement("div");
+  msgDiv.className = type === 'user'
+    ? 'inline-block px-4 py-2 my-2 rounded-xl bg-blue-600 text-white'
+    : 'inline-block px-4 py-2 my-2 rounded-xl bg-green-600 text-white';
+  msgDiv.innerHTML = '<div>' + content + '</div><div class="text-xs text-gray-300 mt-1">' + getTimeStamp() + '</div>';
+  wrapper.appendChild(msgDiv);
+  chatMessages.appendChild(wrapper);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+  if (type === 'bot') speak(content);
+}
+
+function getBotReply(message) {
+  const msg = message.toLowerCase();
+
+
+  
+ 
+
+ 
+  if (msg.includes("joke") || msg.includes("funny")) return "Glad you're having fun! 😂";
+  if (msg.includes("love")) return "I'm single... but in a committed relationship with SQL & Python 💘";
+  if (msg.includes("school")) return "Studied at Alore Highschool.";
+  if (msg.includes("skills") || msg.includes("technologies")) return "SQL, Python, Power BI, Tableau, Excel, HTML, CSS, JS.";
+  if (msg.includes("resume") || msg.includes("cv")) return "Download my resume from the homepage 📄";
+  if (msg.includes("projects") || msg.includes("github")) return "Check out my GitHub or Projects section!";
+  if (msg.includes("dashboard") || msg.includes("power bi") || msg.includes("tableau")) return "Find my dashboards in the 'Dashboard' section or on Tableau Public.";
+  if (msg.includes("linkedin")) return "linkedin.com/in/samarth-kolge-134929285";
+  if (msg.includes("email") || msg.includes("contact") || msg.includes("reach")) return "kolgesamarth@gmail.com or WhatsApp: 9518905490";
+  if (msg.includes("phone") || msg.includes("whatsapp")) return "You can WhatsApp me at 9518905490 📱";
+  if (msg.includes("study") || msg.includes("education")) return "I’m studying AI/ML and always curious!";
+  if (msg.includes("bored") || msg.includes("play") || msg.includes("game")) return "Let’s talk about data — or want a joke?";
+  if (msg.includes("robot") || msg.includes("bot") || msg.includes("assistant")) return "I may be a bot, but I’ve got human-level insights 😉";
+  if (msg.includes("sad") || msg.includes("cry")) return "Everything’s going to be okay. Take a deep breath 🌈";
+
+
+    if (msg.includes('hi') || msg.includes('hello') || msg.includes('hey')) return 'Hello! 😊';
+    if (msg.includes('how are you')) return "I'm doing well, thank you! Keeping busy with projects and coffee. How about you?";
+    if (msg.includes('good morning')) return 'Good morning! Hope you have a fantastic day ahead filled with coffee and code!';
+    if (msg.includes('good afternoon')) return 'Good afternoon! I hope your day is going well. Keep up the great work!';
+    if (msg.includes('good evening')) return 'Good evening! It\'s a great time to unwind and maybe do a bit of coding for fun. 😉';
+    if (msg.includes('bye') || msg.includes('goodbye')) return 'Goodbye! Have a great day ahead!';
+    if (msg.includes('good night')) return "Good night! Sleep tight and don't let the bed bugs (or computer bugs) bite! 🌙";
+    if (msg.includes('thank') || msg.includes('thanks') || msg.includes('thx') || msg.includes('ty')) return 'You\'re welcome! Always happy to help or chat. 😊';
+    if (msg.includes('ok') || msg.includes('yes') || msg.includes('no') || msg.includes('sure') || msg.includes('fine')) return 'Okay, got it! 👍';
+    if (msg.includes('lol') || msg.includes('haha')) return '😂';
+    // Personal info and quick facts
+    if (msg.includes('name') || msg.includes('samarth')) return "I'm DataBot by Samarth 🤖";
+    if (msg.includes('love')) return "I'm single... but in a committed relationship with SQL & Python 💘";
+    if (msg.includes('location') || msg.includes('city') || msg.includes('pune')) return 'Based in Pune, India 🇮🇳';
+    if (msg.includes('school')) return 'Studied at Alore Highschool.';
+    if (msg.includes('college') || msg.includes('university')) return 'Graduated B.Sc. IT from DBJ College, now pursuing M.Sc. AI/ML at Woolf University.';
+    if (msg.includes('skills') || msg.includes('technologies')) return 'SQL, Python, Power BI, Tableau, Excel, HTML, CSS, JS.';
+    if (msg.includes('resume') || msg.includes('cv')) return 'Download my resume from the homepage 📄';
+    if (msg.includes('projects') || msg.includes('github')) return 'Check out my GitHub or Projects section!';
+    if (msg.includes('dashboard') || msg.includes('power bi') || msg.includes('tableau')) return "Find my dashboards in the 'Dashboard' section or on Tableau Public.";
+    if (msg.includes('linkedin')) return 'linkedin.com/in/samarth-kolge-134929285';
+    if (msg.includes('email') || msg.includes('contact') || msg.includes('reach')) return 'kolgesamarth@gmail.com or WhatsApp: 9518905490';
+    if (msg.includes('phone') || msg.includes('whatsapp')) return 'You can WhatsApp me at 9518905490 📱';
+    // Detailed professional Q&A (HR-style)
+    if (msg.includes('tell me about yourself')) return "I'm a data enthusiast passionate about turning raw information into impactful insights. I'm currently pursuing my Master's in AI/ML while continuously upskilling in data science tools. I'm a curious learner who loves solving complex problems and I'm always up for a new challenge!";
+    if (msg.includes('strength')) return 'My greatest strengths are my analytical mindset and perseverance. I excel at breaking down complex problems, and I never stop until I find a solution. Plus, I code with a smile! 😄';
+    if (msg.includes('weakness')) return "If I have to name a weakness, I'd say I can get a bit too absorbed in my projects. Sometimes I lose track of time when debugging or perfecting a feature – but I'm working on balancing my schedule better.";
+    if (msg.includes('why should we hire')) return "You should hire me because I'm a quick learner who brings creativity and dedication to the team. I blend strong technical skills with a collaborative spirit – plus, I make a mean cup of coffee for the team!";
+    if (msg.includes('five years')) return "In five years, I see myself leading innovative projects in data science and AI. I hope to have made a significant impact at my workplace, maybe even mentoring newcomers. Continuous learning is on the agenda too – technology never stands still, and neither will I!";
+    if (msg.includes('dream job')) return 'My dream job is one where I get to solve real-world problems with data and AI. As long as I\'m innovating, learning, and contributing to something meaningful (preferably with a great team), I\'m living the dream!';
+    if (msg.includes('work environment')) return "I thrive in an environment that's collaborative, supportive, and a little humorous. I think the best ideas often come from brainstorming with peers – especially if there's coffee and pizza involved!";
+    if (msg.includes('handle stress')) return 'I handle stress by staying organized and keeping a positive mindset. Break down tasks, prioritize, maybe take a short walk or listen to music. And if all else fails, a quick game or a coffee break helps reset my brain!';
+    if (msg.includes('team') && msg.includes('individual')) return "I work well both on teams and independently. I love the creativity that sparks in teamwork, but I'm also comfortable tackling solo projects with full focus. In short, I'm adaptable to what's needed.";
+    if (msg.includes('achievement')) return 'One of my proudest achievements was creating a data dashboard that helped a local business reduce costs by 20%. Seeing my work make a tangible difference was incredibly rewarding and it drove me to dive even deeper into data analytics.';
+    if (msg.includes('proud project')) return 'I’m particularly proud of a personal project where I built a web app that visualized COVID-19 data for my community. It helped people stay informed, and that feeling of building something useful was priceless.';
+    if (msg.includes('internship')) return 'During my internship, I worked on automating data cleaning processes. It was exciting to apply what I learned in class to real company data. I also learned that coffee truly is an intern’s best friend!';
+    if (msg.includes('leadership')) return 'In group projects, I often take the initiative to organize tasks and ensure everyone\'s voice is heard. Leading hackathon teams taught me a lot about motivating and coordinating with people.';
+    if (msg.includes('certification')) return 'I have several certifications, including a Data Science specialization and a Tableau professional certification. And I\'m always looking to add more – I joke that collecting certifications is my hobby!';
+    if (msg.includes('study') || msg.includes('education')) return 'I have a strong educational foundation: a B.Sc. in IT, and now pursuing an M.Sc. in AI/ML. Beyond formal education, I\'m constantly learning through online courses and challenges – education never really stops for me.';
+    if (msg.includes('relocate')) return 'Yes, I\'m open to relocation if the opportunity is right. I love exploring new cities – every place has its own tech community and culture, and that’s exciting!';
+    if (msg.includes('work from home')) return 'I\'m flexible when it comes to work settings. I can be productive from home (my code doesn\'t mind pajamas), but I also value the energy of an office environment and in-person teamwork.';
+    if (msg.includes('salary')) return 'I\'m looking for a role that\'s a great fit and offers growth. I\'m sure we can find a compensation that reflects my skills and the value I\'ll bring to the team.';
+    if (msg.includes('contribute') && msg.includes('company')) return 'I plan to contribute by using data to drive smart decisions. Whether it\'s optimizing a process or uncovering customer insights, I\'ll use my skills to make a positive impact on the company.';
+    if (msg.includes('questions for us')) return 'What does success look like for someone in this role? Also, I’m curious about the team culture – do you all do any fun activities or hackathons together?';
+    // Casual peer-to-peer questions
+    if (msg.includes("how's life") || msg.includes('hows life')) return 'Life’s great! I\'m learning new things, coding up a storm, and still finding time to binge some Netflix. No complaints!';
+    if (msg.includes('what do you do for fun')) return 'For fun, I enjoy playing chess and video games, and I\'m also a bit of a foodie. Exploring new cafes in Pune on weekends is my guilty pleasure!';
+    if (msg.includes('hobbies')) return 'I have quite a few hobbies. I love playing the guitar, dabbling in photography, and when I\'m not glued to a screen coding, I\'m probably out playing badminton or exploring a new hiking trail.';
+    if (msg.includes('favorite movie')) return 'I\'m a big Marvel fan, so I\'d say *The Avengers*. I can watch it on repeat and not get bored!';
+    if (msg.includes('favorite food')) return 'I\'m a sucker for spicy Indian street food – Vada Pav is life! Also, pizza has a special place in my heart (who can resist cheese?).';
+    if (msg.includes('coffee') && msg.includes('tea')) return 'Definitely coffee! It\'s basically the fuel that powers my code. Though I won\'t say no to a nice cup of masala chai in the evening.';
+    if (msg.includes('cats') || msg.includes('dogs')) return 'I love both, but if I had to choose, I\'d say dogs. They\'re just so friendly and always excited to see you. If I had a dog, I\'d name him Data, so I can say I\'m walking my Data! 😂';
+    if (msg.includes('favorite music')) return 'I enjoy a mix of genres, from classic rock to lo-fi beats. If I\'m coding, chill instrumental or lo-fi hip hop is my go-to. It keeps me in the zone.';
+    if (msg.includes('weekend') || msg.includes('plans')) return 'This weekend, I\'m planning to work on a personal project and then catch up with some friends. Maybe a quick trek to the hills around Pune if the weather is good.';
+    if (msg.includes('hanging out') || msg.includes('hangout')) return 'I\'m always up for hanging out! Maybe we can gather the old college gang and grab some coffee - and by coffee I mean let\'s also brainstorm our next mini-hackathon for fun!';
+    if (msg.includes('travel')) return 'I love traveling! I\'m hoping to visit Ladakh sometime – the idea of biking in those mountains is thrilling. Also on my list is a trip abroad, maybe Japan to experience their tech culture.';
+    if (msg.includes('sports')) return 'I\'m more of a player than a watcher. I love playing badminton and cricket with friends. It\'s a great way to unwind after a week of coding.';
+    if (msg.includes('gaming')) return 'Yes, I\'m into gaming! I enjoy playing FIFA and a bit of Fortnite. It’s a fun way to relax and sometimes inspires my problem-solving skills (strategy, you know?).';
+    if (msg.includes('free')) return 'I\'m usually free on the weekends or after 7 PM on weekdays. If you want to catch up or need help with something, let me know!';
+    if (msg.includes('language')) return 'If you mean programming language, I’m a big fan of Python for data science and JavaScript for web projects. If you mean spoken language, English, Hindi, and a bit of Marathi!';
+    if (msg.includes('dream')) return 'I have big dreams – one is to lead a major AI initiative that improves people\'s lives. On a lighter note, another dream is to have a tech setup so cool that it gets featured on Reddit!';
+    if (msg.includes('mentor')) return 'I\'ve been lucky to have great mentors, and I also enjoy mentoring juniors. Sharing knowledge is how we all grow. If you need help or advice in tech, I\'m all ears.';
+    if (msg.includes('motto')) return 'My life motto is "Keep learning, keep hustling." Technology evolves every day, so I believe in staying curious and adapting. Also, "Work hard, play harder!" 😊';
+    if (msg.includes('favorite book')) return 'One of my favorite books is *Atomic Habits* by James Clear. It taught me a lot about building good habits and it\'s helped me balance work and personal growth quite a bit.';
+    // Fun prompts and miscellaneous
+    if (msg.includes('tell me a joke') || msg === 'joke') return 'Alright, here\'s a joke: Why do programmers prefer dark mode? Because light attracts too many bugs! 😂';
+    if (msg.includes('fun fact')) return 'Fun fact: The first computer “bug” was an actual moth that caused a computer malfunction. Talk about a literal bug in the system!';
+    if (msg.includes('motivation') || msg.includes('inspire')) return 'Remember, every expert was once a beginner. Keep going, and one day you\'ll look back and be amazed at how far you’ve come.';
+    if (msg.includes('meaning of life')) return '42. 😉 Okay, serious answer: I think the meaning of life is to keep learning, helping others, and finding joy in the little things.';
+    if (msg.includes('are you real')) return "I'm as real as the love for semicolons in JavaScript (which is optional, by the way). In other words, I'm a bot, but a friendly one!";
+    if (msg.includes('do you sleep')) return 'I recharge by clearing my cache and doing garbage collection. 😴 But seriously, as a bot I don\'t sleep, I just wait.';
+    if (msg.includes('creator')) return 'I was created by Samarth, who put together my code and taught me to chat. So you could say I\'m a reflection of his knowledge and humor!';
+    if (msg.includes('how old') || msg.includes('your age')) return 'Age is just a number, and in my case that number is calculated in milliseconds since deployment. Let\'s just say I\'m young at heart!';
+    if (msg.includes('gender')) return "I'm a bot, so I don't really have a gender. I'm comfortable being called 'it', but hey, you can call me friend!";
+    if (msg.includes('favorite color')) return 'Blue, definitely blue. Like the sky on a clear day, or the background of a nice VS Code theme.';
+    if (msg.includes('sing') || msg.includes('song')) return '🎵 Never gonna give you up, never gonna let you down... 🎵 Oh wait, I promised I wouldn’t rickroll anyone. Sorry, couldn\'t resist! 😁';
+    if (msg.includes('dance')) return 'If I had legs, I\'d dance the robot for you! For now, I can just sway in spirit.';
+    if (msg.includes('riddle')) return 'Sure! Try this riddle: What has keys but can\'t open locks? (Answer: A piano!)';
+    if (msg.includes('play a game') || msg.includes('game')) return 'We could play a quick game. Try to guess a number I\'m thinking of between 1 and 5. (Just kidding, I\'m thinking of 3. 😜)';
+    if (msg.includes('coin')) return Math.random() < 0.5 ? 'Heads! 🪙' : 'Tails! 🪙';
+    if (msg.includes('dice') || msg.includes('die')) return 'You rolled a ' + (Math.floor(Math.random() * 6) + 1) + '! 🎲';
+
+  return "I'm still learning how to answer that. Try asking about skills, education, or resume.";
+}
+
+chatForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const userMessage = chatInput.value.trim();
+  if (!userMessage) return;
+
+  addMessage(userMessage, 'user');
+  chatInput.value = "";
+
+  const typingDiv = document.createElement("div");
+  typingDiv.className = "text-left text-gray-400 italic";
+  typingDiv.textContent = "DataBot is typing...";
+  chatMessages.appendChild(typingDiv);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+  setTimeout(() => {
+    chatMessages.removeChild(typingDiv);
+    const reply = getBotReply(userMessage);
+    addMessage(reply, 'bot');
+  }, 1000);
+});
+</script>
+
+<!-- Certificate Modal -->
+<div id="modal" class="fixed inset-0 backdrop-blur-md bg-black/70 flex items-center justify-center z-50 hidden">
+  <div id="modalContent"
+    class="relative w-[90%] max-w-5xl max-h-[90vh] bg-gray-900 p-4 rounded-lg shadow-lg animate-fadeIn overflow-auto">
+    
+    <!-- Close Button -->
+    <button onclick="closeModal()" class="absolute top-2 right-2 text-white text-2xl hover:text-red-400 z-10">
+      &times;
+    </button>
+
+    <!-- Zoom + Download Controls -->
+    <div class="flex flex-wrap justify-end gap-2 mb-4">
+      <button onclick="zoomIn()" class="text-white px-3 py-1 bg-green-600 hover:bg-green-700 rounded transition">
+        ➕ Zoom In
+      </button>
+      <button onclick="zoomOut()" class="text-white px-3 py-1 bg-green-600 hover:bg-green-700 rounded transition">
+        ➖ Zoom Out
+      </button>
+      <a id="pdfDownload" href="#" download class="text-white px-3 py-1 bg-green-600 hover:bg-green-700 rounded transition">
+        📄 Download PDF
+      </a>
+    </div>
+
+    <!-- Image Display -->
+    <div class="overflow-auto text-center touch-none">
+      <img id="modalImage" src="" alt="Certificate"
+        class="inline-block max-h-[70vh] sm:max-h-[80vh] rounded border border-gray-300 transition-transform duration-300"
+        style="transform: scale(1);">
+    </div>
+  </div>
+</div>
+
+<!-- Script -->
+<script>
+  let currentScale = 1;
+  const modal = document.getElementById("modal");
+  const modalContent = document.getElementById("modalContent");
+  const image = document.getElementById("modalImage");
+  const pdfBtn = document.getElementById("pdfDownload");
+
+  function openModal(imgSrc) {
+    image.src = imgSrc;
+    pdfBtn.href = imgSrc.replace(/\.(png|jpg|jpeg)$/i, ".pdf");
+    currentScale = 1;
+    image.style.transform = "scale(1)";
+    modal.classList.remove("hidden");
+  }
+
+  function closeModal() {
+    modal.classList.add("hidden");
+  }
+
+  function zoomIn() {
+    currentScale += 0.1;
+    image.style.transform = `scale(${currentScale})`;
+  }
+
+  function zoomOut() {
+    currentScale = Math.max(0.5, currentScale - 0.1);
+    image.style.transform = `scale(${currentScale})`;
+  }
+
+  // Close modal on ESC key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+
+  // Click outside modal to close
+  modal.addEventListener("click", (e) => {
+    if (!modalContent.contains(e.target)) closeModal();
+  });
+
+  // Swipe to close (mobile)
+  let touchStartY = 0;
+  modalContent.addEventListener("touchstart", (e) => {
+    touchStartY = e.touches[0].clientY;
+  });
+
+  modalContent.addEventListener("touchmove", (e) => {
+    const touchEndY = e.touches[0].clientY;
+    if (touchEndY - touchStartY > 100) {
+      closeModal();
+    }
+  });
+</script>
+
+<!-- Style -->
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .backdrop-blur-md {
+    backdrop-filter: blur(10px);
+  }
+</style>
+
+
+
+
+<footer class="relative bg-gradient-to-r from-green-600 to-green-800 text-white py-8 mt-16 overflow-hidden shadow-inner">
+  <!-- Stars Background -->
+  <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+    <canvas id="starCanvas" class="w-full h-full"></canvas>
+  </div>
+
+  <!-- Footer Content -->
+  <div class="relative z-10 max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center text-center gap-4 opacity-0" id="footerContent">
+    
+    <!-- Typing Text -->
+    <div class="text-sm sm:text-base font-medium tracking-wide">
+      <span id="footerTyped" class="inline-block"></span>
+      <span class="inline-block text-white animate-pulse">|</span>
+    </div>
+
+    <!-- Scroll Button -->
+    <div class="flex items-center gap-3">
+      <button onclick="scrollToTop()" class="bg-white text-green-700 hover:bg-green-200 transition px-3 py-1 rounded-full text-xs font-semibold shadow flex items-center gap-1">
+        ⬆️ Back to Top
+      </button>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  const phrases = [
+    "© 2025 Samarth Kolge",
+    "Crafted by Samarth Kolge ❤️",
+    "Analyzing Past For Better Future 📊",
+    "Transforming Data into Decisions 💡",
+    `Samarth Kolge - Data Analyst <span class="inline-block animate-bounce ml-1">🚀</span>`
+  ];
+
+  const typedElement = document.getElementById("footerTyped");
+  const footerContent = document.getElementById("footerContent");
+  const typeSound = new Audio("assets/Typing_audio.mp3");
+  typeSound.volume = 0.15;
+  typeSound.loop = true;
+
+  let typingIndex = 0, charIndex = 0;
+  let isTyping = false, observerTriggered = false;
+
+  function typeLoop() {
+    if (!isTyping) return;
+
+    if (charIndex === 0) {
+      typedElement.innerHTML = "";
+    }
+
+    const cleanPhrase = phrases[typingIndex].replace(/<[^>]*>/g, '');
+
+    if (charIndex < cleanPhrase.length) {
+      typedElement.innerHTML += phrases[typingIndex].charAt(charIndex);
+      charIndex++;
+      setTimeout(typeLoop, 75);
+    } else {
+      typedElement.innerHTML = phrases[typingIndex];
+      setTimeout(() => {
+        charIndex = 0;
+        typingIndex = (typingIndex + 1) % phrases.length;
+        typeLoop();
+      }, 1200);
+    }
+  }
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  // Intersection Observer for immediate reaction
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !observerTriggered) {
+        observerTriggered = true;
+        footerContent.classList.add("animate-footerFade");
+        isTyping = true;
+        typingIndex = 0;
+        charIndex = 0;
+        typeSound.currentTime = 0;
+        typeSound.play();
+        typeLoop();
+      } else if (!entry.isIntersecting && observerTriggered) {
+        isTyping = false;
+        typeSound.pause();
+        typeSound.currentTime = 0;
+        observerTriggered = false;
+      }
+    });
+  }, { threshold: 0.6 });
+
+  observer.observe(footerContent);
+</script>
+
+
+<style>
+  @keyframes footerFade {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-footerFade {
+    animation: footerFade 1s ease-out forwards;
+  }
+
+  #starCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    z-index: 0;
+  }
+</style>
+
+
+<script>
+  const canvas = document.getElementById('starCanvas');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = 150;
+    createStars();
+  }
+
+  function createStars() {
+    stars = [];
+    for (let i = 0; i < 100; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 1.5,
+        alpha: Math.random(),
+        speed: Math.random() * 0.005 + 0.002
+      });
+    }
+  }
+
+  function animateStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      s.alpha += s.speed;
+      if (s.alpha > 1 || s.alpha < 0) s.speed = -s.speed;
+      ctx.beginPath();
+      ctx.globalAlpha = s.alpha;
+      ctx.fillStyle = 'white';
+      ctx.arc(s.x, s.y, s.radius, 0, 2 * Math.PI);
+      ctx.fill();
+    });
+    requestAnimationFrame(animateStars);
+  }
+
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+  animateStars();
+</script>
+
+
+
+<script>
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll(".nav-link");
+
+  function updateActiveLink() {
+    const scrollY = window.scrollY;
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 120; // adjust for sticky nav height
+      const sectionHeight = section.offsetHeight;
+      const sectionId = section.getAttribute("id");
+
+      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+        navLinks.forEach(link => {
+          // Remove highlight from all
+          link.classList.remove("text-green-400", "font-semibold");
+
+          // Match href to ID
+          if (link.getAttribute("href") === `#${sectionId}`) {
+            link.classList.add("text-green-400", "font-semibold");
+          }
+        });
+      }
+    });
+  }
+
+  // Run immediately on scroll
+  window.addEventListener("scroll", updateActiveLink);
+
+  // Run once on page load too
+  window.addEventListener("DOMContentLoaded", updateActiveLink);
+</script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coder Mode – Samarth's Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #000;
+      color: #0f0;
+      font-family: Menlo, monospace;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 1ch;
+      height: 1em;
+      background-color: #0f0;
+      animation: blink 0.8s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50%, 100% { background-color: #0f0; }
+      25%, 75% { background-color: transparent; }
+    }
+
+    #terminal {
+      white-space: pre-wrap;
+      max-width: 700px;
+      width: 100%;
+    }
+
+    .terminal-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 90vh;
+      padding: 1rem;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <!-- Simple nav header -->
+  <div class="p-4 text-gray-400">
+    <a href="index.html" class="underline">&larr; Back to Main Site</a>
+  </div>
+
+  <!-- Terminal block -->
+  <div class="terminal-wrapper">
+    <div id="terminal">
+      <div>
+        <span class="text-green-300">visitor@samarth:</span>
+        <span class="text-blue-300">~$</span>
+        <span id="cmd"></span><span class="cursor" id="termCursor"></span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const codeBlock = `-- Meet Samarth, the Data Analyst who speaks fluent SQL
+
+SELECT 
+  'Samarth Kolge' AS name,
+  'Data Analyst' AS role,
+  ARRAY['SQL', 'Python', 'Power BI', 'Tableau', 'Excel'] AS skills,
+  'Open to Work' AS availability,
+  'Woolf University (M.Sc. AI/ML)' AS education
+WHERE 'SQL' = ANY(ARRAY['SQL', 'Python', 'Power BI']);`;
+
+    const cmdEl = document.getElementById('cmd');
+    const cursorEl = document.getElementById('termCursor');
+
+    let i = 0;
+
+    function typeChar() {
+      if (i < codeBlock.length) {
+        cmdEl.textContent += codeBlock[i];
+        i++;
+        setTimeout(typeChar, 35); // Slower typing speed
+      } else {
+        cursorEl.style.display = "none";
+      }
+    }
+
+    setTimeout(typeChar, 500);
+  </script>
+</body>
+</html>
