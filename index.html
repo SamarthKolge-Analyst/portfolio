@@ -10,8 +10,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
 
-
-
   <!-- ✅ DaisyUI as standalone CSS (safer alternative to plugin) -->
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.8.0/dist/full.css" rel="stylesheet" type="text/css" />
 
@@ -53,21 +51,84 @@
   scroll-behavior: smooth;
 }
 
+
+  #chatWidget {
+    position: fixed;
+    bottom: 20px;
+    right: 24px;
+    z-index: 50;
+  }
+
+  @media (max-width: 768px) {
+    #chatWidget {
+      right: 12px;
+      bottom: 16px;
+      transform: scale(0.9); /* slightly smaller on mobile */
+    }
+
+    #chatWindow {
+      width: 90vw !important;
+      max-height: 80vh !important;
+      bottom: 80px !important;
+    }
+  }
+
+  /* Prevent layout shift when keyboard opens on mobile */
+  @media (max-width: 768px) {
+    body.keyboard-open {
+      overflow: hidden;
+    }
+  }
+
+
+
+
+  @media (max-width: 768px) {
+    #mobileMenu {
+      right: -100%;
+    }
+    #mobileMenu.active {
+      right: 0;
+    }
+  }
+
+  @keyframes fadeInMenu {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-fadeInMenu {
+    animation: fadeInMenu 0.5s ease forwards;
+  }
+
+
   </style>
 </head>
 
 
 <body class="font-sans text-white bg-gradient-to-br from-gray-900 to-black">
   <!-- Marquee Banner -->
-<section id="top" class="bg-green-600 text-white text-sm py-2">
+<section id="top" class="bg-green-600 text-white text-sm py-2 relative z-[60]">
   <marquee behavior="scroll" direction="left" scrollamount="6">
-    🚀 I AM OPEN TO WORK AS A DATA ANALYST AND BUSINESS ANALYST — LET'S CONNECT!
+    🚀 I AM OPEN TO WORK AS A DATA ANALYST AND BUSINESS ANALYST - LET'S CONNECT!
   </marquee>
 </section>
+
   
 
   <!-- Navigation -->
   <nav class="bg-gray-900 shadow sticky top-0 z-50">
+
+
+      <button id="mobileMenuBtn" class="sm:hidden text-white text-2xl focus:outline-none">
+    &#9776;
+  </button>
 
 
       <div class="max-w-7xl mx-auto flex justify-center items-center px-4 py-3">
@@ -88,8 +149,23 @@
 
     </div>
   </nav>
-
   
+  <!-- This is Menu only for mobile n Tab -->
+  <div id="mobileMenu" class="fixed top-0 right-[-100%] w-64 h-full bg-gradient-to-br from-gray-900 to-gray-800/90 backdrop-blur-lg text-white z-[999] transition-all duration-500 sm:hidden shadow-2xl border-l border-gray-700">
+  <div class="flex justify-between items-center px-4 py-4 border-b border-gray-700">
+    <h2 class="text-lg font-bold text-green-400">Menu</h2>
+    <button id="mobileMenuClose" class="text-2xl text-white hover:text-red-400">&times;</button>
+  </div>
+  <nav class="flex flex-col space-y-4 px-6 pt-6 text-lg animate-fadeInMenu">
+    <a href="#top" class="mobile-nav-link nav-link hover:text-green-400 transition">Home</a>
+    <a href="#about" class="mobile-nav-link nav-link hover:text-green-400 transition">About Me</a>
+    <a href="#projects" class="mobile-nav-link nav-link hover:text-green-400 transition">Projects</a>
+    <a href="#certifications" class="mobile-nav-link nav-link hover:text-green-400 transition">Certifications</a>
+    <a href="dashboard.html" class="mobile-nav-link nav-link hover:text-green-400 transition">Dashboard</a>
+    <a href="programmer.html" class="mobile-nav-link nav-link hover:text-green-400 transition">Programmer</a>
+    <a href="#contact" class="mobile-nav-link nav-link hover:text-green-400 transition">Contact</a>
+  </nav>
+</div>
 
     
   <!-- Social sidebar (fixed on left for desktop, hidden on mobile) -->
@@ -164,13 +240,12 @@
 <!-- Talk with Samarth's Bot -->
 <div id="chatWidget" class="fixed bottom-0 right-4 text-base z-50 mb-2">
 
-  <!-- Chat toggle button -->
-  <!-- Chat toggle button with larger image and no background -->
-<button id="chatToggle" class="w-40 h-40 p-0 border-none bg-transparent shadow-none hover:scale-105 transition-transform">
-  <img src="assets/Bot_Photo.png" alt="Chatbot Icon" class="w-full h-full object-contain" />
+
+<button id="chatToggle"
+        class="fixed right-4 w-40 h-40 p-0 border-none bg-transparent shadow-none hover:scale-105 transition-all duration-500 z-30"
+        style="bottom: 16px;">
+  <img src="assets/Logos/Bot_Photo.png" alt="Chatbot Icon" class="w-full h-full object-contain" />
 </button>
-
-
 
 
   <!-- Chat window -->
@@ -192,8 +267,12 @@
       <input
         type="text"
         id="chatInput"
+        inputmode="text"
         class="flex-1 px-3 py-2 text-sm bg-gray-800 text-white rounded outline-none"
-        placeholder="Type a question..." />
+        placeholder="Type a question..."
+        onfocus="document.body.classList.add('keyboard-open')"
+        onblur="document.body.classList.remove('keyboard-open')" />
+
       <button
         type="submit"
         class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded">
@@ -235,13 +314,13 @@
         <h3 class="text-3xl font-bold mb-6 text-green-600 text-center md:text-left border-b-2 border-green-600 pb-2">About Me</h3>
         <ul class="list-disc pl-5 space-y-4 text-justify text-[17px]">
           <li>
-            I'm Samarth Vijay Kolge, a Data Analyst from Hadapsar with a Master's in Computer Science and a passion for chess.
+            I'm Samarth Vijay Kolge, a Data Analyst from Pune with a Master's in Computer Science and a passion for chess.
           </li>
           <li>
-            Skilled in SQL, Python, Tableau, Power BI, and Excel, with hands-on experience from my internship at Borgward Technology.
+            Skilled in SQL, Python, Tableau, Power BI and Excel, with hands-on experience from my internship at Borgward Technology.
           </li>
           <li>
-            Currently specializing in Data Science & Machine Learning at Scaler, I’ve led impactful projects across e-commerce, entertainment, and retail analytics.
+            Currently specializing in Data Science & Machine Learning at Scaler, I’ve led impactful projects across e-commerce, entertainment and retail analytics.
           </li>
         </ul>
       </div>
@@ -444,7 +523,7 @@
     <div class="max-w-3xl mx-auto text-center">
       <h3 class="text-3xl font-bold mb-4 text-green-400">Dashboard</h3>
       <p class="text-gray-300 text-lg mb-6">
-        Visit my Tableau dashboard showcasing key metrics and analytics of my portfolio and performance.
+        Visit my Power BI dashboard showcasing key metrics and analytics of my portfolio and performance.
       </p>
       <a href="dashboard.html" target="_blank" class="inline-block px-6 py-3 bg-green-500 text-white rounded shadow hover:bg-green-600 transition">Go to Dashboard</a>
     </div>
@@ -475,30 +554,63 @@
     </p>
 
     <!-- Success message -->
-               <div id="successMessage" class="hidden text-center text-green-500 font-semibold mb-6">
-            ✅ Message sent successfully!
-          </div>
+    <div id="successMessage" class="hidden text-center text-green-500 font-semibold mb-6">
+      ✔️ Message received successfully. Thank you for reaching out !
+    </div>
 
-    <form id="contactForm" action="https://formspree.io/f/mrbqddqk" method="POST" class="grid gap-6 bg-gray-800 p-8 rounded-lg shadow-lg">
-      <div>
-        <label class="block text-sm font-semibold mb-2">Name</label>
-        <input type="text" name="name" required class="w-full px-4 py-3 rounded bg-gray-700 border border-gray-600 text-white focus:outline-none focus:border-green-500">
-      </div>
 
-      <div>
-        <label class="block text-sm font-semibold mb-2">Email</label>
-        <input type="email" name="email" required class="w-full px-4 py-3 rounded bg-gray-700 border border-gray-600 text-white focus:outline-none focus:border-green-500">
-      </div>
+    <audio id="sendSound" src="assets/send-sound.mp3" preload="auto"></audio>
 
-      <div>
-        <label class="block text-sm font-semibold mb-2">Subject</label>
-        <input type="text" name="subject" class="w-full px-4 py-3 rounded bg-gray-700 border border-gray-600 text-white focus:outline-none focus:border-green-500">
-      </div>
 
-      <div>
-        <label class="block text-sm font-semibold mb-2">Message</label>
-        <textarea name="message" rows="5" required class="w-full px-4 py-3 rounded bg-gray-700 border border-gray-600 text-white focus:outline-none focus:border-green-500"></textarea>
-      </div>
+    
+
+
+    <form id="contactForm" action="https://formspree.io/f/mrbqddqk" method="POST" class="grid gap-6 bg-gray-800 p-8 rounded-lg shadow-lg animate-fadeInUp">
+      
+
+      
+      
+ <div class="relative z-0 w-full group">
+  <input id="name" type="text" name="name" required
+    class="peer w-full px-4 pt-6 pb-2 rounded bg-gray-700 border border-gray-600 text-white focus:outline-none focus:border-green-500 placeholder-transparent"
+    placeholder="Name">
+  <label for="name"
+    class="absolute left-4 top-2 text-sm text-gray-400 transition-all transform scale-100 origin-[0] peer-placeholder-shown:top-4 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:scale-75 peer-focus:text-green-400">
+    Name
+  </label>
+</div>
+
+<div class="relative z-0 w-full group">
+  <input id="email" type="email" name="email" required
+    class="peer w-full px-4 pt-6 pb-2 rounded bg-gray-700 border border-gray-600 text-white focus:outline-none focus:border-green-500 placeholder-transparent"
+    placeholder="Email">
+  <label for="email"
+    class="absolute left-4 top-2 text-sm text-gray-400 transition-all transform scale-100 origin-[0] peer-placeholder-shown:top-4 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:scale-75 peer-focus:text-green-400">
+    Email
+  </label>
+</div>
+
+<div class="relative z-0 w-full group">
+  <input id="subject" type="text" name="subject"
+    class="peer w-full px-4 pt-6 pb-2 rounded bg-gray-700 border border-gray-600 text-white focus:outline-none focus:border-green-500 placeholder-transparent"
+    placeholder="Subject">
+  <label for="subject"
+    class="absolute left-4 top-2 text-sm text-gray-400 transition-all transform scale-100 origin-[0] peer-placeholder-shown:top-4 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:scale-75 peer-focus:text-green-400">
+    Subject
+  </label>
+</div>
+
+<div class="relative z-0 w-full group">
+  <textarea id="message" name="message" rows="5" required
+    class="peer w-full px-4 pt-6 pb-2 rounded bg-gray-700 border border-gray-600 text-white focus:outline-none focus:border-green-500 placeholder-transparent"
+    placeholder="Message"></textarea>
+  <label for="message"
+    class="absolute left-4 top-2 text-sm text-gray-400 transition-all transform scale-100 origin-[0] peer-placeholder-shown:top-4 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:scale-75 peer-focus:text-green-400">
+    Message
+  </label>
+</div>
+
+
 
       <!-- Google reCAPTCHA -->
       <div class="text-center">
@@ -510,72 +622,86 @@
       </button>
 
 
+      <!-- Social Profiles Section -->
+      <div class="mt-12 text-center">
+        <h4 class="text-xl font-semibold text-green-400 mb-6">Find me on:</h4>
+        <div class="flex justify-center flex-wrap gap-6">
 
-      <!-- Social & Profile Links -->
-<!-- Social Profiles Section -->
-<div class="mt-12 text-center">
-  <h4 class="text-xl font-semibold text-green-400 mb-6">Find me on:</h4>
-  <div class="flex justify-center flex-wrap gap-6">
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/in/samarth-kolge-134929285" target="_blank"
+             class="relative group w-10 h-10 sm:w-12 sm:h-12 animate-bounce hover:animate-none transform transition duration-300 hover:scale-110 hover:shadow-[0_0_15px_#0A66C2]">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" class="w-full h-full object-contain" />
+            <span class="tooltip">LinkedIn</span>
+          </a>
 
-    <!-- LinkedIn -->
-    <a href="https://www.linkedin.com/in/samarth-kolge-134929285" target="_blank"
-       class="relative group w-10 h-10 sm:w-12 sm:h-12 animate-pulse hover:animate-none transform transition duration-300 hover:scale-110 hover:shadow-[0_0_15px_#0A66C2]">
-      <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" class="w-full h-full object-contain" />
-      <span class="tooltip">LinkedIn</span>
-    </a>
+          <!-- GitHub -->
+          <a href="https://github.com/SamarthKolge-Analyst" target="_blank"
+             class="relative group w-10 h-10 sm:w-12 sm:h-12 animate-bounce hover:animate-none transform transition duration-300 hover:scale-110 hover:shadow-[0_0_15px_#ffffff]">
+            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" class="w-full h-full object-contain" />
+            <span class="tooltip">GitHub</span>
+          </a>
 
-    <!-- GitHub -->
-    <a href="https://github.com/SamarthKolge-Analyst" target="_blank"
-       class="relative group w-10 h-10 sm:w-12 sm:h-12 animate-pulse hover:animate-none transform transition duration-300 hover:scale-110 hover:shadow-[0_0_15px_#ffffff]">
-      <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" class="w-full h-full object-contain" />
-      <span class="tooltip">GitHub</span>
-    </a>
+          <!-- Scaler -->
+          <a href="https://www.scaler.com/academy/profile/295c762bef94" target="_blank"
+             class="relative group w-10 h-10 sm:w-12 sm:h-12 animate-bounce hover:animate-none transform transition duration-300 hover:scale-110 hover:shadow-[0_0_15px_#0033FF]">
+            <img src="assets/Logos/Scaler_logo.png" alt="Scaler Academy" class="w-full h-full object-contain" />
+            <span class="tooltip">Scaler</span>
+          </a>
 
-    <!-- Scaler -->
-    <a href="https://www.scaler.com/academy/profile/295c762bef94" target="_blank"
-       class="relative group w-10 h-10 sm:w-12 sm:h-12 animate-pulse hover:animate-none transform transition duration-300 hover:scale-110 hover:shadow-[0_0_15px_#0033FF]">
-      <img src="assets/Scaler_logo.png" alt="Scaler Academy" class="w-full h-full object-contain" />
-      <span class="tooltip">Scaler</span>
-    </a>
+          <!-- LeetCode -->
+          <a href="https://leetcode.com/u/Samarth_Kolge" target="_blank"
+             class="relative group w-10 h-10 sm:w-12 sm:h-12 animate-bounce hover:animate-none transform transition duration-300 hover:scale-110 hover:shadow-[0_0_15px_#FFA116]">
+            <img src="https://cdn.iconscout.com/icon/free/png-256/leetcode-3521542-2944960.png" alt="LeetCode" class="w-full h-full object-contain" />
+            <span class="tooltip">LeetCode</span>
+          </a>
 
-    <!-- LeetCode -->
-    <a href="https://leetcode.com/u/Samarth_Kolge" target="_blank"
-       class="relative group w-10 h-10 sm:w-12 sm:h-12 animate-pulse hover:animate-none transform transition duration-300 hover:scale-110 hover:shadow-[0_0_15px_#FFA116]">
-      <img src="https://cdn.iconscout.com/icon/free/png-256/leetcode-3521542-2944960.png" alt="LeetCode" class="w-full h-full object-contain" />
-      <span class="tooltip">LeetCode</span>
-    </a>
+          <!-- HackerRank -->
+          <a href="https://www.hackerrank.com/profile/kolgesamarth" target="_blank"
+             class="relative group w-10 h-10 sm:w-12 sm:h-12 animate-bounce hover:animate-none transform transition duration-300 hover:scale-110 hover:shadow-[0_0_15px_#2EC866]">
+            <img src="assets/Logos/HackerRank.png" alt="HackerRank" class="w-full h-full object-contain" />
+            <span class="tooltip">HackerRank</span>
+          </a>
 
-    <!-- HackerRank -->
-    <a href="https://www.hackerrank.com/profile/kolgesamarth" target="_blank"
-       class="relative group w-10 h-10 sm:w-12 sm:h-12 animate-pulse hover:animate-none transform transition duration-300 hover:scale-110 hover:shadow-[0_0_15px_#2EC866]">
-      <img src="https://cdn.iconscout.com/icon/free/png-256/hackerrank-3628885-3030008.png" alt="HackerRank" class="w-full h-full object-contain" />
-      <span class="tooltip">HackerRank</span>
-    </a>
+          <!-- Email -->
+          <a href="mailto:kolgesamarth@gmail.com" target="_blank"
+             class="relative group w-10 h-10 sm:w-12 sm:h-12 animate-bounce hover:animate-none transform transition duration-300 hover:scale-110 hover:shadow-[0_0_15px_#4FC3F7]">
+            <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email" class="w-full h-full object-contain" />
+            <span class="tooltip">Email</span>
+          </a>
 
-    <!-- WhatsApp -->
-    <a href="https://wa.me/9518905490" target="_blank"
-       class="relative group w-10 h-10 sm:w-12 sm:h-12 animate-pulse hover:animate-none transform transition duration-300 hover:scale-110 hover:shadow-[0_0_15px_#25D366]">
-      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" class="w-full h-full object-contain" />
-      <span class="tooltip">WhatsApp</span>
-    </a>
-
-    <!-- Email -->
-    <a href="mailto:kolgesamarth@gmail.com" target="_blank"
-       class="relative group w-10 h-10 sm:w-12 sm:h-12 animate-pulse hover:animate-none transform transition duration-300 hover:scale-110 hover:shadow-[0_0_15px_#4FC3F7]">
-      <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email" class="w-full h-full object-contain" />
-      <span class="tooltip">Email</span>
-    </a>
-
-  </div>
-</div>
+          <!-- WhatsApp -->
+          <a href="https://wa.me/9518905490" target="_blank"
+             class="relative group w-10 h-10 sm:w-12 sm:h-12 animate-bounce hover:animate-none transform transition duration-300 hover:scale-110 hover:shadow-[0_0_15px_#25D366]">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" class="w-full h-full object-contain" />
+            <span class="tooltip">WhatsApp</span>
+          </a>
 
 
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/sam_kolge.12?igsh=MWV2bDA0cXlseXBucg==" target="_blank"
+             class="relative group w-10 h-10 sm:w-12 sm:h-12 animate-bounce hover:animate-none transform transition duration-300 hover:scale-110 hover:shadow-[0_0_15px_#E1306C]">
+            <img src="assets/Logos/Instagram.png" alt="Instagram" class="w-full h-full object-contain" />
+            <span class="tooltip">Instagram</span>
+          </a>
 
-
+        </div>
+      </div>
 
     </form>
   </div>
 </section>
+
+<!-- JS for toast -->
+<script>
+  document.getElementById("contactForm").addEventListener("submit", function (e) {
+    setTimeout(() => {
+      const toast = document.getElementById("toast");
+      toast.classList.remove("hidden");
+      setTimeout(() => toast.classList.add("hidden"), 4000);
+    }, 500);
+  });
+</script>
+
 
 <!-- Load reCAPTCHA script -->
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -610,24 +736,25 @@
         grecaptcha.reset();
         success.classList.remove('hidden');
 
-        // Instant scroll
+        document.getElementById("sendSound").play().catch(err => console.warn("Audio play blocked:", err));
+
+        // ✅ Keep only ONE scroll into view
         window.scrollTo({ top: document.getElementById('contact').offsetTop, behavior: 'auto' });
 
-
+        // ⏱️ Keep message for 6 seconds, no second scroll
         setTimeout(() => {
           success.classList.add('hidden');
-          window.location.href = "#contact";
-        }, 1000);
+        }, 5000);
       } else {
         alert("❌ There was an error submitting the form.");
       }
     } catch (error) {
       alert("❌ An error occurred. Please try again.");
     }
-
- 
   });
 </script>
+
+
 
 
 
@@ -656,12 +783,15 @@ window.addEventListener('scroll', () => {
 
 function openChat() {
   chatWindow.classList.remove("hidden");
+  chatToggle.style.bottom = "510px"; // ✅ Reduced space between bot and chat window
 }
 
 function closeChat() {
   chatWindow.classList.add("hidden");
+  chatToggle.style.bottom = "16px"; // ✅ Reset to original position
   clearTimeout(inactivityTimer);
 }
+
 
 function startInactivityTimer() {
   clearTimeout(inactivityTimer);
@@ -797,7 +927,7 @@ function getBotReply(message) {
     if (msg.includes('gaming')) return 'Yes, I\'m into gaming! I enjoy playing FIFA and a bit of Fortnite. It’s a fun way to relax and sometimes inspires my problem-solving skills (strategy, you know?).';
     if (msg.includes('free')) return 'I\'m usually free on the weekends or after 7 PM on weekdays. If you want to catch up or need help with something, let me know!';
     if (msg.includes('language')) return 'If you mean programming language, I’m a big fan of Python for data science and JavaScript for web projects. If you mean spoken language, English, Hindi, and a bit of Marathi!';
-    if (msg.includes('dream')) return 'I have big dreams – one is to lead a major AI initiative that improves people\'s lives. On a lighter note, another dream is to have a tech setup so cool that it gets featured on Reddit!';
+    if (msg.includes('dream')) return 'I have big dreams – one is to lead a major AI initiative that improves people lives. On a lighter note, another dream is to have a tech setup so cool that it gets featured on Reddit!';
     if (msg.includes('mentor')) return 'I\'ve been lucky to have great mentors, and I also enjoy mentoring juniors. Sharing knowledge is how we all grow. If you need help or advice in tech, I\'m all ears.';
     if (msg.includes('motto')) return 'My life motto is "Keep learning, keep hustling." Technology evolves every day, so I believe in staying curious and adapting. Also, "Work hard, play harder!" 😊';
     if (msg.includes('favorite book')) return 'One of my favorite books is *Atomic Habits* by James Clear. It taught me a lot about building good habits and it\'s helped me balance work and personal growth quite a bit.';
@@ -818,6 +948,29 @@ function getBotReply(message) {
     if (msg.includes('play a game') || msg.includes('game')) return 'We could play a quick game. Try to guess a number I\'m thinking of between 1 and 5. (Just kidding, I\'m thinking of 3. 😜)';
     if (msg.includes('coin')) return Math.random() < 0.5 ? 'Heads! 🪙' : 'Tails! 🪙';
     if (msg.includes('dice') || msg.includes('die')) return 'You rolled a ' + (Math.floor(Math.random() * 6) + 1) + '! 🎲';
+
+
+    if (msg.includes("haa") || msg.includes("haaa") || msg.includes("haaaa")) return "Hmm 😄";
+    if (msg.includes("tool") || msg.includes("tools") || msg.includes("Tools")) return "I'm most proficient in SQL and Python — they’re my strongest tools! 💻";
+    if (msg.includes("friend")) return "My best friends? SQL and Python! They're always by my side in every data journey. 🤖💚";
+    if (msg.includes("goal")) return "My goal is to become a leading data scientist solving meaningful problems using AI and analytics.";
+    if (msg.includes("data analyst")) return "A Data Analyst is someone who extracts insights from raw data to help drive better decisions — like a data detective!";
+    if (msg.includes("proficient") || msg.includes("proficiency") || msg.includes("expert in")) return "I'm proficient in SQL, Python, Power BI, Tableau, and Excel. Especially SQL — it's my data language!";
+    if (msg.includes("sister") || msg.includes("sisters")) return "I have two amazing sisters — Siddhi and Nikita. They're awesome and full of positivity. 👭";
+    if (msg.includes("why data analyst")) return "Because I love solving problems, spotting patterns, and turning data into smart decisions.";
+    if (msg.includes("greatest strength")) return "Problem-solving and attention to detail — I love turning chaos into clarity.";
+    if (msg.includes("biggest challenge")) return "Once handled a 50,000+ row messy dataset — cleaned, visualized, and delivered insights. That was a win! 🧹📊";
+    if (msg.includes("describe yourself")) return "Curious, analytical, tech-loving, and always ready to turn data into stories. Also, a proud coffee enthusiast! ☕";
+    if (msg.includes("hobbies") || msg.includes("free time") || msg.includes("after work")) return "Chess, coding, café hopping in Pune, and sometimes Netflix or photography!";
+    if (msg.includes("morning routine")) return "☀️ Wake up, coffee ☕, check tech updates, then dive into data or meetings. All with lo-fi beats.";
+    if (msg.includes("daily tasks")) return "Clean data, analyze with SQL, build dashboards, extract insights, and communicate with clarity!";
+    if (msg.includes("fun fact about you")) return "I once built a report automation that saved my team 6 hours a week. I still get thank-yous for that!";
+
+
+
+  
+
+
 
   return "I'm still learning how to answer that. Try asking about skills, education, or resume.";
 }
@@ -1110,36 +1263,144 @@ chatForm.addEventListener("submit", (e) => {
 
 
 <script>
+  // Toggle mobile menu open/close
+  const menuBtn = document.getElementById("mobileMenuBtn");
+  const menuDrawer = document.getElementById("mobileMenu");
+  const closeBtn = document.getElementById("mobileMenuClose");
+  const mobileLinks = document.querySelectorAll(".mobile-nav-link");
+  const allLinks = document.querySelectorAll(".nav-link");
+
+  menuBtn?.addEventListener("click", () => {
+    menuDrawer.classList.add("active");
+  });
+
+  closeBtn?.addEventListener("click", () => {
+    menuDrawer.classList.remove("active");
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!menuDrawer.contains(event.target) && !menuBtn.contains(event.target)) {
+      menuDrawer.classList.remove("active");
+    }
+  });
+
+  mobileLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      menuDrawer.classList.remove("active");
+    });
+  });
+
+  // Highlight active nav link based on scroll
   const sections = document.querySelectorAll("section[id]");
-  const navLinks = document.querySelectorAll(".nav-link");
 
-  function updateActiveLink() {
-    const scrollY = window.scrollY;
+  function highlightCurrentLink() {
+    const scrollY = window.pageYOffset;
 
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop - 120; // adjust for sticky nav height
+    sections.forEach((section) => {
       const sectionHeight = section.offsetHeight;
+      const sectionTop = section.offsetTop - 60;
       const sectionId = section.getAttribute("id");
 
       if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-        navLinks.forEach(link => {
-          // Remove highlight from all
-          link.classList.remove("text-green-400", "font-semibold");
-
-          // Match href to ID
-          if (link.getAttribute("href") === `#${sectionId}`) {
-            link.classList.add("text-green-400", "font-semibold");
+        allLinks.forEach((link) => {
+          link.classList.remove("text-green-400", "font-bold", "underline");
+          if (link.getAttribute("href").includes(`#${sectionId}`)) {
+            link.classList.add("text-green-400", "font-bold", "underline");
           }
         });
       }
     });
   }
 
-  // Run immediately on scroll
-  window.addEventListener("scroll", updateActiveLink);
+  window.addEventListener("scroll", highlightCurrentLink);
+  window.addEventListener("DOMContentLoaded", highlightCurrentLink);
+</script>
 
-  // Run once on page load too
-  window.addEventListener("DOMContentLoaded", updateActiveLink);
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<script>
+  let preventScrollSave = false;
+
+  window.addEventListener("load", () => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animate sections
+    document.querySelectorAll("section").forEach(section => {
+      gsap.from(section, {
+        opacity: 0,
+        y: 100,
+        duration: 1.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play reverse play reverse",
+          markers: false
+        }
+      });
+    });
+
+    // Animate about section
+    gsap.from(".about-text", {
+      scrollTrigger: {
+        trigger: ".about-text",
+        start: "top 80%",
+        toggleActions: "play reverse play reverse",
+      },
+      x: 100,
+      opacity: 0,
+      duration: 1.2,
+      delay: 0.2,
+      ease: "power2.out"
+    });
+
+    // Smooth anchor scroll with flag
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const targetID = this.getAttribute('href');
+        if (targetID.length > 1) {
+          const targetElement = document.querySelector(targetID);
+          if (targetElement) {
+            e.preventDefault();
+
+            preventScrollSave = true; // 🚫 Don't save scroll
+
+            const headerOffset = 100;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = window.pageYOffset + elementPosition - headerOffset;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+
+    // Restore scroll after refresh only
+    setTimeout(() => {
+      const savedY = sessionStorage.getItem('scrollY');
+      if (savedY !== null) {
+        window.scrollTo(0, parseInt(savedY));
+        sessionStorage.removeItem('scrollY');
+      }
+    }, 300);
+  });
+
+  // Save scroll only if not from anchor click
+  window.addEventListener('beforeunload', () => {
+    if (!preventScrollSave) {
+      sessionStorage.setItem('scrollY', window.scrollY);
+    }
+  });
 </script>
 
 

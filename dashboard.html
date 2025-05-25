@@ -5,6 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Samarth Kolge - Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+  @media (max-width: 768px) {
+    #mobileMenu {
+      right: -100%;
+    }
+    #mobileMenu.active {
+      right: 0;
+    }
+  }
+
+  @keyframes fadeInMenu {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-fadeInMenu {
+    animation: fadeInMenu 0.5s ease forwards;
+  }
+</style>
+
+
 </head>
 <body class="bg-[#0b0f1c] text-white">
 
@@ -15,56 +43,65 @@
     </marquee>
   </div>
 
-  <!-- 🔝 Navigation Bar (Same as main site) -->
-  <nav class="bg-gray-900 shadow sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto flex justify-center items-center px-4 py-3 space-x-6 text-lg">
-      <a href="index.html" class="text-white hover:text-green-400 transition">Home</a>
-      <a href="index.html#about" class="text-white hover:text-green-400 transition">About Me</a>
-      <a href="index.html#projects" class="text-white hover:text-green-400 transition">Projects</a>
-      <a href="index.html#certifications" class="text-white hover:text-green-400 transition">Certifications</a>
-      <a href="dashboard.html" class="text-green-500 font-bold">Dashboard</a>
-      <a href="programmer.html" class="text-white hover:text-green-400 transition">Programmer</a>
-      <a href="index.html#contact" class="text-white hover:text-green-400 transition">Contact</a>
+<!-- 🔝 Navigation Bar (Mobile & Desktop Compatible) -->
+<nav class="bg-gray-900 shadow sticky top-0 z-50">
+  <div class="relative max-w-7xl mx-auto flex items-center justify-center px-4 py-3 text-lg">
+
+    <!-- ✅ Mobile Menu Button (positioned absolute, doesn't affect center layout) -->
+    <button id="mobileMenuBtn" class="absolute left-4 sm:hidden text-white text-2xl focus:outline-none z-50">
+      &#9776;
+    </button>
+
+    <!-- ✅ Desktop Nav Menu (centered, hidden on small screens) -->
+    <div class="hidden sm:flex space-x-6">
+      <a href="index.html" class="text-white hover:text-green-400 transition nav-link">Home</a>
+      <a href="index.html#about" class="text-white hover:text-green-400 transition nav-link">About Me</a>
+      <a href="index.html#projects" class="text-white hover:text-green-400 transition nav-link">Projects</a>
+      <a href="index.html#certifications" class="text-white hover:text-green-400 transition nav-link">Certifications</a>
+      <a href="dashboard.html" class="text-green-500 font-bold nav-link">Dashboard</a>
+      <a href="programmer.html" class="text-white hover:text-green-400 transition nav-link">Programmer</a>
+      <a href="index.html#contact" class="text-white hover:text-green-400 transition nav-link">Contact</a>
     </div>
+  </div>
+</nav>
+
+
+<div id="mobileMenu" class="fixed top-0 right-[-100%] w-64 h-full bg-gradient-to-br from-gray-900 to-gray-800/90 backdrop-blur-lg text-white z-[999] transition-all duration-500 sm:hidden shadow-2xl border-l border-gray-700">
+  <div class="flex justify-between items-center px-4 py-4 border-b border-gray-700">
+    <h2 class="text-lg font-bold text-green-400">Menu</h2>
+    <button id="mobileMenuClose" class="text-2xl text-white hover:text-red-400">&times;</button>
+  </div>
+  <nav class="flex flex-col space-y-4 px-6 pt-6 text-lg animate-fadeInMenu">
+    <a href="index.html" class="mobile-nav-link nav-link hover:text-green-400 transition">Home</a>
+    <a href="index.html#about" class="mobile-nav-link nav-link hover:text-green-400 transition">About Me</a>
+    <a href="index.html#projects" class="mobile-nav-link nav-link hover:text-green-400 transition">Projects</a>
+    <a href="index.html#certifications" class="mobile-nav-link nav-link hover:text-green-400 transition">Certifications</a>
+    <a href="dashboard.html" class="mobile-nav-link nav-link hover:text-green-400 transition">Dashboard</a>
+    <a href="programmer.html" class="mobile-nav-link nav-link hover:text-green-400 transition">Programmer</a>
+    <a href="index.html#contact" class="mobile-nav-link nav-link hover:text-green-400 transition">Contact</a>
   </nav>
+</div>
 
-  <!-- 📊 Embedded Tableau Dashboard -->
-  <section class="w-full px-4 py-10 bg-gray-950">
-    <div class="max-w-7xl mx-auto">
-      <div class='tableauPlaceholder' id='viz1747833349318' style='position: relative'>
-        <noscript>
-          <a href='#'><img alt=' ' src='https://public.tableau.com/static/images/Su/Superstore_Profit_Analysis_17085838734660/Dashboard/1_rss.png' style='border: none' /></a>
-        </noscript>
-        <object class='tableauViz' style='display:none;'>
-          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-          <param name='embed_code_version' value='3' />
-          <param name='site_root' value='' />
-          <param name='name' value='Superstore_Profit_Analysis_17085838734660/Dashboard' />
-          <param name='tabs' value='yes' />
-          <param name='toolbar' value='yes' />
-          <param name='static_image' value='https://public.tableau.com/static/images/Su/Superstore_Profit_Analysis_17085838734660/Dashboard/1.png' />
-          <param name='animate_transition' value='yes' />
-          <param name='display_static_image' value='yes' />
-          <param name='display_spinner' value='yes' />
-          <param name='display_overlay' value='yes' />
-          <param name='display_count' value='yes' />
-          <param name='language' value='en-US' />
-        </object>
-      </div>
-      <script type='text/javascript'>
-        var divElement = document.getElementById('viz1747833349318');
-        var vizElement = divElement.getElementsByTagName('object')[0];
-        
-        vizElement.style.width = '100%';
-        vizElement.style.height = '550px'; // ✅ Reduced height here
-        
-        var scriptElement = document.createElement('script');
-        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-        vizElement.parentNode.insertBefore(scriptElement, vizElement);
-      </script>
 
+
+
+<!-- 📊 Embedded Power BI Dashboard -->
+<section class="w-full px-4 py-10 bg-gray-950">
+  <div class="max-w-7xl mx-auto">
+    <div class="w-full">
+      <iframe 
+        title="Samarth Power BI Dashboard" 
+        width="100%" 
+        height="550px" 
+        src="https://app.powerbi.com/view?r=eyJrIjoiODkxMGI1ODItMzBlNy00Y2MwLWExOTktYjkxYmJhYTFjZTBmIiwidCI6ImM4OGFhZjQ1LTY4ZDItNGRlMi1iMzA1LTk1YzBiZjIwMGU3ZSJ9" 
+        frameborder="0" 
+        allowfullscreen="true" 
+        style="border: none; animation: fadeInUp 1s ease-out;">
+      </iframe>
     </div>
-  </section>
+  </div>
+</section>
+
     
   <!-- Social sidebar (fixed on left for desktop, hidden on mobile) -->
 <div class="hidden sm:flex fixed top-1/2 -translate-y-1/2 left-0 flex-col items-center space-y-6
@@ -140,12 +177,11 @@
 <div id="chatWidget" class="fixed bottom-0 right-4 text-base z-50 mb-2">
 
   <!-- Chat toggle button -->
-  <!-- Chat toggle button with larger image and no background -->
-<button id="chatToggle" class="w-40 h-40 p-0 border-none bg-transparent shadow-none hover:scale-105 transition-transform">
-  <img src="assets/Bot_Photo.png" alt="Chatbot Icon" class="w-full h-full object-contain" />
+<button id="chatToggle"
+        class="fixed right-4 w-40 h-40 p-0 border-none bg-transparent shadow-none hover:scale-105 transition-all duration-500 z-30"
+        style="bottom: 16px;">
+  <img src="assets/Logos/Bot_Photo.png" alt="Chatbot Icon" class="w-full h-full object-contain" />
 </button>
-
-
 
 
   <!-- Chat window -->
@@ -218,11 +254,15 @@ function addMessage(content, type = 'bot') {
 // Manual toggle only
 function openChat() {
   chatWindow.classList.remove("hidden");
+  chatToggle.style.bottom = "510px"; // ✅ Reduced space between bot and chat window
 }
 
 function closeChat() {
   chatWindow.classList.add("hidden");
+  chatToggle.style.bottom = "16px"; // ✅ Reset to original position
+  clearTimeout(inactivityTimer);
 }
+
 
 chatToggle.addEventListener("click", () => {
   const isHidden = chatWindow.classList.contains("hidden");
@@ -234,26 +274,105 @@ chatClose.addEventListener("click", () => closeChat());
 // Handle message submission
 chatForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  const userMessage = chatInput.value.trim();
-  if (!userMessage) return;
+  const msg = chatInput.value.trim().toLowerCase();
+  if (!msg) return;
 
-  addMessage(userMessage, 'user');
+  addMessage(msg, 'user');
   chatInput.value = "";
 
   // Simulate bot response logic
   setTimeout(() => {
-    let reply = "I'm still learning! Try asking about skills, tools, or projects.";
-    if (/hi|hello|hey/i.test(userMessage)) reply = "Hello! How can I help you today?";
-    else if (/skills|tools|technologies/i.test(userMessage)) reply = "I'm skilled in SQL, Python, Power BI, Tableau, Excel.";
-    else if (/education|college|university/i.test(userMessage)) reply = "I'm pursuing MSc AI/ML from Woolf University.";
-    else if (/experience|internship/i.test(userMessage)) reply = "I worked as a Data Analyst Intern at Borgward Technology.";
-    addMessage(reply, 'bot');
-  }, 1000);
+    if (msg.includes("joke") || msg.includes("funny")) return addMessage("Glad you're having fun! 😂", 'bot');
+    if (msg.includes("love")) return addMessage("I'm single... but in a committed relationship with SQL & Python 💘", 'bot');
+    if (msg.includes("school")) return addMessage("Studied at Alore Highschool.", 'bot');
+    if (msg.includes("skills") || msg.includes("technologies")) return addMessage("SQL, Python, Power BI, Tableau, Excel, HTML, CSS, JS.", 'bot');
+    if (msg.includes("resume") || msg.includes("cv")) return addMessage("Download my resume from the homepage 📄", 'bot');
+    if (msg.includes("projects") || msg.includes("github")) return addMessage("Check out my GitHub or Projects section!", 'bot');
+    if (msg.includes("dashboard") || msg.includes("power bi") || msg.includes("tableau")) return addMessage("Find my dashboards in the 'Dashboard' section or on Tableau Public.", 'bot');
+    if (msg.includes("linkedin")) return addMessage("linkedin.com/in/samarth-kolge-134929285", 'bot');
+    if (msg.includes("email") || msg.includes("contact") || msg.includes("reach")) return addMessage("kolgesamarth@gmail.com or WhatsApp: 9518905490", 'bot');
+    if (msg.includes("phone") || msg.includes("whatsapp")) return addMessage("You can WhatsApp me at 9518905490 📱", 'bot');
+    if (msg.includes("study") || msg.includes("education")) return addMessage("I’m studying AI/ML and always curious!", 'bot');
+    if (msg.includes("bored") || msg.includes("play") || msg.includes("game")) return addMessage("Let’s talk about data — or want a joke?", 'bot');
+    if (msg.includes("robot") || msg.includes("bot") || msg.includes("assistant")) return addMessage("I may be a bot, but I’ve got human-level insights 😉", 'bot');
+    if (msg.includes("sad") || msg.includes("cry")) return addMessage("Everything’s going to be okay. Take a deep breath 🌈", 'bot');
+    if (msg.includes("hi") || msg.includes("hello") || msg.includes("hey")) return addMessage("Hello! 😊", 'bot');
+    if (msg.includes("how are you")) return addMessage("I'm doing well, thank you! Keeping busy with projects and coffee. How about you?", 'bot');
+    if (msg.includes("good morning")) return addMessage("Good morning! Hope you have a fantastic day ahead filled with coffee and code!", 'bot');
+    if (msg.includes("good afternoon")) return addMessage("Good afternoon! I hope your day is going well. Keep up the great work!", 'bot');
+    if (msg.includes("good evening")) return addMessage("Good evening! It's a great time to unwind and maybe do a bit of coding for fun. 😉", 'bot');
+    if (msg.includes("bye") || msg.includes("goodbye")) return addMessage("Goodbye! Have a great day ahead!", 'bot');
+    if (msg.includes("good night")) return addMessage("Good night! Sleep tight and don't let the bed bugs (or computer bugs) bite! 🌙", 'bot');
+    if (msg.includes("thank") || msg.includes("thanks") || msg.includes("thx") || msg.includes("ty")) return addMessage("You're welcome! Always happy to help or chat. 😊", 'bot');
+    if (msg.includes("ok") || msg.includes("yes") || msg.includes("no") || msg.includes("sure") || msg.includes("fine")) return addMessage("Okay, got it! 👍", 'bot');
+    if (msg.includes("lol") || msg.includes("haha")) return addMessage("😂", 'bot');
+    if (msg.includes("name") || msg.includes("samarth")) return addMessage("I'm DataBot by Samarth 🤖", 'bot');
+    if (msg.includes("location") || msg.includes("city") || msg.includes("pune")) return addMessage("Based in Pune, India 🇮🇳", 'bot');
+    if (msg.includes("college") || msg.includes("university")) return addMessage("Graduated B.Sc. IT from DBJ College, now pursuing M.Sc. AI/ML at Woolf University.", 'bot');
+
+    // Add more if-conditions as needed from your extended script here...
+
+    addMessage("I'm still learning! Try asking about skills, tools, or projects.", 'bot');
+  }, 500);
 });
+
+
+
 </script>
 
 
+<script>
+  const menuBtn = document.getElementById("mobileMenuBtn");
+  const menuDrawer = document.getElementById("mobileMenu");
+  const closeBtn = document.getElementById("mobileMenuClose");
+  const navLinks = document.querySelectorAll(".mobile-nav-link");
 
+  menuBtn?.addEventListener("click", () => {
+    menuDrawer.classList.add("active");
+  });
+
+  closeBtn?.addEventListener("click", () => {
+    menuDrawer.classList.remove("active");
+  });
+
+  document.addEventListener("click", function (event) {
+    if (!menuDrawer.contains(event.target) && !menuBtn.contains(event.target)) {
+      menuDrawer.classList.remove("active");
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      menuDrawer.classList.remove("active");
+    });
+  });
+
+  // Active section highlight based on scroll
+  const sections = document.querySelectorAll("section[id]");
+  const allLinks = document.querySelectorAll(".nav-link");
+
+  function highlightCurrentLink() {
+    let scrollY = window.pageYOffset;
+
+    sections.forEach((current) => {
+      const sectionHeight = current.offsetHeight;
+      const sectionTop = current.offsetTop - 60;
+      const sectionId = current.getAttribute("id");
+
+      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+        allLinks.forEach((link) => {
+          link.classList.remove("text-green-400", "font-bold", "underline");
+          if (link.getAttribute("href").includes(`#${sectionId}`)) {
+            link.classList.add("text-green-400", "font-bold", "underline");
+          }
+        });
+      }
+    });
+  }
+
+  window.addEventListener("scroll", highlightCurrentLink);
+  window.addEventListener("load", highlightCurrentLink);
+</script>
 
 
 </body>
