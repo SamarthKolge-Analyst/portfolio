@@ -44,6 +44,12 @@
 </style>
 
 
+<!-- ✅ Favicons for All Cases -->
+<link rel="icon" href="assets/favicon.png" type="image/png" />
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+
+
 </head>
 <body class="bg-[#0b0f1c] text-white">
 
@@ -320,6 +326,47 @@ chatForm.addEventListener("submit", (e) => {
     if (msg.includes("name") || msg.includes("samarth")) return addMessage("I'm DataBot by Samarth 🤖", 'bot');
     if (msg.includes("location") || msg.includes("city") || msg.includes("pune")) return addMessage("Based in Pune, India 🇮🇳", 'bot');
     if (msg.includes("college") || msg.includes("university")) return addMessage("Graduated B.Sc. IT from DBJ College, now pursuing M.Sc. AI/ML at Woolf University.", 'bot');
+    if (msg.includes("haa") || msg.includes("haaa") || msg.includes("haaaa"))
+      return "Hmm 😄";
+
+    if (msg.includes("friend"))
+      return "My best friends? SQL and Python! They're always by my side in every data journey. 🤖💚";
+
+    if (msg.includes("goal"))
+      return "My goal is to become a leading data scientist solving meaningful problems using AI and analytics.";
+
+    if (msg.includes("data analyst"))
+      return "A Data Analyst is someone who extracts insights from raw data to help drive better decisions — like a data detective!";
+
+    if (msg.includes("proficient") || msg.includes("proficiency") || msg.includes("expert in"))
+      return "I'm proficient in SQL, Python, Power BI, Tableau, and Excel. Especially SQL — it's my data language!";
+
+    if (msg.includes("sister") || msg.includes("sisters"))
+      return "I have two amazing sisters — Siddhi and Nikita. They're awesome and full of positivity. 👭";
+
+    if (msg.includes("why data analyst"))
+      return "Because I love solving problems, spotting patterns, and turning data into smart decisions.";
+
+    if (msg.includes("greatest strength"))
+      return "Problem-solving and attention to detail — I love turning chaos into clarity.";
+
+    if (msg.includes("biggest challenge"))
+      return "Once handled a 50,000+ row messy dataset — cleaned, visualized, and delivered insights. That was a win! 🧹📊";
+
+    if (msg.includes("describe yourself"))
+      return "Curious, analytical, tech-loving, and always ready to turn data into stories. Also, a proud coffee enthusiast! ☕";
+
+    if (msg.includes("hobbies") || msg.includes("free time") || msg.includes("after work"))
+      return "Chess, coding, café hopping in Pune, and sometimes Netflix or photography!";
+
+    if (msg.includes("morning routine"))
+      return "☀️ Wake up, coffee ☕, check tech updates, then dive into data or meetings. All with lo-fi beats.";
+
+    if (msg.includes("daily tasks"))
+      return "Clean data, analyze with SQL, build dashboards, extract insights, and communicate with clarity!";
+
+    if (msg.includes("fun fact about you"))
+      return "I once built a report automation that saved my team 6 hours a week. I still get thank-yous for that!";
 
     // Add more if-conditions as needed from your extended script here...
 
