@@ -303,7 +303,7 @@ chatForm.addEventListener("submit", (e) => {
     if (msg.includes("joke") || msg.includes("funny")) return addMessage("Glad you're having fun! 😂", 'bot');
     if (msg.includes("love")) return addMessage("I'm single... but in a committed relationship with SQL & Python 💘", 'bot');
     if (msg.includes("school")) return addMessage("Studied at Alore Highschool.", 'bot');
-    if (msg.includes("skills") || msg.includes("technologies")) return addMessage("SQL, Python, Power BI, Tableau, Excel, HTML, CSS, JS.", 'bot');
+    if (msg.includes("skills") || msg.includes("technologies")) return addMessage("SQL, Python, Power BI, Tableau and Excel", 'bot');
     if (msg.includes("resume") || msg.includes("cv")) return addMessage("Download my resume from the homepage 📄", 'bot');
     if (msg.includes("projects") || msg.includes("github")) return addMessage("Check out my GitHub or Projects section!", 'bot');
     if (msg.includes("dashboard") || msg.includes("power bi") || msg.includes("tableau")) return addMessage("Find my dashboards in the 'Dashboard' section or on Tableau Public.", 'bot');
@@ -324,7 +324,6 @@ chatForm.addEventListener("submit", (e) => {
     if (msg.includes("thank") || msg.includes("thanks") || msg.includes("thx") || msg.includes("ty")) return addMessage("You're welcome! Always happy to help or chat. 😊", 'bot');
     if (msg.includes("ok") || msg.includes("yes") || msg.includes("no") || msg.includes("sure") || msg.includes("fine")) return addMessage("Okay, got it! 👍", 'bot');
     if (msg.includes("lol") || msg.includes("haha")) return addMessage("😂", 'bot');
-    if (msg.includes("name") || msg.includes("samarth")) return addMessage("I'm DataBot by Samarth 🤖", 'bot');
     if (msg.includes("location") || msg.includes("city") || msg.includes("pune")) return addMessage("Based in Pune, India 🇮🇳", 'bot');
     if (msg.includes("college") || msg.includes("university")) return addMessage("Graduated B.Sc. IT from DBJ College, now pursuing M.Sc. AI/ML at Woolf University.", 'bot');
     if (msg.includes("haa") || msg.includes("haaa") || msg.includes("haaaa"))
@@ -368,6 +367,9 @@ chatForm.addEventListener("submit", (e) => {
 
     if (msg.includes("fun fact about you"))
       return "I once built a report automation that saved my team 6 hours a week. I still get thank-yous for that!";
+
+    if (msg.includes("name") || msg.includes("samarth")) return addMessage("I'm DataBot by Samarth 🤖", 'bot');
+
 
     // Add more if-conditions as needed from your extended script here...
 

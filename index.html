@@ -922,29 +922,22 @@ function getBotReply(message) {
   if (msg.includes("sad") || msg.includes("cry")) return "Everything’s going to be okay. Take a deep breath 🌈";
 
 
-    if (msg.includes('hi') || msg.includes('hello') || msg.includes('hey')) return 'Hello! 😊';
+    if (msg.includes('hi') || msg.includes('hello') || msg.includes('hii') || msg.includes('hiii') || msg.includes('hiiii') || msg.includes('helloo') || msg.includes('hey')) return 'Hello! 😊';
     if (msg.includes('how are you')) return "I'm doing well, thank you! Keeping busy with projects and coffee. How about you?";
-    if (msg.includes('good morning')) return 'Good morning! Hope you have a fantastic day ahead filled with coffee and code!';
-    if (msg.includes('good afternoon')) return 'Good afternoon! I hope your day is going well. Keep up the great work!';
-    if (msg.includes('good evening')) return 'Good evening! It\'s a great time to unwind and maybe do a bit of coding for fun. 😉';
+    if (msg.includes('good morning') || msg.includes('gm') ) return 'Good morning! Hope you have a fantastic day ahead filled with coffee and code!';
+    if (msg.includes('good afternoon') || msg.includes('ga')) return 'Good afternoon! I hope your day is going well. Keep up the great work!';
+    if (msg.includes('good evening') || msg.includes('ge')) return 'Good evening! It\'s a great time to unwind and maybe do a bit of coding for fun. 😉';
     if (msg.includes('bye') || msg.includes('goodbye')) return 'Goodbye! Have a great day ahead!';
-    if (msg.includes('good night')) return "Good night! Sleep tight and don't let the bed bugs (or computer bugs) bite! 🌙";
-    if (msg.includes('thank') || msg.includes('thanks') || msg.includes('thx') || msg.includes('ty')) return 'You\'re welcome! Always happy to help or chat. 😊';
-    if (msg.includes('ok') || msg.includes('yes') || msg.includes('no') || msg.includes('sure') || msg.includes('fine')) return 'Okay, got it! 👍';
+    if (msg.includes('good night') || msg.includes('gn') ) return "Good night! Sleep tight and don't let the bed bugs (or computer bugs) bite! 🌙";
+    if (msg.includes('thank') || msg.includes('thanks') || msg.includes('thank you') || msg.includes('thx') || msg.includes('ty')) return 'You\'re welcome! Always happy to help or chat. 😊';
+    if (msg.includes('ok') || msg.includes('yes') || msg.includes('okk') || msg.includes('no') || msg.includes('sure') || msg.includes('fine')) return 'Okay, got it! 👍';
     if (msg.includes('lol') || msg.includes('haha')) return '😂';
     // Personal info and quick facts
-    if (msg.includes('name') || msg.includes('samarth')) return "I'm DataBot by Samarth 🤖";
-    if (msg.includes('love')) return "I'm single... but in a committed relationship with SQL & Python 💘";
+  
+  
     if (msg.includes('location') || msg.includes('city') || msg.includes('pune')) return 'Based in Pune, India 🇮🇳';
-    if (msg.includes('school')) return 'Studied at Alore Highschool.';
     if (msg.includes('college') || msg.includes('university')) return 'Graduated B.Sc. IT from DBJ College, now pursuing M.Sc. AI/ML at Woolf University.';
-    if (msg.includes('skills') || msg.includes('technologies')) return 'SQL, Python, Power BI, Tableau, Excel, HTML, CSS, JS.';
-    if (msg.includes('resume') || msg.includes('cv')) return 'Download my resume from the homepage 📄';
-    if (msg.includes('projects') || msg.includes('github')) return 'Check out my GitHub or Projects section!';
-    if (msg.includes('dashboard') || msg.includes('power bi') || msg.includes('tableau')) return "Find my dashboards in the 'Dashboard' section or on Tableau Public.";
-    if (msg.includes('linkedin')) return 'linkedin.com/in/samarth-kolge-134929285';
-    if (msg.includes('email') || msg.includes('contact') || msg.includes('reach')) return 'kolgesamarth@gmail.com or WhatsApp: 9518905490';
-    if (msg.includes('phone') || msg.includes('whatsapp')) return 'You can WhatsApp me at 9518905490 📱';
+   
     // Detailed professional Q&A (HR-style)
 
     if (msg.includes('tell me about yourself')) return "I'm a data enthusiast passionate about turning raw information into impactful insights. I'm currently pursuing my Master's in AI/ML while continuously upskilling in data science tools. I'm a curious learner who loves solving complex problems and I'm always up for a new challenge!";
@@ -1047,7 +1040,18 @@ function getBotReply(message) {
 
     if (msg.includes("fun fact about you"))
       return "I once built a report automation that saved my team 6 hours a week. I still get thank-yous for that!";
-
+    if (msg.includes('name') || msg.includes('samarth')) return "I'm DataBot, created by the awesome Samarth Kolge — a kind and passionate Data Analyst. Ask me anything about him! 🤖";
+    if (msg.includes('what can you do') || msg.includes('capabilities') || msg.includes('features'))
+      return "I can answer questions about my skills, education, and projects. I can also tell jokes, share fun facts, and help with data-related queries!";
+    if (msg.includes('tell me about yourself') || msg.includes('who are you') || msg.includes('what are you'))
+      return "I'm DataBot, created by Samarth Kolge. I'm here to assist you with data-related questions, share my skills, and maybe even make you smile with a joke or two!";
+    if (msg.includes('what can you do for me') || msg.includes('how can you help'))
+      return "I can help you learn about data analysis, provide insights into my skills and projects, and even entertain you with jokes or fun facts. Just ask!";
+    if (msg.includes('what is your purpose') || msg.includes('why do you exist'))
+      return "I'm here to assist you with data-related questions, share my knowledge, and hopefully make your day a little brighter with some humor and insights!";
+    if (msg.includes('what is your name') || msg.includes('who created you') || msg.includes('who made you'))
+      return "I am DataBot, created by Samarth Kolge. I'm here to assist you with data-related questions and provide insights into my skills and projects!";
+    
 
   
 
