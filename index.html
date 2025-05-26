@@ -855,7 +855,7 @@ function getBotReply(message) {
   if (msg.includes("joke") || msg.includes("funny")) return "Glad you're having fun! 😂";
   if (msg.includes("love")) return "I'm single... but in a committed relationship with SQL & Python 💘";
   if (msg.includes("school")) return "Studied at Alore Highschool.";
-  if (msg.includes("skills") || msg.includes("technologies")) return "SQL, Python, Power BI, Tableau, Excel, HTML, CSS, JS.";
+  if (msg.includes("skills") || msg.includes("technologies")) return "SQL, Python, Power BI, Tableau and Excel.";
   if (msg.includes("resume") || msg.includes("cv")) return "Download my resume from the homepage 📄";
   if (msg.includes("projects") || msg.includes("github")) return "Check out my GitHub or Projects section!";
   if (msg.includes("dashboard") || msg.includes("power bi") || msg.includes("tableau")) return "Find my dashboards in the 'Dashboard' section or on Tableau Public.";
@@ -892,6 +892,7 @@ function getBotReply(message) {
     if (msg.includes('email') || msg.includes('contact') || msg.includes('reach')) return 'kolgesamarth@gmail.com or WhatsApp: 9518905490';
     if (msg.includes('phone') || msg.includes('whatsapp')) return 'You can WhatsApp me at 9518905490 📱';
     // Detailed professional Q&A (HR-style)
+
     if (msg.includes('tell me about yourself')) return "I'm a data enthusiast passionate about turning raw information into impactful insights. I'm currently pursuing my Master's in AI/ML while continuously upskilling in data science tools. I'm a curious learner who loves solving complex problems and I'm always up for a new challenge!";
     if (msg.includes('strength')) return 'My greatest strengths are my analytical mindset and perseverance. I excel at breaking down complex problems, and I never stop until I find a solution. Plus, I code with a smile! 😄';
     if (msg.includes('weakness')) return "If I have to name a weakness, I'd say I can get a bit too absorbed in my projects. Sometimes I lose track of time when debugging or perfecting a feature – but I'm working on balancing my schedule better.";
