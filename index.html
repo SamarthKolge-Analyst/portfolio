@@ -14,6 +14,7 @@
 </script>
 
 
+
 <!-- ✅ Essential SEO Meta Tags -->
 <title>Samarth Kolge | Data Analyst Portfolio</title>
 <meta name="description" content="I'm Samarth Kolge — a Data Analyst passionate about transforming data into insights. Explore my projects, dashboards, resume, and skills in SQL, Python, Power BI, Tableau, and Excel.">
@@ -963,8 +964,21 @@ function getBotReply(message) {
     // Casual peer-to-peer questions
     if (msg.includes("how's life") || msg.includes('hows life')) return 'Life’s great! I\'m learning new things, coding up a storm, and still finding time to binge some Netflix. No complaints!';
     if (msg.includes('what do you do for fun')) return 'For fun, I enjoy playing chess and video games, and I\'m also a bit of a foodie. Exploring new cafes in Pune on weekends is my guilty pleasure!';
-    if (msg.includes('hobbies')) return 'I have quite a few hobbies. I love playing the guitar, dabbling in photography, and when I\'m not glued to a screen coding, I\'m probably out playing badminton or exploring a new hiking trail.';
+    if (msg.includes('hobbies')) return 'I have a bunch of hobbies that keep me active and curious! I am passionate about chess—it is my favorite. I also enjoy playing cricket, badminton, carrom, and kabaddi. When I am not exploring the world of data, I love diving into a good book';
     if (msg.includes('favorite movie')) return 'I\'m a big Marvel fan, so I\'d say *The Avengers*. I can watch it on repeat and not get bored!';
+
+  if (msg.includes('what does lentra ai do') || msg.includes('what is lentra ai')) 
+    return 'Lentra AI is a leading fintech company that offers AI-powered solutions to streamline and digitize the lending process for financial institutions. Their cloud-native platform helps banks and NBFCs reduce risk and make faster credit decisions.';
+
+  if (msg.includes('why you want to join lentra') || msg.includes('why do you want to join lentra')) 
+    return 'I want to join Lentra AI because it operates at the intersection of finance and technology, which aligns with my passion for data-driven decision-making. I admire Lentra’s innovative use of AI in transforming the lending ecosystem, and I’m excited by the opportunity to contribute to meaningful impact in fintech.';
+
+  if (msg.includes('lentra')) 
+    return 'Lentra AI is a rapidly growing fintech company focused on transforming digital lending with advanced AI technologies. They work with leading banks and financial institutions to enable faster, smarter loan approvals.';
+
+
+
+
     if (msg.includes('favorite food')) return 'I\'m a sucker for spicy Indian street food – Vada Pav is life! Also, pizza has a special place in my heart (who can resist cheese?).';
     if (msg.includes('coffee') && msg.includes('tea')) return 'Definitely coffee! It\'s basically the fuel that powers my code. Though I won\'t say no to a nice cup of masala chai in the evening.';
     if (msg.includes('cats') || msg.includes('dogs')) return 'I love both, but if I had to choose, I\'d say dogs. They\'re just so friendly and always excited to see you. If I had a dog, I\'d name him Data, so I can say I\'m walking my Data! 😂';
@@ -1051,6 +1065,105 @@ function getBotReply(message) {
       return "I'm here to assist you with data-related questions, share my knowledge, and hopefully make your day a little brighter with some humor and insights!";
     if (msg.includes('what is your name') || msg.includes('who created you') || msg.includes('who made you'))
       return "I am DataBot, created by Samarth Kolge. I'm here to assist you with data-related questions and provide insights into my skills and projects!";
+
+
+
+
+
+
+      if (msg.includes('tell me about yourself')) 
+  return 'I’m a data-driven individual with a Master’s in Computer Science, specializing in AI & ML. I enjoy solving real-world problems with data and have hands-on experience in analysis, visualization, and dashboarding.';
+
+if (msg.includes('what are your strengths')) 
+  return 'My strengths include data storytelling, critical thinking, and strong communication. I’m also very adaptable and enjoy collaborating across teams.';
+
+if (msg.includes('what are your weaknesses')) 
+  return 'I used to be a perfectionist, but over time I’ve learned to balance quality with deadlines and prioritize effectively.';
+
+if (msg.includes('where do you see yourself in 5 years')) 
+  return 'In five years, I aim to grow into a senior analyst role where I can lead strategic data initiatives and mentor others while continuously upskilling.';
+
+if (msg.includes('why should we hire you')) 
+  return 'I bring analytical rigor, strong business acumen, and the ability to turn raw data into insights that drive decisions. I’m a fast learner and passionate about adding value.';
+
+if (msg.includes('why do you want this job')) 
+  return 'This role perfectly aligns with my skills in data analysis, dashboarding, and stakeholder communication. It’s an exciting opportunity to make an impact.';
+
+if (msg.includes('what motivates you')) 
+  return 'Solving complex problems and creating value through data insights motivates me. I love seeing how data can influence strategic decisions.';
+
+if (msg.includes('how do you handle stress')) 
+  return 'I break big problems into smaller tasks, prioritize efficiently, and stay focused. I also maintain a healthy work-life balance to stay energized.';
+
+if (msg.includes('do you work well in teams')) 
+  return 'Absolutely. I enjoy team collaboration and believe diverse perspectives lead to better problem-solving and innovation.';
+
+if (msg.includes('how do you handle conflict at work')) 
+  return 'I address conflict with empathy and professionalism. I focus on facts, listen actively, and work toward a mutually beneficial solution.';
+
+if (msg.includes('tell me about a time you failed')) 
+  return 'Once I underestimated the time needed for a dashboard project. I learned to better estimate timelines and improve communication with stakeholders.';
+
+if (msg.includes('describe a challenging project')) 
+  return 'I worked on a large dataset with missing and inconsistent values. I cleaned and modeled it, resulting in a reliable dashboard that enhanced decision-making.';
+
+if (msg.includes('how do you prioritize tasks')) 
+  return 'I evaluate task urgency and impact, then use tools like Kanban or to-do lists to structure and execute effectively.';
+
+if (msg.includes('what are your career goals')) 
+  return 'I aim to grow into a leadership role in analytics, contributing to business strategy and mentoring junior analysts.';
+
+if (msg.includes('how do you stay organized')) 
+  return 'I use task management tools like Trello and Notion, maintain a priority list, and plan my week in advance.';
+
+if (msg.includes('do you prefer working alone or in a team')) 
+  return 'Both. I enjoy the independence of individual tasks but also value collaboration for brainstorming and refining ideas.';
+
+if (msg.includes('how do you handle feedback')) 
+  return 'I see feedback as an opportunity to grow. I actively seek it out and apply it constructively to improve my work.';
+
+if (msg.includes('what is your greatest achievement')) 
+  return 'One of my proudest moments was building a Tableau dashboard that helped reduce reporting time by 40% for my team.';
+
+if (msg.includes('how do you define success')) 
+  return 'For me, success is solving real problems and contributing meaningfully to a team or project, while continuing to learn.';
+
+if (msg.includes('how do you deal with ambiguity')) 
+  return 'I ask clarifying questions, gather context, and break down the problem into manageable steps to move forward.';
+
+if (msg.includes('how do you ensure accuracy in your analysis')) 
+  return 'I validate data sources, perform sanity checks, use version control, and peer review critical outputs.';
+
+if (msg.includes('how do you handle tight deadlines')) 
+  return 'I prioritize high-impact items, avoid distractions, and sometimes work in sprints to meet deadlines without compromising quality.';
+
+if (msg.includes('how do you handle multiple stakeholders')) 
+  return 'I ensure regular updates, manage expectations early, and tailor communication based on stakeholder needs and roles.';
+
+if (msg.includes('how do you gather requirements')) 
+  return 'I conduct interviews, send questionnaires, and collaborate with stakeholders to understand their goals and pain points.';
+
+if (msg.includes('how do you analyze data')) 
+  return 'I clean and transform data using tools like SQL and Python, then derive insights using visualizations and statistical methods.';
+
+if (msg.includes('what tools do you use')) 
+  return 'I primarily use SQL, Python (Pandas, Matplotlib), Excel, Power BI, Tableau, and Jira for task tracking.';
+
+if (msg.includes('what is kpi')) 
+  return 'KPI stands for Key Performance Indicator. It’s a measurable value that indicates how effectively a company is achieving key objectives.';
+
+if (msg.includes('what is data modeling')) 
+  return 'Data modeling is the process of designing a structure that defines how data is stored, accessed, and related within a system.';
+
+if (msg.includes('what is a/b testing')) 
+  return 'A/B testing is a method to compare two versions of a variable (A and B) to see which performs better based on a specific metric.';
+
+if (msg.includes('what is etl')) 
+  return 'ETL stands for Extract, Transform, Load. It’s a data pipeline used to collect data from sources, transform it, and load it into a data warehouse.';
+
+if (msg.includes('what is jira')) 
+  return 'Jira is a project management tool used by teams to track tasks, bugs, sprints, and workflows—especially in Agile environments.';
+
     
 
   
