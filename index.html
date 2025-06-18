@@ -925,8 +925,13 @@ function getBotReply(message) {
 
 
 
-  if (msg.includes("aditi") || msg.includes("who is aditi") || msg.includes("tell me about aditi"))
-  return "Aditi is one of the kindest souls I’ve met and proudly my very first friend at Lentra. She earned her Bachelor's degree from New College, Kolhapur (Aug 2020 – Apr 2023), and is currently pursuing her Master’s in Computer Applications at Progressive Education Society’s Modern College of Engineering, Pune (Aug 2023 – Jun 2025). While she dreams of becoming a software developer, she’s already shining bright as a skilled and insightful Business Analyst at Lentra. Her email ID is aditishinde5959@gmail.com—I've always been curious about the “5959” in it; maybe it hints at her birthday on September 5th? Whatever the story behind the numbers, one thing is crystal clear: Aditi is truly inspiring, both as a professional and as a friend.Aditi is one of the kindest souls I’ve met and proudly my very first friend at Lentra. She completed her Bachelor’s from Kolhapur University and holds an MCA degree from Modern College. Though her dream is to become a software developer, she’s currently making her mark as a talented Business Analyst at Lentra. Her email ID is aditishinde5959@gmail.com — I’ve always wondered about the '5959' in it; maybe it’s a clue she was born on September 5th? Whatever the reason, one thing is certain: Aditi is truly amazing, both as a professional and as a friend.";
+  if (
+  msg.includes("aditi") ||
+  msg.includes("who is aditi") ||
+  msg.includes("tell me about aditi")
+) 
+  return "Aditi is one of the kindest souls I’ve met and proudly my very first friend at Lentra. She earned her Bachelor's degree from New College, Kolhapur, and is currently pursuing her Master’s in Computer Applications at Progressive Education Society’s Modern College of Engineering, Pune. While she dreams of becoming a software developer, she’s already shining bright as a skilled and insightful Business Analyst at Lentra. Her email ID is aditishinde5959@gmail.com — I've always been curious about the “5959” in it; maybe it hints at her birthday on September 5th?\n\nBeyond work, Aditi comes from a brilliant family. Her younger brother recently scored an incredible 96% in his exams — and that too with hardly any studying! It’s a huge achievement, and I can imagine how proud their parents and relatives must be. I deeply relate to that feeling, having gone through a similar stage myself — it’s a moment of shared happiness and pride.\n\nWhatever the story behind the numbers or dreams, one thing is certain: Aditi is truly inspiring, both as a professional and as a friend.😊";
+
 
 
     if (msg.includes('hi') || msg.includes('hello') || msg.includes('hii') || msg.includes('hiii') || msg.includes('hiiii') || msg.includes('helloo') || msg.includes('hey')) return 'Hello! 😊';
