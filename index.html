@@ -811,9 +811,6 @@
 
 
 
-
-
-
 <!-- DataBot Full Feature Script -->
 <script>
 const chatToggle = document.getElementById("chatToggle");
@@ -847,7 +844,6 @@ function closeChat() {
   clearTimeout(inactivityTimer);
 }
 
-
 function startInactivityTimer() {
   clearTimeout(inactivityTimer);
   inactivityTimer = setTimeout(() => {
@@ -877,10 +873,29 @@ function getTimeStamp() {
   return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
+// ✅ Smart read-time fallback (in case speech synthesis not supported)
+function estimateReadTime(text) {
+  const words = text.split(' ').length;
+  return Math.max(9000, words * 400); // 400ms per word, min 9s
+}
+
+// ✅ Enhanced speak function with smart close
 function speak(text) {
   if ('speechSynthesis' in window) {
     const msg = new SpeechSynthesisUtterance(text);
+
+    msg.onend = function () {
+      setTimeout(() => {
+        closeChat();
+      }, 1200); // small buffer after speech ends
+    };
+
     window.speechSynthesis.speak(msg);
+  } else {
+    // Fallback for browsers without speech support
+    setTimeout(() => {
+      closeChat();
+    }, estimateReadTime(text));
   }
 }
 
