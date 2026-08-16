@@ -1,0 +1,1365 @@
+/*==================================================
+            VisionDock v5.0
+        Apple VisionOS Floating Dock
+==================================================*/
+
+
+/*==================================================
+                ROOT VARIABLES
+==================================================*/
+
+:root{
+
+    --dock-width:70px;
+
+    --dock-radius:999px;
+
+    --dock-padding:14px 0;
+
+    --dock-gap:16px;
+
+    --dock-bg:rgba(10,18,32,.32);
+
+    --dock-border:rgba(255,255,255,.08);
+
+    --dock-blur:26px;
+
+    --dock-shadow:
+
+        0 10px 30px rgba(0,0,0,.25);
+
+}
+
+
+/*==================================================
+                MAIN CONTAINER
+==================================================*/
+
+.vision-dock{
+
+    position:fixed;
+
+    left:24px;
+
+    top:50%;
+
+    width:96px;
+
+    height:320px;
+
+    transform:translateY(-50%);
+
+    background:none;
+
+    border:none;
+
+    box-shadow:none;
+
+    overflow:visible;
+
+    isolation:isolate;
+
+    perspective:1600px;
+
+    transform-style:preserve-3d;
+
+    contain:layout paint style;
+
+    z-index:999;
+
+}
+
+
+
+/*==================================================
+            SIDE RAIL
+==================================================*/
+
+.vision-dock::before{
+
+    content:"";
+
+    position:absolute;
+
+    right:18px;
+
+    top:20px;
+
+    bottom:20px;
+
+    width:2px;
+
+    border-radius:999px;
+
+    background:linear-gradient(
+
+        to bottom,
+
+        rgba(255,255,255,.05),
+
+        rgba(255,255,255,.45),
+
+        rgba(255,255,255,.05)
+
+    );
+
+    box-shadow:
+
+        0 0 8px rgba(255,255,255,.25),
+
+        0 0 16px rgba(0,255,255,.12);
+
+}
+
+/*==================================================
+            TOP GLOW DOT
+==================================================
+
+.vision-dock::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    top:6px;
+
+    width:8px;
+
+    height:8px;
+
+    transform:translateX(-50%);
+
+    border-radius:50%;
+
+    background:#ffffff;
+
+    box-shadow:
+
+        0 0 8px rgba(255,255,255,.9),
+
+        0 0 20px rgba(110,231,255,.30);
+
+}
+*/
+
+/*==================================================
+            BOTTOM GLOW DOT
+==================================================
+
+.dock-end{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:6px;
+
+    width:8px;
+
+    height:8px;
+
+    transform:translateX(-50%);
+
+    border-radius:50%;
+
+    background:#ffffff;
+
+    box-shadow:
+
+        0 0 8px rgba(255,255,255,.9),
+
+        0 0 20px rgba(110,231,255,.30);
+
+}
+
+*/
+
+
+/*==================================================
+                GPU
+==================================================*/
+
+.vision-dock{
+
+    will-change:transform;
+
+}
+
+
+/*==================================================
+            PERFORMANCE
+==================================================*/
+
+.vision-dock{
+
+    contain:layout paint style;
+
+}
+
+
+/*==================================================
+                DOCK ITEMS
+==================================================*/
+
+.dock-item{
+
+    position:absolute;
+
+    left:48px;
+
+    top:50%;
+
+    width:52px;
+
+    height:52px;
+
+    margin-left:-26px;
+
+    margin-top:-26px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:50%;
+
+    overflow:visible;
+
+    text-decoration:none;
+
+    transform-style:preserve-3d;
+
+    transform-origin:center center;
+
+    backface-visibility:hidden;
+
+    transition:
+
+        filter .35s ease,
+
+        box-shadow .35s ease,
+
+        background .35s ease;
+
+    z-index:3;
+
+}
+
+
+/*==================================================
+            FLOATING GLASS DISC
+==================================================*/
+
+.dock-item::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:4px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(255,255,255,.10),
+
+            rgba(255,255,255,.03),
+
+            transparent 75%
+
+        );
+
+    backdrop-filter:blur(12px);
+
+    -webkit-backdrop-filter:blur(12px);
+
+    opacity:0;
+
+    transition:
+
+        opacity .35s ease,
+
+        transform .35s ease;
+
+}
+
+
+/*==================================================
+                ICON
+==================================================*/
+
+.dock-item i{
+
+    position:relative;
+
+    z-index:2;
+
+    font-size:1.42rem;
+
+    line-height:1;
+
+    transition:
+
+        color .35s ease,
+
+        filter .35s ease,
+
+        transform .35s ease;
+
+}
+
+
+/*==================================================
+            LINK RESET
+==================================================*/
+
+.dock-item,
+
+.dock-item:hover,
+
+.dock-item:visited{
+
+    text-decoration:none;
+
+}
+
+
+/*==================================================
+            DEFAULT STATE
+==================================================*/
+
+.dock-item{
+
+    filter:
+
+        brightness(.92)
+
+        saturate(.95);
+
+}
+
+
+/*==================================================
+            HOVER
+==================================================*/
+
+.dock-item:hover{
+
+    z-index:999;
+
+}
+
+.dock-item:hover::before{
+
+    opacity:1;
+
+    transform:scale(1.08);
+
+}
+
+.dock-item:hover i{
+
+    filter:
+
+        drop-shadow(0 0 12px currentColor);
+
+}
+
+
+/*==================================================
+            HOVER HALO
+==================================================*/
+
+.dock-item::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(255,255,255,.10),
+
+            transparent 72%
+
+        );
+
+    opacity:0;
+
+    transition:
+
+        opacity .35s ease;
+
+}
+
+
+.dock-item:hover::before{
+
+    opacity:1;
+
+}
+
+
+/*==================================================
+            ACTIVE PRESS
+==================================================*/
+
+.dock-item:active{
+
+    filter:
+
+        brightness(.90);
+
+}
+
+
+/*==================================================
+            ACCESSIBILITY
+==================================================*/
+
+.dock-item:focus-visible{
+
+    outline:none;
+
+}
+
+
+.dock-item:focus-visible::before{
+
+    opacity:1;
+
+}
+
+
+/*==================================================
+            GPU
+==================================================*/
+
+.dock-item,
+
+.dock-item i,
+
+.dock-item::before{
+
+    will-change:
+
+        transform,
+
+        opacity,
+
+        filter;
+
+}
+
+
+/*==================================================
+            POINTER EVENTS
+==================================================*/
+
+.dock-item i{
+
+    pointer-events:none;
+
+}
+
+
+
+/*==================================================
+                TOOLTIP
+==================================================*/
+
+.dock-item span{
+
+    position:absolute;
+
+    left:70px;
+
+    top:50%;
+
+    transform:
+
+        translateY(-50%)
+
+        translateX(-12px);
+
+    white-space:nowrap;
+
+    padding:10px 16px;
+
+    border-radius:14px;
+
+    background:rgba(10,18,32,.94);
+
+    color:#fff;
+
+    font-size:.9rem;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:
+
+        opacity .28s,
+
+        transform .28s;
+
+}
+
+.dock-item:hover span{
+
+    opacity:1;
+
+    transform:
+
+        translateY(-50%)
+
+        translateX(0);
+
+}
+
+
+/*==================================================
+            ACTIVE GLASS CAPSULE
+==================================================*/
+
+.dock-active-bg{
+
+    position:absolute;
+
+    left:50%;
+
+    top:0;
+
+width:50px;
+height:46px;
+border-radius:16px;;
+
+    transform:
+        translateX(-50%);
+
+    pointer-events:none;
+
+    z-index:1;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.20),
+            rgba(255,255,255,.08)
+        );
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
+    border:
+
+        1px solid rgba(255,255,255,.16);
+
+    box-shadow:
+
+        inset 0 1px rgba(255,255,255,.25),
+
+        0 10px 25px rgba(0,0,0,.28),
+
+        0 0 24px rgba(255,255,255,.08);
+
+    will-change:
+
+        transform,
+
+        top,
+
+        opacity;
+
+}
+
+.dock-item{
+
+    z-index:3;
+
+    overflow:visible;
+
+    flex-shrink:0;
+}
+
+
+/*==================================================
+            CENTER ICON
+==================================================*/
+
+
+
+
+.linkedin.dock-center{
+
+    color:#0A66C2;
+
+}
+
+.github.dock-center{
+
+    color:#ffffff;
+
+}
+
+.whatsapp.dock-center{
+
+    color:#25D366;
+
+}
+
+.instagram.dock-center{
+
+    color:#E4405F;
+
+}
+
+.gmail.dock-center{
+
+    color:#EA4335;
+
+}
+
+
+
+
+.dock-center i{
+
+    filter:
+
+        drop-shadow(0 0 12px currentColor);
+
+}
+
+
+/*==================================================
+            NEAR ITEMS
+==================================================*/
+
+.dock-near{
+
+    opacity:.82;
+
+    filter:
+
+        brightness(.96)
+
+        saturate(.95);
+
+}
+
+
+/*==================================================
+            FAR ITEMS
+==================================================*/
+
+.dock-far{
+
+    opacity:.45;
+
+    filter:
+
+        brightness(.72)
+
+        saturate(.82);
+
+}
+
+
+/*==================================================
+            SMOOTH VISUALS
+==================================================*/
+
+.dock-center,
+
+.dock-near,
+
+.dock-far{
+
+    transition:
+
+        opacity .45s ease,
+
+        color .45s ease,
+
+        filter .45s ease;
+
+}
+
+
+/*==================================================
+            ACTIVE CAPSULE SHIMMER
+==================================================*/
+
+.dock-active-bg::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:1px;
+
+    border-radius:inherit;
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            rgba(255,255,255,.20),
+
+            transparent 45%
+
+        );
+
+    opacity:.75;
+
+}
+
+
+/*==================================================
+            AMBIENT LIGHT
+==================================================*/
+
+.dock-active-bg::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-8px;
+
+    border-radius:22px;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(255,255,255,.12),
+
+            transparent 75%
+
+        );
+
+    filter:blur(14px);
+
+    opacity:.6;
+
+}
+
+
+
+
+/*==================================================
+        MOBILE CONNECT TAB
+==================================================*/
+
+.mobile-dock-toggle{
+
+    display:none;
+
+}
+
+@media (max-width:768px){
+
+.mobile-dock-toggle{
+
+    position:fixed;
+
+    left:0;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:42px;
+
+    padding:14px 0;
+
+    border-radius:0 18px 18px 0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:4px;
+
+    background:rgba(8,15,30,.82);
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
+    border:
+
+        1px solid rgba(255,255,255,.08);
+
+    border-left:none;
+
+    box-shadow:
+
+        0 0 18px rgba(0,255,255,.10),
+
+        0 8px 30px rgba(0,0,0,.30);
+
+    cursor:pointer;
+
+    z-index:99999;
+
+    transition:
+
+        transform .35s ease,
+
+        box-shadow .35s ease,
+
+        background .35s ease;
+
+}
+
+.mobile-dock-toggle:hover{
+
+    transform:
+
+        translateY(-50%)
+
+        translateX(4px);
+
+}
+
+.mobile-dock-toggle span{
+
+    font-size:.68rem;
+
+    font-weight:700;
+
+    letter-spacing:.14em;
+
+    color:#ffffff;
+
+    opacity:.9;
+
+    user-select:none;
+
+}
+
+}
+
+
+
+
+@media (max-width:768px){
+
+@keyframes connectBreath{
+
+0%{
+
+box-shadow:
+
+0 0 8px rgba(0,255,255,.10);
+
+}
+
+50%{
+
+box-shadow:
+
+0 0 18px rgba(0,255,255,.35);
+
+}
+
+100%{
+
+box-shadow:
+
+0 0 8px rgba(0,255,255,.10);
+
+}
+
+}
+
+.mobile-dock-toggle{
+
+animation:
+
+connectBreath 3s ease-in-out infinite;
+
+}
+
+}
+
+@media (max-width:768px){
+
+    .vision-dock{
+
+        left:-120px;
+
+        opacity:0;
+
+        visibility:hidden;
+
+        pointer-events:none;
+
+        transition:
+            left .45s ease,
+            opacity .35s ease;
+
+    }
+
+    .vision-dock.mobile-open{
+
+        left:24px;
+
+        opacity:1;
+
+        visibility:visible;
+
+        pointer-events:auto;
+
+    }
+
+}
+
+
+@media (max-width:768px){
+
+.mobile-dock-toggle.active{
+
+    background:
+
+        rgba(18,25,45,.95);
+
+}
+
+.mobile-dock-toggle.active span{
+
+    display:none;
+
+}
+
+
+.mobile-dock-toggle.active::before{
+
+    content:"C\A L\A O\A S\A E";
+
+    white-space:pre;
+
+    color:white;
+
+    font-size:.68rem;
+
+    font-weight:700;
+
+    line-height:1.2;
+
+    text-align:center;
+
+}
+
+}
+
+@media (max-width:768px){
+
+.mobile-dock-toggle.active{
+
+    transform:
+
+        translateY(-50%)
+
+        translateX(6px);
+
+}
+
+}
+
+.mobile-dock-toggle{
+
+    overflow:hidden;
+
+}
+
+
+
+.mobile-dock-toggle::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-2px;
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            transparent,
+
+            rgba(0,255,255,.28),
+
+            transparent
+
+        );
+
+transform:
+
+translateY(var(--beam,-130%));
+
+    opacity:0;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*==================================================
+                QUICK ACTIONS
+==================================================*/
+
+.quick-actions{
+
+    position:fixed;
+
+    left:18px;
+
+    top:calc(50% + 205px);
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+
+    z-index:999;
+
+}
+
+/*==================================================
+            ACTION CAPSULE
+==================================================*/
+
+.action-capsule{
+
+    position:relative;
+
+    width:148px;
+
+    height:48px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 18px;
+
+    border-radius:999px;
+
+    overflow:hidden;
+
+    text-decoration:none;
+
+    color:#fff;
+
+    background:
+
+        rgba(12,18,30,.58);
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
+    border:
+
+        1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+
+        0 10px 30px rgba(0,0,0,.30);
+
+    transition:
+
+        width .35s,
+
+        transform .35s,
+
+        border-color .35s,
+
+        box-shadow .35s;
+
+}
+
+/*==================================================
+                ICON
+==================================================*/
+
+.action-icon{
+
+    width:30px;
+
+    height:30px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:50%;
+
+    background:
+
+        rgba(255,255,255,.06);
+
+}
+
+/*==================================================
+                TEXT
+==================================================*/
+
+.action-capsule span{
+
+    flex:1;
+
+    margin-left:12px;
+
+    margin-right:14px;   /* <-- Add this */
+
+    font-size:.92rem;
+
+    font-weight:600;
+
+    white-space:nowrap;
+
+}
+
+/*==================================================
+                ARROW
+==================================================*/
+
+.action-arrow{
+
+    flex-shrink:0;
+
+    font-size:.82rem;
+
+    opacity:.72;
+
+    transition:
+
+        transform .35s ease,
+
+        opacity .35s ease;
+
+}
+
+/*==================================================
+            HOVER
+==================================================*/
+
+.action-capsule:hover{
+
+    width:184px;
+
+    transform:
+
+        translateX(8px);
+
+}
+
+.action-capsule:hover .action-arrow{
+
+    transform:
+
+        translateX(6px);
+
+    opacity:1;
+
+}
+
+.action-capsule:hover .action-icon{
+
+    transform:
+
+        rotate(-8deg)
+
+        scale(1.08);
+
+}
+
+
+
+
+.action-capsule::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+
+            120deg,
+
+            transparent 0%,
+
+            transparent 35%,
+
+            rgba(255,255,255,.22) 50%,
+
+            transparent 65%,
+
+            transparent 100%
+
+        );
+
+    transform:
+
+        translateX(-180%);
+
+}
+
+
+
+
+@keyframes sweep{
+
+0%{
+
+transform:
+
+translateX(-180%);
+
+}
+
+100%{
+
+transform:
+
+translateX(220%);
+
+}
+
+}
+
+.action-capsule:hover::before{
+
+animation:
+
+sweep .8s ease;
+
+}
+
+
+
+
+@keyframes breathe{
+
+0%,100%{
+
+box-shadow:
+
+0 10px 28px rgba(0,0,0,.30);
+
+}
+
+50%{
+
+box-shadow:
+
+0 10px 30px rgba(0,0,0,.30),
+
+0 0 20px rgba(0,255,255,.12);
+
+}
+
+}
+
+.action-capsule{
+
+animation:
+
+breathe 5s infinite ease-in-out;
+
+}
+
+
+
+.resume-action{
+
+border-color:
+
+rgba(44,214,111,.18);
+
+}
+
+.resume-action:hover{
+
+border-color:
+
+rgba(44,214,111,.55);
+
+}
+
+.devlab-action{
+
+border-color:
+
+rgba(79,140,255,.18);
+
+}
+
+.devlab-action:hover{
+
+border-color:
+
+rgba(79,140,255,.55);
+
+}
+
+
+
+
