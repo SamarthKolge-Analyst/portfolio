@@ -7,7 +7,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         dashboard: resolve(__dirname, 'Dashboard/index.html'),
-        programmer: resolve(__dirname, 'Programmer/index.html'),
+        devLab: resolve(__dirname, 'DevLab/index.html'),
         studyMaterial: resolve(__dirname, 'Study-Material/index.html'),
       },
     },
