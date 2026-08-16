@@ -12958,72 +12958,79 @@ window.scrollToTop = function(){
 
 
 
-
-
-
-
 /* =========================================================
-   DEVLAB NAVIGATION — MOBILE KEYBOARD FIX
+   DEVLAB NAVIGATION — ZERO KEYBOARD FLASH
    ---------------------------------------------------------
    MAIN PAGE ONLY
 
-   Problem:
-   When user opens DevLab discovery panel and taps
-   "Enter DevLab", a previously focused chat/input field
-   can keep the mobile keyboard open during navigation.
+   Goal:
+   The mobile keyboard must NEVER appear when the user
+   enters DevLab from the main page.
 
-   Solution:
-   1. Detect DevLab navigation
-   2. Immediately blur active input
-   3. Blur ALL editable elements
-   4. Remove focus from chat controls
-   5. Temporarily disable text inputs
-   6. Prevent touch/focus race conditions
-   7. Navigate cleanly to /DevLab/
-
-   Does NOT modify the loader page.
+   Strategy:
+   - Release input focus BEFORE click navigation
+   - Intercept pointer/touch BEFORE click
+   - Prevent focus from returning during navigation
+   - Navigate directly after the touch/pointer event
+   - Do NOT focus body
+   - Do NOT modify the loader page
 ========================================================= */
 
-(function setupDevLabNavigationFix() {
+(function setupDevLabNavigation() {
 
     "use strict";
 
 
-    /* =====================================================
-       CONFIG
-    ===================================================== */
-
     const DEVLAB_URL = "/DevLab/";
 
-    let navigatingToDevLab = false;
+    let devLabNavigating = false;
 
 
     /* =====================================================
-       MOBILE DETECTION
+       EDITABLE ELEMENT TEST
     ===================================================== */
 
-    function isMobileDevice() {
+    function isEditable(element) {
 
-        return window.matchMedia(
-            "(max-width: 767px)"
-        ).matches;
+        if (!element) {
+            return false;
+        }
+
+
+        if (!element.matches) {
+            return false;
+        }
+
+
+        return element.matches(
+            [
+                "input",
+                "textarea",
+                "select",
+                "[contenteditable='true']",
+                "[contenteditable='']",
+                "[role='textbox']"
+            ].join(",")
+        );
 
     }
 
 
     /* =====================================================
-       BLUR EVERYTHING THAT CAN HOLD KEYBOARD FOCUS
+       RELEASE FOCUS
+       -----------------------------------------------------
+       This runs BEFORE the click event.
     ===================================================== */
 
-    function blurAllEditableElements() {
-
-        /*
-         * First blur the currently focused element.
-         */
+    function releaseFocusImmediately() {
 
         const active =
             document.activeElement;
 
+
+        /*
+         * Blur the currently focused element first.
+         */
 
         if (
             active &&
@@ -13038,12 +13045,11 @@ window.scrollToTop = function(){
 
 
         /*
-         * Then explicitly blur all possible
-         * keyboard-producing elements.
+         * Explicitly blur every possible keyboard source.
          */
 
-        const editableElements =
-            document.querySelectorAll(
+        document
+            .querySelectorAll(
                 [
                     "input",
                     "textarea",
@@ -13052,201 +13058,66 @@ window.scrollToTop = function(){
                     "[contenteditable='']",
                     "[role='textbox']"
                 ].join(",")
-            );
-
-
-        editableElements.forEach(
-            function(element) {
+            )
+            .forEach(function(element) {
 
                 try {
 
                     element.blur();
 
-                } catch (error) {
+                } catch (error) {}
 
-                    /*
-                     * Ignore individual elements
-                     * that cannot be blurred.
-                     */
-
-                }
-
-            }
-        );
+            });
 
     }
 
 
     /* =====================================================
-       REMOVE FOCUS FROM CHAT WIDGET
+       LOCK KEYBOARD FOCUS
        -----------------------------------------------------
-       This is intentionally generic so it does not depend
-       on your exact chat input ID.
+       While navigation is happening, if the browser tries
+       to restore focus to the chat input, immediately kill
+       that focus.
     ===================================================== */
 
-    function releaseChatFocus() {
+    function preventFocusDuringNavigation(event) {
 
-        blurAllEditableElements();
-
-
-        /*
-         * Remove focus from any focused button/link too.
-         * This prevents the browser from carrying the
-         * interaction state into the next navigation.
-         */
-
-        const active =
-            document.activeElement;
-
-
-        if (
-            active &&
-            typeof active.blur === "function"
-        ) {
-
-            active.blur();
-
+        if (!devLabNavigating) {
+            return;
         }
 
 
-        /*
-         * If your chat widget has an active/open state,
-         * don't force-close the panel here.
-         *
-         * We only release keyboard focus.
-         */
+        if (!isEditable(event.target)) {
+            return;
+        }
+
+
+        event.preventDefault();
+
+
+        try {
+
+            event.target.blur();
+
+        } catch (error) {}
 
     }
 
-
-    /* =====================================================
-       TEMPORARILY DISABLE EDITABLE FIELDS
-       -----------------------------------------------------
-       This prevents a focus event from immediately
-       reopening the keyboard between blur() and navigation.
-    ===================================================== */
-
-    function lockEditableFields() {
-
-        const elements =
-            document.querySelectorAll(
-                [
-                    "input",
-                    "textarea",
-                    "select",
-                    "[contenteditable='true']",
-                    "[contenteditable='']",
-                    "[role='textbox']"
-                ].join(",")
-            );
-
-
-        elements.forEach(
-            function(element) {
-
-                /*
-                 * Do NOT use disabled on everything because
-                 * that can change page state.
-                 *
-                 * Instead temporarily prevent focus.
-                 */
-
-                element.dataset.devlabFocusLocked =
-                    "true";
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       UNLOCK AFTER NAVIGATION IS CANCELLED
-       -----------------------------------------------------
-       Normally the page navigates immediately, so this is
-       only a safety fallback.
-    ===================================================== */
-
-    function unlockEditableFields() {
-
-        const elements =
-            document.querySelectorAll(
-                "[data-devlab-focus-locked='true']"
-            );
-
-
-        elements.forEach(
-            function(element) {
-
-                delete element.dataset
-                    .devlabFocusLocked;
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       CAPTURE FOCUS
-       -----------------------------------------------------
-       If anything tries to focus an input while the DevLab
-       navigation is being prepared, immediately blur it.
-    ===================================================== */
 
     document.addEventListener(
         "focusin",
-        function(event) {
-
-            if (!navigatingToDevLab) {
-                return;
-            }
-
-
-            if (!isMobileDevice()) {
-                return;
-            }
-
-
-            const target =
-                event.target;
-
-
-            if (
-                target &&
-                target.matches &&
-                target.matches(
-                    [
-                        "input",
-                        "textarea",
-                        "select",
-                        "[contenteditable='true']",
-                        "[contenteditable='']",
-                        "[role='textbox']"
-                    ].join(",")
-                )
-            ) {
-
-                target.blur();
-
-            }
-
-        },
+        preventFocusDuringNavigation,
         true
     );
 
 
     /* =====================================================
-       MAIN NAVIGATION HANDLER
+       NAVIGATION
     ===================================================== */
 
-    function navigateToDevLab(event) {
+    function goToDevLab(event) {
 
-        /*
-         * Prevent duplicate navigation.
-         */
-
-        if (navigatingToDevLab) {
+        if (devLabNavigating) {
 
             event.preventDefault();
 
@@ -13255,24 +13126,26 @@ window.scrollToTop = function(){
         }
 
 
-        navigatingToDevLab = true;
+        devLabNavigating = true;
 
 
         /*
-         * Stop the browser's normal anchor navigation
-         * temporarily so we can release keyboard focus
-         * BEFORE changing the page.
+         * IMPORTANT:
+         * Prevent the normal browser click.
          */
 
         event.preventDefault();
 
 
         /*
-         * Stop any other click/touch handlers from
-         * reopening chat or focusing an input.
+         * Stop other handlers from touching the chat
+         * or restoring focus.
          */
 
-        if (event.stopImmediatePropagation) {
+        if (
+            typeof event.stopImmediatePropagation ===
+            "function"
+        ) {
 
             event.stopImmediatePropagation();
 
@@ -13280,158 +13153,215 @@ window.scrollToTop = function(){
 
 
         /*
-         * RELEASE KEYBOARD FOCUS IMMEDIATELY.
+         * Release keyboard focus immediately.
          */
 
-        releaseChatFocus();
+        releaseFocusImmediately();
 
 
         /*
-         * Lock editable elements while navigation is
-         * being prepared.
-         */
-
-        if (isMobileDevice()) {
-
-            lockEditableFields();
-
-        }
-
-
-        /*
-         * Explicitly focus the document body.
+         * Navigate directly.
          *
-         * Important:
-         * Do NOT focus an input.
+         * No body.focus()
+         * No timeout
+         * No animation frame delay
          */
 
-        try {
-
-            document.body.focus({
-                preventScroll: true
-            });
-
-        } catch (error) {
-
-            /*
-             * Some browsers don't support preventScroll
-             * on body.focus().
-             */
-
-        }
-
-
-        /*
-         * Blur AGAIN immediately after body focus.
-         */
-
-        blurAllEditableElements();
-
-
-        /* =================================================
-           NAVIGATE
-           -------------------------------------------------
-           requestAnimationFrame gives the browser a chance
-           to process blur() before leaving the page.
-        ================================================= */
-
-        requestAnimationFrame(function() {
-
-            blurAllEditableElements();
-
-
-            /*
-             * Second frame handles mobile Safari/Chrome
-             * focus restoration races.
-             */
-
-            requestAnimationFrame(function() {
-
-                blurAllEditableElements();
-
-
-                window.location.href =
-                    DEVLAB_URL;
-
-            });
-
-        });
-
-
-        /*
-         * Safety fallback.
-         */
-
-        setTimeout(function() {
-
-            if (navigatingToDevLab) {
-
-                window.location.href =
-                    DEVLAB_URL;
-
-            }
-
-        }, 250);
+        window.location.replace(
+            DEVLAB_URL
+        );
 
     }
 
 
     /* =====================================================
-       REGISTER BOTH DEVLAB BUTTONS
+       EARLY TOUCH / POINTER INTERCEPTION
+       -----------------------------------------------------
+       This is the important improvement.
+
+       click happens AFTER the browser has processed the
+       touch interaction.
+
+       pointerdown/touchstart happens earlier.
+
+       Therefore we release focus BEFORE the browser has
+       a chance to carry the focused input into the click.
     ===================================================== */
 
-    function attachDevLabNavigation() {
+    function prepareDevLabNavigation(event) {
 
-        const selectors = [
-
-            "#devLabDiscovery .devlab-enter-button",
-
-            "#mobileDevLabDiscovery .mobile-devlab-enter"
-
-        ];
+        if (devLabNavigating) {
+            return;
+        }
 
 
-        const buttons =
-            document.querySelectorAll(
-                selectors.join(",")
+        /*
+         * Only do this for the DevLab CTA itself.
+         */
+
+        const button =
+            event.target.closest(
+                "#devLabDiscovery .devlab-enter-button," +
+                "#mobileDevLabDiscovery .mobile-devlab-enter"
             );
 
 
-        buttons.forEach(
-            function(button) {
-
-                /*
-                 * Prevent duplicate listeners if this
-                 * initialization happens more than once.
-                 */
-
-                if (
-                    button.dataset.devlabNavFix === "true"
-                ) {
-
-                    return;
-
-                }
+        if (!button) {
+            return;
+        }
 
 
-                button.dataset.devlabNavFix =
-                    "true";
+        /*
+         * Only mobile needs the aggressive early focus
+         * release. Desktop doesn't need this behavior.
+         */
+
+        if (
+            !window.matchMedia(
+                "(max-width: 767px)"
+            ).matches
+        ) {
+
+            return;
+
+        }
 
 
-                /*
-                 * CLICK is the important event because it
-                 * handles keyboard/mouse and normal touch
-                 * activation.
-                 */
+        /*
+         * Release focus BEFORE click.
+         */
 
-                button.addEventListener(
-                    "click",
-                    navigateToDevLab,
-                    true
-                );
+        releaseFocusImmediately();
+
+
+        /*
+         * Mark navigation as pending.
+
+         * This prevents another focus event from
+         * restoring the keyboard during the same
+         * interaction.
+         */
+
+        devLabNavigating = true;
+
+
+        /*
+         * Prevent the browser from continuing the original
+         * touch interaction.
+
+         * This is what prevents the focused input from
+         * getting another opportunity to trigger the
+         * keyboard.
+         */
+
+        event.preventDefault();
+
+
+        /*
+         * Stop other handlers on this interaction.
+         */
+
+        if (
+            typeof event.stopImmediatePropagation ===
+            "function"
+        ) {
+
+            event.stopImmediatePropagation();
+
+        }
+
+
+        /*
+         * Navigate NOW.
+
+         * We don't wait 50ms / 100ms / requestAnimationFrame.
+         * The page leaves immediately after focus release.
+         */
+
+        window.location.replace(
+            DEVLAB_URL
+        );
+
+    }
+
+
+    /* =====================================================
+       ATTACH TO EXISTING BUTTONS
+    ===================================================== */
+
+    function attachDevLabButtons() {
+
+        const buttons =
+            document.querySelectorAll(
+                [
+                    "#devLabDiscovery .devlab-enter-button",
+                    "#mobileDevLabDiscovery .mobile-devlab-enter"
+                ].join(",")
+            );
+
+
+        buttons.forEach(function(button) {
+
+            if (
+                button.dataset.devLabKeyboardFix ===
+                "true"
+            ) {
+
+                return;
 
             }
-        );
+
+
+            button.dataset.devLabKeyboardFix =
+                "true";
+
+
+            /*
+             * POINTERDOWN
+             *
+             * Modern Chrome / Android.
+             */
+
+            button.addEventListener(
+                "pointerdown",
+                prepareDevLabNavigation,
+                {
+                    capture: true,
+                    passive: false
+                }
+            );
+
+
+            /*
+             * TOUCHSTART
+             *
+             * Fallback for mobile browsers where
+             * pointer events behave differently.
+             */
+
+            button.addEventListener(
+                "touchstart",
+                prepareDevLabNavigation,
+                {
+                    capture: true,
+                    passive: false
+                }
+            );
+
+
+            /*
+             * CLICK
+             *
+             * Desktop fallback + accessibility.
+             */
+
+            button.addEventListener(
+                "click",
+                goToDevLab,
+                true
+            );
+
+        });
 
     }
 
@@ -13441,40 +13371,36 @@ window.scrollToTop = function(){
     ===================================================== */
 
     if (
-        document.readyState === "loading"
+        document.readyState ===
+        "loading"
     ) {
 
         document.addEventListener(
             "DOMContentLoaded",
-            attachDevLabNavigation
+            attachDevLabButtons
         );
 
     } else {
 
-        attachDevLabNavigation();
+        attachDevLabButtons();
 
     }
 
 
     /* =====================================================
-       SUPPORT DYNAMICALLY CREATED DEVLAB PANELS
-       -----------------------------------------------------
-       If your panel is rebuilt dynamically, MutationObserver
-       will attach the fix automatically.
+       DYNAMIC PANEL SUPPORT
     ===================================================== */
 
     const observer =
-        new MutationObserver(
-            function() {
+        new MutationObserver(function() {
 
-                if (!navigatingToDevLab) {
+            if (!devLabNavigating) {
 
-                    attachDevLabNavigation();
-
-                }
+                attachDevLabButtons();
 
             }
-        );
+
+        });
 
 
     observer.observe(
