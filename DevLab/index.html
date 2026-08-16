@@ -40714,7 +40714,7 @@ body.dev-home-ready #devMain {
                         </span>
 
                         <span>
-                            [120, 180, 240, 310]
+                            [120, 180, 240, 310],
                         </span>
 
                     </div>
@@ -41663,109 +41663,140 @@ console.log(
     </div>
 
 
+<!-- =================================================
+     TERMINAL HELP / SHORTCUTS
+     SEPARATE FROM TERMINAL BODY
+================================================== -->
 
-    <!-- =================================================
-         TERMINAL HELP / SHORTCUTS
-         SEPARATE FROM TERMINAL BODY
-    ================================================== -->
+<section
+    id="terminalHelp"
+    class="terminal-help"
+    aria-label="Terminal help">
 
-    <section
-        id="terminalHelp"
-        class="terminal-help"
-        aria-label="Terminal help">
 
+    <div
+        class="terminal-help-title">
+
+        <i
+            class="fa-solid fa-circle-info"
+            aria-hidden="true">
+        </i>
+
+        <span>
+            Terminal Help
+        </span>
+
+    </div>
+
+
+    <div
+        class="terminal-help-items">
+
+
+        <!-- HELP -->
 
         <div
-            class="terminal-help-title">
+            class="terminal-help-item">
 
-            <i
-                class="fa-solid fa-circle-info">
-            </i>
+            <kbd>
+                help
+            </kbd>
 
             <span>
-                Terminal Help
+                Show available commands
             </span>
 
         </div>
 
 
+        <!-- CLEAR -->
+
         <div
-            class="terminal-help-items">
+            class="terminal-help-item">
 
+            <kbd>
+                clear
+            </kbd>
 
-            <div
-                class="terminal-help-item">
-
-
-                <kbd>help</kbd>
-
-                <span>
-                    Show available commands
-                </span>
-
-            </div>
-
-
-            <div
-                class="terminal-help-item">
-
-
-                <kbd>clear</kbd>
-
-                <span>
-                    Clear terminal output
-                </span>
-
-            </div>
-
-
-            <div
-                class="terminal-help-item">
-
-
-                <kbd>Ctrl</kbd>
-                <span class="terminal-plus">+</span>
-                <kbd>L</kbd>
-
-                <span>
-                    Clear terminal
-                </span>
-
-            </div>
-
-
-            <div
-                class="terminal-help-item">
-
-
-                <kbd>↑</kbd>
-                <span class="terminal-plus">/</span>
-                <kbd>↓</kbd>
-
-                <span>
-                    Command history
-                </span>
-
-            </div>
-
-
-            <div
-                class="terminal-help-item">
-
-
-                <kbd>Tab</kbd>
-
-                <span>
-                    Autocomplete command
-                </span>
-
-            </div>
-
+            <span>
+                Clear terminal output
+            </span>
 
         </div>
 
 
-    </section>
+        <!-- CTRL + L -->
+
+        <div
+            class="terminal-help-item">
+
+            <kbd>
+                Ctrl
+            </kbd>
+
+            <span
+                class="terminal-plus"
+                aria-hidden="true">
+                +
+            </span>
+
+            <kbd>
+                L
+            </kbd>
+
+            <span>
+                Clear terminal
+            </span>
+
+        </div>
+
+
+        <!-- COMMAND HISTORY -->
+
+        <div
+            class="terminal-help-item">
+
+            <kbd>
+                ↑
+            </kbd>
+
+            <span
+                class="terminal-plus"
+                aria-hidden="true">
+                /
+            </span>
+
+            <kbd>
+                ↓
+            </kbd>
+
+            <span>
+                Command history
+            </span>
+
+        </div>
+
+
+        <!-- AUTOCOMPLETE -->
+
+        <div
+            class="terminal-help-item">
+
+            <kbd>
+                Tab
+            </kbd>
+
+            <span>
+                Autocomplete command
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+</section>
 
 
 </article>
@@ -41774,7 +41805,7 @@ console.log(
 </div>
 
 
-        </section>
+</section>
 
 
     </main>
@@ -46435,49 +46466,49 @@ console.log(
                         class="dev-command-list">
 
 
-                        <!-- =================================
-                             RETURN HOME
-                        ================================== -->
+                    <!-- =================================
+                         RETURN HOME
+                    ================================== -->
 
-                        <button
-                            class="dev-command-item"
-                            type="button"
-                            data-command="home"
-                            data-label="home portfolio main overview">
-
-
-                            <span
-                                class="dev-command-item-icon cyan">
-
-                                <i
-                                    class="fa-solid fa-house">
-                                </i>
-
-                            </span>
+                    <a
+                        href="../"
+                        class="dev-command-item"
+                        aria-label="Return to portfolio">
 
 
-                            <span
-                                class="dev-command-item-content">
+                        <span
+                            class="dev-command-item-icon cyan">
 
-                                <strong>
-                                    Return to Portfolio
-                                </strong>
+                            <i
+                                class="fa-solid fa-house"
+                                aria-hidden="true">
+                            </i>
 
-                                <small>
-                                    Go back to the main portfolio
-                                </small>
-
-                            </span>
+                        </span>
 
 
-                            <span
-                                class="dev-command-item-key">
+                        <span
+                            class="dev-command-item-content">
 
-                                ↵
+                            <strong>
+                                Return to Portfolio
+                            </strong>
 
-                            </span>
+                            <small>
+                                Go back to the main portfolio
+                            </small>
 
-                        </button>
+                        </span>
+
+
+                        <span
+                            class="dev-command-item-key">
+
+                            ↵
+
+                        </span>
+
+                    </a>
 
 
 
@@ -69232,47 +69263,37 @@ function activateAtmosphere(value) {
 
        Cell 2 can use `data`.
     ===================================================== */
+async function executeCell(
+    runtime,
+    source
+) {
 
-    async function executeCell(
-        runtime,
-        source
-    ) {
+    /* =====================================================
+       LOAD REQUIRED PYTHON PACKAGES
+    ===================================================== */
 
-        /*
-           Ask Pyodide to load packages referenced
-           by the cell when possible.
-        */
+    try {
 
-        try {
+        await runtime.loadPackagesFromImports(
+            source
+        );
 
-            await runtime
-                .loadPackagesFromImports(
-                    source
-                );
+    }
+    catch (packageError) {
 
-        }
+        console.warn(
+            "[DevLab Python] Package auto-load warning:",
+            packageError
+        );
 
-        catch (packageError) {
-
-            console.warn(
-                "[DevLab Python] Package auto-load warning:",
-                packageError
-            );
-        }
+    }
 
 
-        /*
-           Python helper.
+    /* =====================================================
+       PYTHON NOTEBOOK RUNNER
+    ===================================================== */
 
-           It:
-
-           1. Executes normal statements.
-           2. Captures print().
-           3. Evaluates the final expression,
-              just like a notebook.
-        */
-
-        const runner = `
+    const runner = `
 import ast
 import contextlib
 import io
@@ -69299,11 +69320,9 @@ with contextlib.redirect_stdout(__devlab_stdout):
         )
     ):
 
-        __devlab_last =
-            __devlab_tree.body[-1]
+        __devlab_last = __devlab_tree.body[-1]
 
-        __devlab_tree.body =
-            __devlab_tree.body[:-1]
+        __devlab_tree.body = __devlab_tree.body[:-1]
 
         if __devlab_tree.body:
 
@@ -69338,8 +69357,8 @@ with contextlib.redirect_stdout(__devlab_stdout):
             globals()
         )
 
-__devlab_stdout_value =
-    __devlab_stdout.getvalue()
+
+__devlab_stdout_value = __devlab_stdout.getvalue()
 
 (
     __devlab_stdout_value,
@@ -69348,81 +69367,91 @@ __devlab_stdout_value =
 `;
 
 
-        const value =
-            await runtime.runPythonAsync(
-                runner
-            );
+    /* =====================================================
+       EXECUTE WITH PYODIDE
+    ===================================================== */
+
+    const value =
+        await runtime.runPythonAsync(
+            runner
+        );
 
 
-        /*
-           Convert tuple returned by Python.
-        */
+    /* =====================================================
+       READ RESULT
+    ===================================================== */
 
-        let stdout = "";
+    let stdout = "";
 
-        let reprValue = "";
-
-
-        try {
-
-            const jsValue =
-                value.toJs
-                    ? value.toJs()
-                    : value;
+    let reprValue = "";
 
 
-            if (
-                Array.isArray(jsValue)
-            ) {
+    try {
 
-                stdout =
-                    jsValue[0] || "";
+        const jsValue =
+            value.toJs
+                ? value.toJs()
+                : value;
 
-                reprValue =
-                    jsValue[1] || "";
-            }
-
-            else {
-
-                stdout =
-                    String(jsValue);
-            }
-
-        }
-
-        finally {
-
-            if (
-                value &&
-                typeof value.destroy ===
-                "function"
-            ) {
-
-                value.destroy();
-            }
-        }
-
-
-        /*
-           Don't show Python's "None" when a cell only
-           prints output.
-        */
 
         if (
-            reprValue === "None"
+            Array.isArray(jsValue)
         ) {
 
-            reprValue = "";
+            stdout =
+                jsValue[0] || "";
+
+            reprValue =
+                jsValue[1] || "";
+
         }
 
+        else {
 
-        return {
+            stdout =
+                String(jsValue);
 
-            stdout,
+        }
 
-            result:reprValue
-        };
     }
+
+    finally {
+
+        if (
+            value &&
+            typeof value.destroy === "function"
+        ) {
+
+            value.destroy();
+
+        }
+
+    }
+
+
+    /* =====================================================
+       DON'T SHOW NONE
+    ===================================================== */
+
+    if (
+        reprValue === "None"
+    ) {
+
+        reprValue = "";
+
+    }
+
+
+    return {
+
+        stdout,
+
+        result:
+            reprValue
+
+    };
+
+}
 
 
     /* =====================================================
@@ -72227,26 +72256,79 @@ __devlab_stdout_value =
 
     }
 
+/* =========================================================
+   23. SELECT EXECUTION
+   Supports:
+   SELECT * FROM customers
+   SELECT id, customer_name FROM customers
+   SELECT customers.* FROM customers
+   SELECT ... GROUP BY ...
+========================================================= */
+
+function executeSelect(sql) {
+
+    /*
+     * Get source rows
+     */
+    let rows =
+        buildSourceRows(
+            sql
+        );
 
 
-    /* =========================================================
-       23. SELECT EXECUTION
-    ========================================================= */
-
-    function executeSelect(sql) {
-
-        let rows =
-            buildSourceRows(
-                sql
-            );
+    /*
+     * Apply WHERE
+     */
+    rows =
+        applyWhere(
+            rows,
+            sql
+        );
 
 
-        rows =
-            applyWhere(
-                rows,
-                sql
-            );
+    /*
+     * Detect GROUP BY
+     */
+    const hasGroupBy =
+        /\bGROUP\s+BY\b/i.test(
+            sql
+        );
 
+
+    /*
+     * Detect aggregate functions
+     */
+    const hasAggregate =
+        /\b(COUNT|SUM|AVG|MIN|MAX)\s*\(/i.test(
+            sql
+        );
+
+
+    /*
+     * =====================================================
+     * IMPORTANT
+     *
+     * Normal SELECT:
+     *
+     * SELECT * FROM customers
+     *
+     * must return ONE RESULT PER SOURCE ROW.
+     *
+     * Grouped SELECT:
+     *
+     * SELECT customer_segment,
+     * COUNT(*)
+     * FROM customers
+     * GROUP BY customer_segment
+     *
+     * must use groupRows().
+     * =====================================================
+     */
+
+    let workingGroups;
+
+
+    if (hasGroupBy) {
 
         const groups =
             groupRows(
@@ -72255,89 +72337,247 @@ __devlab_stdout_value =
             );
 
 
-        const workingGroups =
-            groups || [rows];
+        workingGroups =
+            groups || [];
 
+    }
 
-        const selectExpressions =
-            parseSelect(
-                sql
+    else if (hasAggregate) {
+
+        /*
+         * Aggregate without GROUP BY
+         *
+         * Example:
+         *
+         * SELECT COUNT(*)
+         * FROM customers
+         *
+         * Entire table = one group.
+         */
+
+        workingGroups = [
+            rows
+        ];
+
+    }
+
+    else {
+
+        /*
+         * Normal SELECT
+         *
+         * Every database row becomes
+         * its own result group.
+         */
+
+        workingGroups =
+            rows.map(
+                row => [row]
             );
 
-
-        const resultRows = [];
-
-
-        for (
-            const group
-            of workingGroups
-        ) {
-
-            const result = {};
+    }
 
 
-            for (
-                const rawExpression
-                of selectExpressions
-            ) {
+    /*
+     * =====================================================
+     * PARSE SELECT
+     * =====================================================
+     */
 
-                const parsed =
-                    parseAlias(
-                        rawExpression
+    const selectExpressions =
+        parseSelect(
+            sql
+        );
+
+
+    /*
+     * =====================================================
+     * EXPAND SELECT *
+     * =====================================================
+     */
+
+    const expandedExpressions = [];
+
+
+    selectExpressions.forEach(
+        expression => {
+
+            const clean =
+                expression.trim();
+
+
+            /*
+             * SELECT *
+             */
+
+            if (clean === "*") {
+
+                if (rows.length) {
+
+                    Object.keys(
+                        rows[0]
+                    )
+                    .filter(
+                        key =>
+                            !key.includes(".")
+                    )
+                    .forEach(
+                        key => {
+
+                            expandedExpressions.push(
+                                key
+                            );
+
+                        }
                     );
-
-
-                const expression =
-                    parsed.expression;
-
-
-                const value =
-                    evaluateExpression(
-                        group,
-                        expression
-                    );
-
-
-                let columnName =
-                    parsed.alias;
-
-
-                if (!columnName) {
-
-                    columnName =
-                        expression
-
-                            .replace(
-                                /\s+/g,
-                                " "
-                            )
-
-                            .trim();
 
                 }
 
-
-                result[columnName] =
-                    value;
+                return;
 
             }
 
 
-            resultRows.push(
-                result
+            /*
+             * SELECT customers.*
+             */
+
+            const tableStar =
+                clean.match(
+                    /^([a-zA-Z_][\w]*)\.\*$/i
+                );
+
+
+            if (tableStar) {
+
+                const tableName =
+                    tableStar[1]
+                        .toLowerCase();
+
+
+                if (rows.length) {
+
+                    Object.keys(
+                        rows[0]
+                    )
+                    .filter(
+                        key =>
+                            key.startsWith(
+                                tableName + "."
+                            )
+                    )
+                    .forEach(
+                        key => {
+
+                            expandedExpressions.push(
+                                key.substring(
+                                    tableName.length + 1
+                                )
+                            );
+
+                        }
+                    );
+
+                }
+
+                return;
+
+            }
+
+
+            /*
+             * Normal expression
+             */
+
+            expandedExpressions.push(
+                expression
             );
+
+        }
+    );
+
+
+    /*
+     * =====================================================
+     * BUILD RESULT
+     * =====================================================
+     */
+
+    const resultRows = [];
+
+
+    for (
+        const group
+        of workingGroups
+    ) {
+
+        const result = {};
+
+
+        for (
+            const rawExpression
+            of expandedExpressions
+        ) {
+
+            const parsed =
+                parseAlias(
+                    rawExpression
+                );
+
+
+            const expression =
+                parsed.expression;
+
+
+            const value =
+                evaluateExpression(
+                    group,
+                    expression
+                );
+
+
+            let columnName =
+                parsed.alias;
+
+
+            if (!columnName) {
+
+                columnName =
+                    expression
+                        .replace(
+                            /\s+/g,
+                            " "
+                        )
+                        .trim();
+
+            }
+
+
+            result[columnName] =
+                value;
 
         }
 
 
-        return applyOrderBy(
-            resultRows,
-            sql
+        resultRows.push(
+            result
         );
 
     }
 
 
+    /*
+     * =====================================================
+     * ORDER BY
+     * =====================================================
+     */
+
+    return applyOrderBy(
+        resultRows,
+        sql
+    );
+
+}
 
     /* =========================================================
        24. ORDER BY
@@ -75604,6 +75844,444 @@ ${code}`
     };
 
 })();
+
+
+/* =========================================================
+   MOBILE TERMINAL KEYBOARD / NEXT BUTTON FIX
+   ---------------------------------------------------------
+   Fixes:
+   - Mobile keyboard "Next" causing page jump
+   - Enter submitting the page/form
+   - Terminal losing its scroll position
+   - Browser auto-scrolling to bottom
+   - Keeps existing terminal Enter handler working
+========================================================= */
+
+(function protectMobileTerminalKeyboard() {
+
+    "use strict";
+
+
+    const isMobile =
+        () =>
+            window.matchMedia(
+                "(max-width: 767px)"
+            ).matches;
+
+
+    /*
+     * Try to find the terminal input.
+     *
+     * This supports common input implementations:
+     * - input
+     * - textarea
+     * - contenteditable
+     */
+
+    function isTerminalInput(element) {
+
+        if (!element) {
+            return false;
+        }
+
+
+        if (
+            element.matches &&
+            element.matches(
+                "#terminalInput, " +
+                "#terminalCommandInput, " +
+                ".terminal-input, " +
+                ".terminal-command-input, " +
+                ".terminal-body input, " +
+                ".terminal-body textarea, " +
+                ".terminal-body [contenteditable='true']"
+            )
+        ) {
+
+            return true;
+
+        }
+
+
+        return false;
+
+    }
+
+
+
+    /* =====================================================
+       PROTECT ENTER / NEXT
+    ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (!isMobile()) {
+                return;
+            }
+
+
+            const target =
+                event.target;
+
+
+            if (!isTerminalInput(target)) {
+                return;
+            }
+
+
+            /*
+             * Mobile keyboard "Next" normally arrives
+             * as Enter.
+             */
+
+            if (
+                event.key === "Enter" ||
+                event.keyCode === 13
+            ) {
+
+
+                /*
+                 * Remember current page position.
+                 */
+
+                const currentScroll =
+                    window.scrollY ||
+                    window.pageYOffset ||
+                    0;
+
+
+                /*
+                 * IMPORTANT:
+                 *
+                 * Prevent browser's default Enter
+                 * behaviour.
+                 *
+                 * We DO NOT stop propagation.
+                 *
+                 * Therefore your existing terminal
+                 * Enter/command handler still receives
+                 * the event.
+                 */
+
+                event.preventDefault();
+
+
+                /*
+                 * Restore page position after the
+                 * browser has processed the keyboard
+                 * action.
+                 */
+
+                requestAnimationFrame(
+                    function () {
+
+                        window.scrollTo(
+                            0,
+                            currentScroll
+                        );
+
+                    }
+                );
+
+
+                setTimeout(
+                    function () {
+
+                        /*
+                         * Only restore if browser caused
+                         * an abnormal page jump.
+                         */
+
+                        const newScroll =
+                            window.scrollY ||
+                            window.pageYOffset ||
+                            0;
+
+
+                        if (
+                            Math.abs(
+                                newScroll -
+                                currentScroll
+                            ) > 150
+                        ) {
+
+                            window.scrollTo(
+                                0,
+                                currentScroll
+                            );
+
+                        }
+
+                    },
+                    80
+                );
+
+
+                setTimeout(
+                    function () {
+
+                        const newScroll =
+                            window.scrollY ||
+                            window.pageYOffset ||
+                            0;
+
+
+                        if (
+                            Math.abs(
+                                newScroll -
+                                currentScroll
+                            ) > 300
+                        ) {
+
+                            window.scrollTo(
+                                0,
+                                currentScroll
+                            );
+
+                        }
+
+                    },
+                    250
+                );
+
+            }
+
+        },
+        true
+    );
+
+
+
+    /* =====================================================
+       PREVENT FORM SUBMISSION
+       -----------------------------------------------------
+       If terminal input is inside a <form>, pressing
+       Next/Enter must NOT submit the entire page.
+    ===================================================== */
+
+    document.addEventListener(
+        "submit",
+        function (event) {
+
+            if (!isMobile()) {
+                return;
+            }
+
+
+            const form =
+                event.target;
+
+
+            if (!form) {
+                return;
+            }
+
+
+            const active =
+                document.activeElement;
+
+
+            if (
+                isTerminalInput(active) &&
+                form.contains(active)
+            ) {
+
+                event.preventDefault();
+
+            }
+
+        },
+        true
+    );
+
+
+
+    /* =====================================================
+       PREVENT MOBILE AUTO-SCROLL ON FOCUS
+    ===================================================== */
+
+    document.addEventListener(
+        "focusin",
+        function (event) {
+
+            if (!isMobile()) {
+                return;
+            }
+
+
+            if (
+                !isTerminalInput(
+                    event.target
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            /*
+             * Save the page position.
+             */
+
+            const savedScroll =
+                window.scrollY ||
+                window.pageYOffset ||
+                0;
+
+
+            /*
+             * Mobile Safari / Chrome may automatically
+             * scroll the whole document when the keyboard
+             * changes viewport height.
+             */
+
+            requestAnimationFrame(
+                function () {
+
+                    window.scrollTo(
+                        0,
+                        savedScroll
+                    );
+
+                }
+            );
+
+        },
+        true
+    );
+
+
+
+    /* =====================================================
+       VISUAL VIEWPORT PROTECTION
+       -----------------------------------------------------
+       Keyboard opening changes visualViewport height.
+       We keep the DOCUMENT from being dragged around.
+    ===================================================== */
+
+    if (window.visualViewport) {
+
+        let terminalFocused =
+            false;
+
+        let lockedScroll =
+            0;
+
+
+        document.addEventListener(
+            "focusin",
+            function (event) {
+
+                if (
+                    isMobile() &&
+                    isTerminalInput(
+                        event.target
+                    )
+                ) {
+
+                    terminalFocused =
+                        true;
+
+                    lockedScroll =
+                        window.scrollY ||
+                        window.pageYOffset ||
+                        0;
+
+                }
+
+            },
+            true
+        );
+
+
+        document.addEventListener(
+            "focusout",
+            function (event) {
+
+                if (
+                    isTerminalInput(
+                        event.target
+                    )
+                ) {
+
+                    terminalFocused =
+                        false;
+
+                }
+
+            },
+            true
+        );
+
+
+        window.visualViewport.addEventListener(
+            "resize",
+            function () {
+
+                if (
+                    !isMobile() ||
+                    !terminalFocused
+                ) {
+
+                    return;
+
+                }
+
+
+                /*
+                 * Do NOT prevent the keyboard itself.
+                 *
+                 * Only prevent the document from
+                 * jumping.
+                 */
+
+                requestAnimationFrame(
+                    function () {
+
+                        const current =
+                            window.scrollY ||
+                            window.pageYOffset ||
+                            0;
+
+
+                        if (
+                            Math.abs(
+                                current -
+                                lockedScroll
+                            ) > 100
+                        ) {
+
+                            window.scrollTo(
+                                0,
+                                lockedScroll
+                            );
+
+                        }
+
+                    }
+                );
+
+            },
+            {
+                passive: true
+            }
+        );
+
+    }
+
+
+
+    console.log(
+        "[DevLab] Mobile terminal keyboard protection enabled."
+    );
+
+})();
+
+
+
 
 
 
