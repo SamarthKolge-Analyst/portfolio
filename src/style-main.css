@@ -14606,55 +14606,37 @@ Then delete this duplicate .info-icon selector.
 
 
 /* =========================================================
-   AI CHAT — MOBILE FULL SCREEN SYSTEM
-   Desktop remains unchanged.
+   SAMARTH AI CHAT
+   MOBILE SYSTEM — FROM SCRATCH
    ========================================================= */
 
-@media (max-width: 767px) {
+/*
+   IMPORTANT:
+   This section ONLY applies to phones/tablets.
+   Desktop is not touched.
+*/
 
-    /* -----------------------------------------------------
-       CHAT WIDGET CONTAINER
-       ----------------------------------------------------- */
+@media screen and (max-width: 767px) {
+
+    /* =====================================================
+       1. PAGE SAFETY
+       ===================================================== */
+
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+
+    /* =====================================================
+       2. CHAT WIDGET
+       
+       Make the widget a viewport-level system.
+       ===================================================== */
 
     #chatWidget {
-        position: fixed !important;
-        inset: 0 !important;
-        width: 100vw !important;
-        height: 100dvh !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        z-index: 99999 !important;
-        pointer-events: none;
-    }
-
-
-    /* -----------------------------------------------------
-       FLOATING ROBOT
-       ----------------------------------------------------- */
-
-    #chatToggle {
-        position: fixed !important;
-
-        right: max(14px, env(safe-area-inset-right)) !important;
-        bottom: max(14px, env(safe-area-inset-bottom)) !important;
-
-        width: 82px !important;
-        height: 82px !important;
-
-        z-index: 100001 !important;
-        pointer-events: auto !important;
-    }
-
-
-    /* -----------------------------------------------------
-       CHAT WINDOW
-       
-       IMPORTANT:
-       Do NOT use absolute positioning on mobile.
-       It must attach directly to the viewport.
-       ----------------------------------------------------- */
-
-    #chatWindow {
         position: fixed !important;
 
         top: 0 !important;
@@ -14662,14 +14644,119 @@ Then delete this duplicate .info-icon selector.
         bottom: 0 !important;
         left: 0 !important;
 
+        width: 100% !important;
+
+        /*
+         * IMPORTANT:
+         * svh = stable viewport height.
+         *
+         * Unlike dvh, it does NOT continuously change
+         * when the mobile keyboard opens.
+         */
+        height: 100svh !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        z-index: 99999 !important;
+
+        pointer-events: none;
+    }
+
+
+    /* =====================================================
+       3. FLOATING BOT
+       ===================================================== */
+
+    #chatToggle {
+        position: fixed !important;
+
+        right: 14px !important;
+
+        bottom:
+            max(14px, env(safe-area-inset-bottom)) !important;
+
+        width: 76px !important;
+        height: 76px !important;
+
+        z-index: 100001 !important;
+
+        pointer-events: auto !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+
+    /* =====================================================
+       4. CHAT WINDOW
+       
+       IMPORTANT:
+       We specifically use :not(.hidden).
+       
+       This means Tailwind's "hidden" class still works.
+       
+       DO NOT use:
+       
+       #chatWindow {
+           display:flex !important;
+       }
+       
+       because that would destroy .hidden.
+       ===================================================== */
+
+    #chatWindow:not(.hidden) {
+
+        position: fixed !important;
+
+        top: 0 !important;
+        left: 0 !important;
+
+        right: 0 !important;
+        bottom: auto !important;
+
         width: 100vw !important;
-        height: 100dvh !important;
+
+        /*
+         * STABLE HEIGHT.
+         *
+         * Keyboard opening does NOT change this.
+         */
+        height: 100svh !important;
+
+        min-height: 100svh !important;
+        max-height: 100svh !important;
+
         max-width: none !important;
-        max-height: none !important;
 
         margin: 0 !important;
 
+        padding: 0 !important;
+
+        /*
+         * REMOVE DESKTOP WINDOW SHAPE.
+         */
         border-radius: 0 !important;
+
+        /*
+         * CRITICAL:
+         * Remove the desktop absolute positioning.
+         */
+        transform: none !important;
+
+        /*
+         * CRITICAL:
+         * No animation should reposition the entire
+         * chat window when keyboard opens.
+         */
+        transition: none !important;
+
+        /*
+         * Keep the panel as a flex application.
+         */
+        display: flex !important;
+
+        flex-direction: column !important;
 
         overflow: hidden !important;
 
@@ -14677,76 +14764,184 @@ Then delete this duplicate .info-icon selector.
 
         pointer-events: auto !important;
 
-        display: flex !important;
-        flex-direction: column !important;
-
-        /*
-         * Do not allow the old desktop positioning
-         * to affect mobile.
-         */
-        transform: none !important;
+        box-sizing: border-box !important;
     }
 
 
-    /* -----------------------------------------------------
-       CHAT HEADER
-       ----------------------------------------------------- */
+    /* =====================================================
+       5. CHAT HEADER
+       ===================================================== */
 
-    #chatWindow > div:first-child {
+    #chatWindow:not(.hidden) > div:first-child {
 
         flex: 0 0 auto !important;
+
+        width: 100% !important;
+
+        box-sizing: border-box !important;
 
         padding-top:
             max(16px, env(safe-area-inset-top)) !important;
 
-        padding-left:
-            max(18px, env(safe-area-inset-left)) !important;
-
         padding-right:
-            max(18px, env(safe-area-inset-right)) !important;
+            max(16px, env(safe-area-inset-right)) !important;
+
+        padding-left:
+            max(16px, env(safe-area-inset-left)) !important;
 
         padding-bottom: 14px !important;
+
+        /*
+         * Header must never shrink.
+         */
+        min-height: 80px !important;
+
+        background: rgba(15, 23, 42, 0.96) !important;
+
+        z-index: 10 !important;
     }
 
 
-    /* -----------------------------------------------------
-       WELCOME PANEL
-       ----------------------------------------------------- */
+    /* =====================================================
+       6. HEADER CONTENT
+       ===================================================== */
+
+    #chatWindow:not(.hidden) > div:first-child .flex {
+
+        min-width: 0 !important;
+    }
+
+
+    #chatWindow:not(.hidden) > div:first-child h2 {
+
+        font-size: 17px !important;
+
+        line-height: 1.3 !important;
+
+        white-space: nowrap !important;
+
+        overflow: hidden !important;
+
+        text-overflow: ellipsis !important;
+    }
+
+
+    #chatWindow:not(.hidden) > div:first-child p {
+
+        font-size: 12px !important;
+    }
+
+
+    /* =====================================================
+       7. CLOSE BUTTON
+       ===================================================== */
+
+    #chatClose {
+
+        flex: 0 0 auto !important;
+
+        width: 42px !important;
+        height: 42px !important;
+
+        display: flex !important;
+
+        align-items: center !important;
+        justify-content: center !important;
+
+        margin-left: auto !important;
+
+        padding: 0 !important;
+
+        font-size: 30px !important;
+
+        line-height: 1 !important;
+
+        -webkit-tap-highlight-color: transparent;
+    }
+
+
+    /* =====================================================
+       8. WELCOME PANEL
+       ===================================================== */
 
     #welcomePanel {
 
         flex: 0 0 auto !important;
 
-        padding-left: 18px !important;
-        padding-right: 18px !important;
+        width: 100% !important;
+
+        box-sizing: border-box !important;
 
         padding-top: 14px !important;
+        padding-right: 16px !important;
         padding-bottom: 14px !important;
+        padding-left: 16px !important;
 
-        max-height: 30vh !important;
+        /*
+         * Do not allow welcome content to consume
+         * the entire phone.
+         */
+        max-height: 27svh !important;
 
         overflow-y: auto !important;
+
+        overscroll-behavior: contain !important;
     }
 
 
-    /* -----------------------------------------------------
-       WELCOME COMPACT
-       ----------------------------------------------------- */
+    /* =====================================================
+       9. SUGGESTIONS
+       ===================================================== */
+
+    #suggestionArea {
+
+        display: flex !important;
+
+        flex-wrap: wrap !important;
+
+        gap: 7px !important;
+
+        margin-top: 12px !important;
+    }
+
+
+    #suggestionArea .suggestion {
+
+        font-size: 11px !important;
+
+        padding-top: 7px !important;
+        padding-right: 10px !important;
+        padding-bottom: 7px !important;
+        padding-left: 10px !important;
+
+        white-space: nowrap !important;
+    }
+
+
+    /* =====================================================
+       10. COMPACT WELCOME
+       ===================================================== */
 
     #welcomeCompact {
 
         flex: 0 0 auto !important;
 
-        padding-left: 18px !important;
-        padding-right: 18px !important;
+        width: 100% !important;
+
+        box-sizing: border-box !important;
+
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+
+        overflow: hidden !important;
     }
 
 
-    /* -----------------------------------------------------
-       MESSAGES
+    /* =====================================================
+       11. MESSAGE AREA
        
-       This becomes the ONLY scrolling area.
-       ----------------------------------------------------- */
+       THIS is the only area that should scroll.
+       ===================================================== */
 
     #chatMessages {
 
@@ -14754,30 +14949,58 @@ Then delete this duplicate .info-icon selector.
 
         min-height: 0 !important;
 
-        height: auto !important;
+        width: 100% !important;
 
-        overflow-y: auto !important;
+        box-sizing: border-box !important;
+
         overflow-x: hidden !important;
 
-        padding-left: 16px !important;
-        padding-right: 16px !important;
+        overflow-y: auto !important;
 
-        padding-top: 16px !important;
+        padding-top: 14px !important;
+
+        padding-right: 14px !important;
+
+        padding-bottom: 14px !important;
+
+        padding-left: 14px !important;
 
         /*
-         * Space above the input.
+         * Native mobile scrolling.
          */
-        padding-bottom: 12px !important;
-
         -webkit-overflow-scrolling: touch !important;
 
-        overscroll-behavior: contain !important;
+        overscroll-behavior-y: contain !important;
+
+        /*
+         * Prevent horizontal movement.
+         */
+        touch-action: pan-y !important;
     }
 
 
-    /* -----------------------------------------------------
-       CHAT FORM / INPUT AREA
-       ----------------------------------------------------- */
+    /* =====================================================
+       12. MESSAGE CONTENT MUST NOT BREAK WIDTH
+       ===================================================== */
+
+    #chatMessages > * {
+
+        max-width: 100% !important;
+
+        box-sizing: border-box !important;
+
+        overflow-wrap: anywhere !important;
+
+        word-break: break-word !important;
+    }
+
+
+    /* =====================================================
+       13. INPUT FORM
+       
+       The form belongs to the chat panel.
+       It does NOT use viewport calculations.
+       ===================================================== */
 
     #chatForm {
 
@@ -14787,162 +15010,229 @@ Then delete this duplicate .info-icon selector.
 
         width: 100% !important;
 
+        box-sizing: border-box !important;
+
         margin: 0 !important;
 
         padding-top: 10px !important;
-        padding-left: 12px !important;
-        padding-right: 12px !important;
 
-        /*
-         * Critical for iPhone home indicator.
-         */
+        padding-right:
+            max(10px, env(safe-area-inset-right)) !important;
+
         padding-bottom:
-            max(12px, env(safe-area-inset-bottom)) !important;
+            max(10px, env(safe-area-inset-bottom)) !important;
 
-        background: #0f172a !important;
+        padding-left:
+            max(10px, env(safe-area-inset-left)) !important;
 
-        z-index: 100002 !important;
+        background: rgba(15, 23, 42, 0.98) !important;
+
+        border-top: 1px solid rgba(255,255,255,0.08) !important;
+
+        z-index: 20 !important;
     }
 
 
-    /* -----------------------------------------------------
-       INPUT ROW
-       ----------------------------------------------------- */
+    /* =====================================================
+       14. INPUT ROW
+       ===================================================== */
 
     #chatForm > div {
 
+        display: flex !important;
+
+        align-items: center !important;
+
         width: 100% !important;
+
+        min-width: 0 !important;
 
         min-height: 52px !important;
 
-        border-radius: 18px !important;
+        box-sizing: border-box !important;
 
-        padding-left: 10px !important;
-        padding-right: 8px !important;
+        padding-left: 8px !important;
+
+        padding-right: 7px !important;
 
         gap: 6px !important;
+
+        border-radius: 17px !important;
     }
 
 
-    /* -----------------------------------------------------
-       TEXT INPUT
-       ----------------------------------------------------- */
+    /* =====================================================
+       15. TEXT INPUT
+       ===================================================== */
 
     #chatInput {
+
+        flex: 1 1 auto !important;
 
         min-width: 0 !important;
 
         width: 100% !important;
 
+        height: 48px !important;
+
+        box-sizing: border-box !important;
+
+        padding-top: 10px !important;
+
+        padding-right: 4px !important;
+
+        padding-bottom: 10px !important;
+
+        padding-left: 4px !important;
+
         font-size: 16px !important;
 
-        /*
-         * Prevent iOS Safari from zooming into the input.
-         */
         line-height: 1.4 !important;
 
-        padding-top: 12px !important;
-        padding-bottom: 12px !important;
+        /*
+         * CRITICAL FOR MOBILE:
+         *
+         * Prevent iOS Safari from zooming the page
+         * when input receives focus.
+         */
+        transform: none !important;
+
+        outline: none !important;
     }
 
 
-    /* -----------------------------------------------------
-       VOICE BUTTON
-       ----------------------------------------------------- */
+    /* =====================================================
+       16. VOICE BUTTON
+       ===================================================== */
 
     #voiceBtn {
 
         flex: 0 0 42px !important;
 
         width: 42px !important;
+
         height: 42px !important;
 
+        min-width: 42px !important;
+
+        min-height: 42px !important;
+
         display: flex !important;
+
         align-items: center !important;
+
         justify-content: center !important;
 
+        margin: 0 !important;
+
+        padding: 0 !important;
+
         border-radius: 50% !important;
+
+        touch-action: manipulation !important;
     }
 
 
-    /* -----------------------------------------------------
-       SEND BUTTON
-       ----------------------------------------------------- */
+    #voiceIcon {
+
+        width: 22px !important;
+
+        height: 22px !important;
+
+        object-fit: contain !important;
+    }
+
+
+    /* =====================================================
+       17. SEND BUTTON
+       ===================================================== */
 
     #chatForm button[type="submit"] {
 
         flex: 0 0 42px !important;
 
         width: 42px !important;
+
         height: 42px !important;
 
         min-width: 42px !important;
+
         min-height: 42px !important;
 
+        display: flex !important;
+
+        align-items: center !important;
+
+        justify-content: center !important;
+
+        padding: 0 !important;
+
         border-radius: 12px !important;
+
+        touch-action: manipulation !important;
     }
 
 
-    /* -----------------------------------------------------
-       BOT SHOULD DISAPPEAR WHEN CHAT IS OPEN
-       ----------------------------------------------------- */
+    /* =====================================================
+       18. REMOVE MOBILE HOVER EFFECTS
+       ===================================================== */
 
-    #chatWindow:not(.hidden) ~ #chatToggle {
-        display: none !important;
+    #chatToggle:hover,
+    #chatClose:hover,
+    #voiceBtn:hover,
+    #chatForm button:hover {
+
+        transform: none !important;
     }
 
 
-    /* -----------------------------------------------------
-       PREVENT HORIZONTAL OVERFLOW
-       ----------------------------------------------------- */
+    /* =====================================================
+       19. PREVENT RANDOM WIDTH / HEIGHT OVERRIDES
+       ===================================================== */
 
-    #chatWindow,
-    #chatWindow * {
-
-        max-width: 100% !important;
+    #chatWindow *,
+    #chatWindow {
 
         box-sizing: border-box !important;
     }
 
 
-    /* -----------------------------------------------------
-       MOBILE SMALL DEVICES
-       ----------------------------------------------------- */
+    /* =====================================================
+       20. SMALL PHONES
+       ===================================================== */
 
-    @media (max-height: 700px) {
+    @media screen and (max-height: 700px) {
 
-        #welcomePanel {
+        #chatWindow:not(.hidden) > div:first-child {
 
-            max-height: 24vh !important;
+            padding-top:
+                max(10px, env(safe-area-inset-top)) !important;
 
-            padding-top: 10px !important;
-            padding-bottom: 10px !important;
-        }
-
-        #chatMessages {
-
-            padding-top: 10px !important;
             padding-bottom: 8px !important;
         }
 
-        #chatForm {
+
+        #welcomePanel {
+
+            max-height: 22svh !important;
 
             padding-top: 8px !important;
+            padding-bottom: 8px !important;
+        }
+
+
+        #chatMessages {
+
+            padding-top: 8px !important;
+            padding-bottom: 8px !important;
+        }
+
+
+        #chatForm {
+
+            padding-top: 7px !important;
         }
     }
-}
-
-
-
-
-
-html,
-body {
-    overflow-x: hidden;
-}
-
-#chatWindow {
-    box-sizing: border-box;
 }
 
 
