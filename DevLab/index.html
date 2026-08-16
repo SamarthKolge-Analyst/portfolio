@@ -39535,6 +39535,48 @@ body.dev-home-ready #devMain {
 }
 
 
+
+
+
+/* =========================================================
+   DEVLАB LOADER — MOBILE FOCUS PROTECTION
+========================================================= */
+
+@media (max-width: 700px) {
+
+    body.devlab-loader-active input,
+    body.devlab-loader-active textarea,
+    body.devlab-loader-active select,
+    body.devlab-loader-active [contenteditable="true"] {
+
+        /*
+         * Nothing should receive keyboard focus while
+         * DevLab loader is running.
+         */
+        caret-color: transparent !important;
+    }
+
+
+    body.devlab-loader-active #chatInput {
+        pointer-events: none !important;
+    }
+
+
+    body.devlab-loader-active #chatWidget {
+        pointer-events: none !important;
+    }
+
+
+    /*
+     * Loader itself stays above everything.
+     */
+    #devLoader {
+        z-index: 2147483647 !important;
+    }
+}
+
+
+
     </style>
 
 </head>
@@ -95227,6 +95269,232 @@ ${code}`
 
 
 
+
+/* =========================================================
+   DEVLАB LOADER — MOBILE KEYBOARD PROTECTION
+   ---------------------------------------------------------
+   While DevLab loader is active:
+   - Remove focus from chat/input fields
+   - Prevent inputs from receiving focus
+   - Prevent mobile keyboard from reopening
+   - Restore normal behavior after loader closes
+========================================================= */
+
+(function protectDevLabLoaderFocus() {
+
+    const loader = document.getElementById("devLoader");
+
+    if (!loader) return;
+
+    const isMobile = () =>
+        window.matchMedia("(max-width: 700px)").matches;
+
+    /* -----------------------------------------------------
+       Remove focus immediately
+    ----------------------------------------------------- */
+
+    function blurActiveElement() {
+
+        const active = document.activeElement;
+
+        if (
+            active &&
+            active !== document.body &&
+            typeof active.blur === "function"
+        ) {
+            active.blur();
+        }
+
+        /*
+         * Also explicitly blur common interactive inputs.
+         * This catches cases where the browser keeps focus
+         * on the chat field while the loader is opening.
+         */
+
+        document
+            .querySelectorAll(
+                "input, textarea, select, [contenteditable='true']"
+            )
+            .forEach(element => {
+
+                if (typeof element.blur === "function") {
+                    element.blur();
+                }
+
+            });
+    }
+
+
+    /* -----------------------------------------------------
+       Protect against focus while loader is active
+    ----------------------------------------------------- */
+
+    function preventLoaderFocus(event) {
+
+        if (!document.body.classList.contains("devlab-loader-active")) {
+            return;
+        }
+
+        if (!isMobile()) {
+            return;
+        }
+
+        const target = event.target;
+
+        if (
+            target.matches &&
+            target.matches(
+                "input, textarea, select, [contenteditable='true']"
+            )
+        ) {
+
+            target.blur();
+
+        }
+
+    }
+
+
+    /* -----------------------------------------------------
+       Capture focus BEFORE browser can keep keyboard alive
+    ----------------------------------------------------- */
+
+    document.addEventListener(
+        "focusin",
+        preventLoaderFocus,
+        true
+    );
+
+
+    /* -----------------------------------------------------
+       Watch loader activation
+    ----------------------------------------------------- */
+
+    const observer = new MutationObserver(() => {
+
+        if (
+            document.body.classList.contains(
+                "devlab-loader-active"
+            )
+        ) {
+
+            if (isMobile()) {
+
+                /*
+                 * Blur immediately
+                 */
+                blurActiveElement();
+
+
+                /*
+                 * Blur again on next animation frame.
+                 * Mobile browsers sometimes restore focus
+                 * after the current click event finishes.
+                 */
+                requestAnimationFrame(() => {
+                    blurActiveElement();
+                });
+
+
+                /*
+                 * And once more after browser UI settles.
+                 */
+                setTimeout(() => {
+                    blurActiveElement();
+                }, 100);
+
+
+                setTimeout(() => {
+                    blurActiveElement();
+                }, 300);
+
+            }
+
+        }
+
+    });
+
+
+    observer.observe(document.body, {
+        attributes: true,
+        attributeFilter: ["class"]
+    });
+
+
+    /* -----------------------------------------------------
+       Extra protection when DevLab launcher is clicked
+    ----------------------------------------------------- */
+
+    document.addEventListener(
+        "click",
+        event => {
+
+            const launcher =
+                event.target.closest(
+                    "#devLabLauncher"
+                );
+
+            if (!launcher) return;
+
+            if (!isMobile()) return;
+
+            /*
+             * Remove keyboard BEFORE DevLab opens.
+             */
+            blurActiveElement();
+
+
+            /*
+             * Remove focus from launcher itself too.
+             * This prevents mobile browser focus behavior.
+             */
+            launcher.blur();
+
+
+            requestAnimationFrame(() => {
+                blurActiveElement();
+                launcher.blur();
+            });
+
+        },
+        true
+    );
+
+
+    /* -----------------------------------------------------
+       Also protect touch interaction
+    ----------------------------------------------------- */
+
+    document.addEventListener(
+        "touchstart",
+        event => {
+
+            if (
+                !document.body.classList.contains(
+                    "devlab-loader-active"
+                )
+            ) {
+                return;
+            }
+
+            if (!isMobile()) return;
+
+            const target = event.target;
+
+            if (
+                target.matches &&
+                target.matches(
+                    "input, textarea, select, [contenteditable='true']"
+                )
+            ) {
+                target.blur();
+            }
+
+        },
+        true
+    );
+
+})();
 
 
 
