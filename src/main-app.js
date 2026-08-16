@@ -12727,4 +12727,763 @@ window.scrollToTop = function(){
 
 
 
+/* ============================================================
+   MOBILE CHAT — FINAL KEYBOARD SAFE SYSTEM
+   ============================================================ */
 
+(function () {
+
+    "use strict";
+
+
+    /* ---------------------------------------------------------
+       ELEMENTS
+       --------------------------------------------------------- */
+
+    const chatWidget = document.getElementById("chatWidget");
+    const chatWindow = document.getElementById("chatWindow");
+    const chatToggle = document.getElementById("chatToggle");
+    const chatClose = document.getElementById("chatClose");
+    const chatForm = document.getElementById("chatForm");
+    const chatInput = document.getElementById("chatInput");
+
+    if (
+        !chatWidget ||
+        !chatWindow ||
+        !chatToggle ||
+        !chatClose
+    ) {
+        return;
+    }
+
+
+    /* ---------------------------------------------------------
+       MOBILE DETECTION
+       --------------------------------------------------------- */
+
+    function isMobile() {
+
+        return window.matchMedia(
+            "(max-width: 767px)"
+        ).matches;
+
+    }
+
+
+    /* ---------------------------------------------------------
+       STATE
+       --------------------------------------------------------- */
+
+    let originalParent = null;
+
+    let originalNextSibling = null;
+
+    let pageScrollPosition = 0;
+
+    let mobileChatOpen = false;
+
+    let keyboardOpen = false;
+
+
+    /* ---------------------------------------------------------
+       MOVE CHAT TO BODY
+
+       THIS IS THE MOST IMPORTANT PART.
+
+       Originally:
+
+       body
+        └── chatWidget
+             └── chatWindow
+
+       We change mobile to:
+
+       body
+        └── chatWidget
+        └── chatWindow
+
+       Therefore chatWindow is no longer affected by the
+       positioning context of chatWidget.
+       --------------------------------------------------------- */
+
+    function moveChatToBody() {
+
+        if (!isMobile()) {
+            return;
+        }
+
+        if (chatWindow.parentElement === document.body) {
+            return;
+        }
+
+        originalParent =
+            chatWindow.parentElement;
+
+        originalNextSibling =
+            chatWindow.nextSibling;
+
+        document.body.appendChild(chatWindow);
+
+    }
+
+
+    /* ---------------------------------------------------------
+       RETURN CHAT TO ORIGINAL LOCATION
+
+       Only needed when leaving mobile layout.
+       --------------------------------------------------------- */
+
+    function restoreChatLocation() {
+
+        if (
+            !originalParent ||
+            chatWindow.parentElement !== document.body
+        ) {
+            return;
+        }
+
+        if (
+            originalNextSibling &&
+            originalNextSibling.parentNode === originalParent
+        ) {
+
+            originalParent.insertBefore(
+                chatWindow,
+                originalNextSibling
+            );
+
+        } else {
+
+            originalParent.appendChild(
+                chatWindow
+            );
+
+        }
+
+    }
+
+
+    /* ---------------------------------------------------------
+       LOCK PAGE
+       --------------------------------------------------------- */
+
+    function lockPage() {
+
+        pageScrollPosition =
+            window.scrollY ||
+            window.pageYOffset ||
+            0;
+
+
+        document.documentElement.classList.add(
+            "mobile-chat-active"
+        );
+
+        document.body.classList.add(
+            "mobile-chat-active"
+        );
+
+
+        document.body.style.position = "fixed";
+
+        document.body.style.top =
+            `-${pageScrollPosition}px`;
+
+        document.body.style.left = "0";
+
+        document.body.style.right = "0";
+
+        document.body.style.width = "100%";
+
+        document.body.style.overflow = "hidden";
+
+    }
+
+
+    /* ---------------------------------------------------------
+       UNLOCK PAGE
+       --------------------------------------------------------- */
+
+    function unlockPage() {
+
+        document.documentElement.classList.remove(
+            "mobile-chat-active"
+        );
+
+        document.body.classList.remove(
+            "mobile-chat-active"
+        );
+
+
+        document.body.style.position = "";
+
+        document.body.style.top = "";
+
+        document.body.style.left = "";
+
+        document.body.style.right = "";
+
+        document.body.style.width = "";
+
+        document.body.style.overflow = "";
+
+
+        window.scrollTo(
+            0,
+            pageScrollPosition
+        );
+
+    }
+
+
+    /* ---------------------------------------------------------
+       FORCE STABLE PANEL
+
+       Notice:
+       We NEVER use visualViewport.height here.
+
+       Therefore keyboard cannot resize the panel.
+       --------------------------------------------------------- */
+
+    function forceStablePanel() {
+
+        if (!isMobile()) {
+            return;
+        }
+
+        if (!mobileChatOpen) {
+            return;
+        }
+
+
+        chatWindow.style.position = "fixed";
+
+        chatWindow.style.top = "0px";
+
+        chatWindow.style.left = "0px";
+
+        chatWindow.style.right = "0px";
+
+        chatWindow.style.bottom = "auto";
+
+        chatWindow.style.width = "100%";
+
+        chatWindow.style.height = "100svh";
+
+        chatWindow.style.maxHeight = "100svh";
+
+        chatWindow.style.minHeight = "100svh";
+
+        chatWindow.style.transform =
+            "none";
+
+    }
+
+
+    /* ---------------------------------------------------------
+       RESET COMPOSER
+       --------------------------------------------------------- */
+
+    function resetComposer() {
+
+        if (!chatForm) {
+            return;
+        }
+
+        chatForm.style.transform =
+            "translate3d(0, 0, 0)";
+
+    }
+
+
+    /* ---------------------------------------------------------
+       KEYBOARD HANDLING
+       
+       PANEL STAYS FIXED.
+
+       ONLY COMPOSER MOVES.
+       --------------------------------------------------------- */
+
+    function updateKeyboardPosition() {
+
+        if (!isMobile()) {
+            return;
+        }
+
+        if (!mobileChatOpen) {
+            return;
+        }
+
+        if (!window.visualViewport) {
+            return;
+        }
+
+
+        const viewport =
+            window.visualViewport;
+
+
+        const keyboardHeight =
+            Math.max(
+                0,
+                window.innerHeight -
+                viewport.height -
+                viewport.offsetTop
+            );
+
+
+        /*
+         * Keyboard threshold.
+         */
+        const keyboardIsOpen =
+            keyboardHeight > 100;
+
+
+        keyboardOpen =
+            keyboardIsOpen;
+
+
+        /*
+         * CRITICAL:
+         *
+         * Never touch chatWindow here.
+         *
+         * Only move chatForm.
+         */
+
+
+        if (
+            keyboardIsOpen &&
+            chatForm
+        ) {
+
+            chatForm.style.transform =
+                `translate3d(0, -${keyboardHeight}px, 0)`;
+
+        } else {
+
+            resetComposer();
+
+        }
+
+    }
+
+
+    /* ---------------------------------------------------------
+       OPEN CHAT
+       --------------------------------------------------------- */
+
+    function openMobileChat() {
+
+        if (!isMobile()) {
+            return;
+        }
+
+
+        moveChatToBody();
+
+
+        mobileChatOpen = true;
+
+
+        lockPage();
+
+
+        /*
+         * Open immediately.
+         */
+        chatWindow.classList.remove(
+            "hidden"
+        );
+
+
+        /*
+         * Remove positioning classes that can interfere.
+         */
+        chatWindow.style.position =
+            "fixed";
+
+        chatWindow.style.top =
+            "0px";
+
+        chatWindow.style.left =
+            "0px";
+
+        chatWindow.style.right =
+            "0px";
+
+        chatWindow.style.bottom =
+            "auto";
+
+        chatWindow.style.width =
+            "100%";
+
+        chatWindow.style.height =
+            "100svh";
+
+
+        resetComposer();
+
+
+        /*
+         * Give browser a frame.
+         */
+        requestAnimationFrame(() => {
+
+            forceStablePanel();
+
+        });
+
+    }
+
+
+    /* ---------------------------------------------------------
+       CLOSE CHAT
+       --------------------------------------------------------- */
+
+    function closeMobileChat() {
+
+        if (!isMobile()) {
+            return;
+        }
+
+
+        mobileChatOpen = false;
+
+
+        /*
+         * Remove input focus FIRST.
+         */
+        if (
+            chatInput &&
+            document.activeElement === chatInput
+        ) {
+
+            chatInput.blur();
+
+        }
+
+
+        resetComposer();
+
+
+        chatWindow.classList.add(
+            "hidden"
+        );
+
+
+        unlockPage();
+
+    }
+
+
+    /* ---------------------------------------------------------
+       TOGGLE
+       --------------------------------------------------------- */
+
+    chatToggle.addEventListener(
+        "click",
+        function () {
+
+            if (!isMobile()) {
+                return;
+            }
+
+
+            if (mobileChatOpen) {
+
+                closeMobileChat();
+
+            } else {
+
+                openMobileChat();
+
+            }
+
+        },
+        true
+    );
+
+
+    /* ---------------------------------------------------------
+       CLOSE
+       --------------------------------------------------------- */
+
+    chatClose.addEventListener(
+        "click",
+        function () {
+
+            if (!isMobile()) {
+                return;
+            }
+
+            closeMobileChat();
+
+        },
+        true
+    );
+
+
+    /* ---------------------------------------------------------
+       INPUT FOCUS
+       
+       DO NOT scroll chatWindow.
+       DO NOT resize chatWindow.
+       --------------------------------------------------------- */
+
+    if (chatInput) {
+
+        chatInput.addEventListener(
+            "focus",
+            function () {
+
+                if (!isMobile()) {
+                    return;
+                }
+
+
+                /*
+                 * Lock panel before keyboard animation.
+                 */
+                forceStablePanel();
+
+
+                /*
+                 * Wait for keyboard.
+                 */
+                setTimeout(
+                    updateKeyboardPosition,
+                    100
+                );
+
+                setTimeout(
+                    updateKeyboardPosition,
+                    300
+                );
+
+                setTimeout(
+                    updateKeyboardPosition,
+                    600
+                );
+
+            }
+        );
+
+
+        chatInput.addEventListener(
+            "blur",
+            function () {
+
+                if (!isMobile()) {
+                    return;
+                }
+
+
+                /*
+                 * Let keyboard disappear.
+                 */
+                setTimeout(
+                    function () {
+
+                        resetComposer();
+
+                        forceStablePanel();
+
+                    },
+                    150
+                );
+
+            }
+        );
+
+    }
+
+
+    /* ---------------------------------------------------------
+       VISUAL VIEWPORT
+       
+       Keyboard changes this viewport.
+       
+       We use it ONLY for composer.
+       --------------------------------------------------------- */
+
+    if (window.visualViewport) {
+
+        window.visualViewport.addEventListener(
+            "resize",
+            function () {
+
+                if (!isMobile()) {
+                    return;
+                }
+
+                if (!mobileChatOpen) {
+                    return;
+                }
+
+
+                /*
+                 * DO NOT resize chatWindow.
+                 */
+                forceStablePanel();
+
+
+                /*
+                 * Move only composer.
+                 */
+                updateKeyboardPosition();
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        window.visualViewport.addEventListener(
+            "scroll",
+            function () {
+
+                if (!isMobile()) {
+                    return;
+                }
+
+                if (!mobileChatOpen) {
+                    return;
+                }
+
+
+                /*
+                 * iOS sometimes changes viewport offset.
+                 *
+                 * Panel remains at 0.
+                 */
+                forceStablePanel();
+
+
+                updateKeyboardPosition();
+
+            },
+            {
+                passive: true
+            }
+        );
+
+    }
+
+
+    /* ---------------------------------------------------------
+       WINDOW RESIZE
+       
+       DO NOT use resize to change chat height.
+       --------------------------------------------------------- */
+
+    window.addEventListener(
+        "resize",
+        function () {
+
+            if (!isMobile()) {
+                return;
+            }
+
+            if (!mobileChatOpen) {
+                return;
+            }
+
+
+            /*
+             * Keep panel fixed.
+             */
+            forceStablePanel();
+
+
+            /*
+             * Update composer only.
+             */
+            updateKeyboardPosition();
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    /* ---------------------------------------------------------
+       ORIENTATION
+       --------------------------------------------------------- */
+
+    window.addEventListener(
+        "orientationchange",
+        function () {
+
+            if (!isMobile()) {
+                return;
+            }
+
+
+            setTimeout(
+                function () {
+
+                    if (!mobileChatOpen) {
+                        return;
+                    }
+
+
+                    forceStablePanel();
+
+                    updateKeyboardPosition();
+
+                },
+                400
+            );
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    /* ---------------------------------------------------------
+       MOBILE INITIALIZATION
+       --------------------------------------------------------- */
+
+    if (isMobile()) {
+
+        moveChatToBody();
+
+    }
+
+
+    /* ---------------------------------------------------------
+       DESKTOP / MOBILE SWITCH
+       --------------------------------------------------------- */
+
+    window
+        .matchMedia("(max-width: 767px)")
+        .addEventListener(
+            "change",
+            function (event) {
+
+                if (event.matches) {
+
+                    moveChatToBody();
+
+                } else {
+
+                    mobileChatOpen = false;
+
+                    resetComposer();
+
+                    unlockPage();
+
+                    restoreChatLocation();
+
+                }
+
+            }
+        );
+
+
+})();
