@@ -1300,15 +1300,6 @@ window.addEventListener("load", () => {
 
 
 
-window.addEventListener("scroll", () => {
-
-    if (!chatWindow.classList.contains("hidden")) {
-
-        closeChat();
-
-    }
-
-});
 
 
 
@@ -1329,52 +1320,142 @@ function showSittingBot() {
 }
 
 
-
 function openChat() {
 
     chatWindow.classList.remove("hidden");
     chatWindow.classList.add("active");
 
-    // Keep standing bot initially
+    document.body.classList.add("chat-mobile-open");
+
     showStandingBot();
 
-    // Move upward
-    chatToggle.style.bottom = "800px";
 
-    // After movement completes, change to sitting
-    setTimeout(() => {
-        showSittingBot();
-    }, 550);
+    /*
+     * DESKTOP BOT MOVEMENT ONLY
+     */
 
-    const dot = document.getElementById("botStatusDot");
+    if (window.matchMedia("(min-width: 769px)").matches) {
 
-    if (dot) {
-        dot.style.opacity = "0";
-        dot.style.transform = "scale(0)";
+        chatToggle.style.bottom = "800px";
+
+        setTimeout(() => {
+
+            showSittingBot();
+
+        }, 550);
+
     }
 
+
+    /*
+     * MOBILE
+     *
+     * Do NOT move the bot to 800px.
+     * Do NOT reposition the chat.
+     */
+
+    else {
+
+        chatToggle.style.bottom = "10px";
+
+        chatToggle.classList.add("open");
+
+    }
+
+
+    const dot =
+        document.getElementById("botStatusDot");
+
+    if (dot) {
+
+        dot.style.opacity = "0";
+
+        dot.style.transform =
+            "scale(0)";
+
+    }
+
+
+    /*
+     * Recalculate mobile visual viewport.
+     */
+
+    if (
+        window.matchMedia("(max-width: 768px)").matches
+        &&
+        window.visualViewport
+    ) {
+
+        requestAnimationFrame(() => {
+
+            const height =
+                window.visualViewport.height;
+
+            document.documentElement.style.setProperty(
+                "--chat-viewport-height",
+                `${height}px`
+            );
+
+        });
+
+    }
+
+
     resetInactivityTimer();
+
 }
+
+
 
 function closeChat() {
 
     chatWindow.classList.add("hidden");
     chatWindow.classList.remove("active");
 
-    // First become standing
+    document.body.classList.remove(
+        "chat-mobile-open"
+    );
+
+
     showStandingBot();
 
-    // Then move down
-    chatToggle.style.bottom = "16px";
 
-    const dot = document.getElementById("botStatusDot");
+    /*
+     * Desktop only.
+     */
 
-    if (dot) {
-        dot.style.opacity = "1";
-        dot.style.transform = "scale(1)";
+    if (window.matchMedia("(min-width: 769px)").matches) {
+
+        chatToggle.style.bottom = "16px";
+
     }
 
+    /*
+     * Mobile.
+     */
+
+    else {
+
+        chatToggle.style.bottom = "10px";
+
+    }
+
+
+    const dot =
+        document.getElementById("botStatusDot");
+
+    if (dot) {
+
+        dot.style.opacity = "1";
+
+        dot.style.transform =
+            "scale(1)";
+
+    }
+
+
     clearTimeout(inactivityTimer);
+
 }
 
 
@@ -1384,17 +1465,59 @@ function resetInactivityTimer() {
 
     clearTimeout(inactivityTimer);
 
-    if (isHoveringChat) return;
+
+    /*
+     * Never auto-close while typing.
+     */
 
     if (isTyping) return;
 
+
+    /*
+     * Never auto-close while user is interacting
+     * with the chat.
+     */
+
+    if (isHoveringChat) return;
+
+
+    /*
+     * Never auto-close while mobile keyboard is open.
+     */
+
+    if (
+        document.documentElement.classList.contains(
+            "chat-keyboard-open"
+        )
+    ) {
+        return;
+    }
+
+
     inactivityTimer = setTimeout(() => {
+
+        /*
+         * Check again before closing.
+         */
+
+        if (isTyping) return;
+
+        if (
+            document.documentElement.classList.contains(
+                "chat-keyboard-open"
+            )
+        ) {
+            return;
+        }
 
         closeChat();
 
     }, INACTIVITY_DELAY);
 
 }
+
+
+
 chatToggle.addEventListener("click", () => {
 
   console.log("Chat button clicked");
@@ -1421,13 +1544,16 @@ chatInput.addEventListener("focus", () => {
 
 });
 
-chatInput.addEventListener("blur", () => {
 
-    isTyping = false;
 
-    resetInactivityTimer();
+chatInput.addEventListener("focus", () => {
+
+    isTyping = true;
+
+    clearTimeout(inactivityTimer);
 
 });
+
 
 chatInput.addEventListener("input", () => {
 
@@ -1437,13 +1563,85 @@ chatInput.addEventListener("input", () => {
 
 });
 
+
 chatInput.addEventListener("blur", () => {
 
-    isTyping = false;
+    /*
+     * Don't immediately close/re-arm the inactivity
+     * timer during mobile keyboard transitions.
+     */
 
-    resetInactivityTimer();
+    setTimeout(() => {
+
+        if (
+            document.activeElement !== chatInput
+        ) {
+
+            isTyping = false;
+
+            resetInactivityTimer();
+
+        }
+
+    }, 500);
 
 });
+
+
+
+
+
+
+
+
+
+chatInput.addEventListener("focus", () => {
+
+    isTyping = true;
+
+    clearTimeout(inactivityTimer);
+
+});
+
+
+chatInput.addEventListener("input", () => {
+
+    isTyping = true;
+
+    clearTimeout(inactivityTimer);
+
+});
+
+
+chatInput.addEventListener("blur", () => {
+
+    /*
+     * Don't immediately close/re-arm the inactivity
+     * timer during mobile keyboard transitions.
+     */
+
+    setTimeout(() => {
+
+        if (
+            document.activeElement !== chatInput
+        ) {
+
+            isTyping = false;
+
+            resetInactivityTimer();
+
+        }
+
+    }, 500);
+
+});
+
+
+
+
+
+
+
 
 chatWindow.addEventListener("click", resetInactivityTimer);
 
@@ -1654,10 +1852,36 @@ requestAnimationFrame(() => {
 
 if (type === "bot") {
 
-    chatMessages.scrollTo({
-        top: wrapper.offsetTop - 15,
-        behavior: "smooth"
+if (type === "bot") {
+
+    requestAnimationFrame(() => {
+
+        chatMessages.scrollTo({
+            top:
+                chatMessages.scrollHeight -
+                chatMessages.clientHeight,
+
+            behavior: "smooth"
+
+        });
+
     });
+
+} else {
+
+    requestAnimationFrame(() => {
+
+        chatMessages.scrollTo({
+            top:
+                chatMessages.scrollHeight,
+
+            behavior: "smooth"
+
+        });
+
+    });
+
+}
 
 } else {
 
@@ -9700,7 +9924,15 @@ if (
 
 }
 
-  chatInput.value = "";
+ chatInput.value = "";
+
+if (
+    window.matchMedia("(max-width: 768px)").matches
+) {
+
+    chatInput.blur();
+
+}
 
 const typingDiv = document.createElement("div");
 
