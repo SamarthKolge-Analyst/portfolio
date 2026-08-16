@@ -52,7 +52,7 @@ this.config = Object.freeze({
                 Scheduler
     ==========================================*/
 
-    idleTime: 4000,          // Wait 4 sec before next rotation
+    idleTime: 3000,          // Wait 4 sec before next rotation
 
     /*==========================================
             Animation Timing

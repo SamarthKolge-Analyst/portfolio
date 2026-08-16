@@ -39538,42 +39538,14 @@ body.dev-home-ready #devMain {
 
 
 
-/* =========================================================
-   DEVLАB LOADER — MOBILE FOCUS PROTECTION
-========================================================= */
-
-@media (max-width: 700px) {
-
-    body.devlab-loader-active input,
-    body.devlab-loader-active textarea,
-    body.devlab-loader-active select,
-    body.devlab-loader-active [contenteditable="true"] {
-
-        /*
-         * Nothing should receive keyboard focus while
-         * DevLab loader is running.
-         */
-        caret-color: transparent !important;
-    }
 
 
-    body.devlab-loader-active #chatInput {
-        pointer-events: none !important;
-    }
 
 
-    body.devlab-loader-active #chatWidget {
-        pointer-events: none !important;
-    }
 
 
-    /*
-     * Loader itself stays above everything.
-     */
-    #devLoader {
-        z-index: 2147483647 !important;
-    }
-}
+
+
 
 
 
@@ -95271,215 +95243,270 @@ ${code}`
 
 
 /* =========================================================
-   DEVLАB LOADER — MOBILE KEYBOARD PROTECTION
+   DEVLАB LOADER — HARD MOBILE KEYBOARD PROTECTION
    ---------------------------------------------------------
-   While DevLab loader is active:
-   - Remove focus from chat/input fields
-   - Prevent inputs from receiving focus
-   - Prevent mobile keyboard from reopening
-   - Restore normal behavior after loader closes
+   This runs immediately when DevLab loader starts.
+
+   Protects against:
+   - Previous chat textarea retaining focus
+   - Mobile keyboard reopening
+   - Browser restoring focus after navigation
+   - Chat input receiving focus during loader
+   - Touch/pointer focus
 ========================================================= */
 
 (function protectDevLabLoaderFocus() {
 
-    const loader = document.getElementById("devLoader");
+    "use strict";
 
-    if (!loader) return;
 
-    const isMobile = () =>
-        window.matchMedia("(max-width: 700px)").matches;
+    const loader =
+        document.getElementById(
+            "devLoader"
+        );
 
-    /* -----------------------------------------------------
-       Remove focus immediately
-    ----------------------------------------------------- */
 
-    function blurActiveElement() {
+    if (!loader) {
+        return;
+    }
 
-        const active = document.activeElement;
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
+
+    function isMobile() {
+
+        return window.matchMedia(
+            "(max-width: 767px)"
+        ).matches;
+
+    }
+
+
+    /* =====================================================
+       BLUR EVERYTHING
+    ===================================================== */
+
+    function forceBlur() {
+
+        const active =
+            document.activeElement;
+
 
         if (
             active &&
             active !== document.body &&
             typeof active.blur === "function"
         ) {
+
             active.blur();
+
         }
 
-        /*
-         * Also explicitly blur common interactive inputs.
-         * This catches cases where the browser keeps focus
-         * on the chat field while the loader is opening.
-         */
 
         document
             .querySelectorAll(
                 "input, textarea, select, [contenteditable='true']"
             )
-            .forEach(element => {
+            .forEach(function(element) {
 
-                if (typeof element.blur === "function") {
+                if (
+                    typeof element.blur === "function"
+                ) {
+
                     element.blur();
+
                 }
 
             });
+
     }
 
 
-    /* -----------------------------------------------------
-       Protect against focus while loader is active
-    ----------------------------------------------------- */
+    /* =====================================================
+       CLOSE / HIDE CHAT
+    ===================================================== */
 
-    function preventLoaderFocus(event) {
+    function disableChatDuringLoader() {
 
-        if (!document.body.classList.contains("devlab-loader-active")) {
-            return;
+        const chatWindow =
+            document.getElementById(
+                "chatWindow"
+            );
+
+
+        const chatToggle =
+            document.getElementById(
+                "chatToggle"
+            );
+
+
+        /*
+         * Remove active/open state.
+         */
+
+        if (chatWindow) {
+
+            chatWindow.classList.remove(
+                "active"
+            );
+
         }
+
+
+        /*
+         * Make sure chat toggle itself
+         * cannot keep focus.
+         */
+
+        if (chatToggle) {
+
+            chatToggle.blur();
+
+        }
+
+
+        /*
+         * Blur all chat controls.
+         */
+
+        document
+            .querySelectorAll(
+                "#chatWidget input, " +
+                "#chatWidget textarea, " +
+                "#chatWidget select, " +
+                "#chatWidget [contenteditable='true']"
+            )
+            .forEach(function(element) {
+
+                element.blur();
+
+            });
+
+    }
+
+
+    /* =====================================================
+       INITIAL LOCK
+       ===================================================== */
+
+    function lockLoaderFocus() {
 
         if (!isMobile()) {
             return;
         }
 
-        const target = event.target;
 
-        if (
-            target.matches &&
-            target.matches(
-                "input, textarea, select, [contenteditable='true']"
-            )
-        ) {
+        forceBlur();
 
-            target.blur();
+        disableChatDuringLoader();
 
-        }
+
+        /*
+         * Mobile browsers can restore focus
+         * immediately after page navigation.
+         */
+
+        requestAnimationFrame(function() {
+
+            forceBlur();
+
+            disableChatDuringLoader();
+
+        });
+
+
+        requestAnimationFrame(function() {
+
+            requestAnimationFrame(function() {
+
+                forceBlur();
+
+                disableChatDuringLoader();
+
+            });
+
+        });
+
+
+        setTimeout(function() {
+
+            forceBlur();
+
+        }, 50);
+
+
+        setTimeout(function() {
+
+            forceBlur();
+
+        }, 150);
+
+
+        setTimeout(function() {
+
+            forceBlur();
+
+        }, 300);
+
+
+        setTimeout(function() {
+
+            forceBlur();
+
+        }, 600);
 
     }
 
 
-    /* -----------------------------------------------------
-       Capture focus BEFORE browser can keep keyboard alive
-    ----------------------------------------------------- */
+    /* =====================================================
+       RUN IMMEDIATELY
+       ===================================================== */
+
+    lockLoaderFocus();
+
+
+    /* =====================================================
+       MARK LOADER ACTIVE
+       ===================================================== */
+
+    document.documentElement.classList.add(
+        "devlab-loader-active"
+    );
+
+    document.body.classList.add(
+        "devlab-loader-active"
+    );
+
+
+    /* =====================================================
+       BLOCK INPUT FOCUS WHILE LOADER IS ACTIVE
+    ===================================================== */
 
     document.addEventListener(
         "focusin",
-        preventLoaderFocus,
-        true
-    );
+        function(event) {
 
-
-    /* -----------------------------------------------------
-       Watch loader activation
-    ----------------------------------------------------- */
-
-    const observer = new MutationObserver(() => {
-
-        if (
-            document.body.classList.contains(
-                "devlab-loader-active"
-            )
-        ) {
-
-            if (isMobile()) {
-
-                /*
-                 * Blur immediately
-                 */
-                blurActiveElement();
-
-
-                /*
-                 * Blur again on next animation frame.
-                 * Mobile browsers sometimes restore focus
-                 * after the current click event finishes.
-                 */
-                requestAnimationFrame(() => {
-                    blurActiveElement();
-                });
-
-
-                /*
-                 * And once more after browser UI settles.
-                 */
-                setTimeout(() => {
-                    blurActiveElement();
-                }, 100);
-
-
-                setTimeout(() => {
-                    blurActiveElement();
-                }, 300);
-
+            if (!isMobile()) {
+                return;
             }
 
-        }
-
-    });
-
-
-    observer.observe(document.body, {
-        attributes: true,
-        attributeFilter: ["class"]
-    });
-
-
-    /* -----------------------------------------------------
-       Extra protection when DevLab launcher is clicked
-    ----------------------------------------------------- */
-
-    document.addEventListener(
-        "click",
-        event => {
-
-            const launcher =
-                event.target.closest(
-                    "#devLabLauncher"
-                );
-
-            if (!launcher) return;
-
-            if (!isMobile()) return;
-
-            /*
-             * Remove keyboard BEFORE DevLab opens.
-             */
-            blurActiveElement();
-
-
-            /*
-             * Remove focus from launcher itself too.
-             * This prevents mobile browser focus behavior.
-             */
-            launcher.blur();
-
-
-            requestAnimationFrame(() => {
-                blurActiveElement();
-                launcher.blur();
-            });
-
-        },
-        true
-    );
-
-
-    /* -----------------------------------------------------
-       Also protect touch interaction
-    ----------------------------------------------------- */
-
-    document.addEventListener(
-        "touchstart",
-        event => {
 
             if (
                 !document.body.classList.contains(
                     "devlab-loader-active"
                 )
             ) {
+
                 return;
+
             }
 
-            if (!isMobile()) return;
 
-            const target = event.target;
+            const target =
+                event.target;
+
 
             if (
                 target.matches &&
@@ -95487,14 +95514,247 @@ ${code}`
                     "input, textarea, select, [contenteditable='true']"
                 )
             ) {
+
                 target.blur();
+
             }
 
         },
         true
     );
 
+
+    /* =====================================================
+       BLOCK POINTER FOCUS ON CHAT INPUT
+    ===================================================== */
+
+    document.addEventListener(
+        "pointerdown",
+        function(event) {
+
+            if (!isMobile()) {
+                return;
+            }
+
+
+            if (
+                !document.body.classList.contains(
+                    "devlab-loader-active"
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            const target =
+                event.target;
+
+
+            if (
+                target.closest &&
+                target.closest(
+                    "#chatWidget input, " +
+                    "#chatWidget textarea, " +
+                    "#chatWidget [contenteditable='true']"
+                )
+            ) {
+
+                event.preventDefault();
+
+                forceBlur();
+
+            }
+
+        },
+        {
+            capture: true,
+            passive: false
+        }
+    );
+
+
+    /* =====================================================
+       TOUCH FALLBACK
+    ===================================================== */
+
+    document.addEventListener(
+        "touchstart",
+        function(event) {
+
+            if (!isMobile()) {
+                return;
+            }
+
+
+            if (
+                !document.body.classList.contains(
+                    "devlab-loader-active"
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            const target =
+                event.target;
+
+
+            if (
+                target.closest &&
+                target.closest(
+                    "#chatWidget input, " +
+                    "#chatWidget textarea, " +
+                    "#chatWidget [contenteditable='true']"
+                )
+            ) {
+
+                event.preventDefault();
+
+                forceBlur();
+
+            }
+
+        },
+        {
+            capture: true,
+            passive: false
+        }
+    );
+
+
+    /* =====================================================
+       WATCH LOADER STATE
+    ===================================================== */
+
+    const observer =
+        new MutationObserver(
+            function() {
+
+                if (
+                    document.body.classList.contains(
+                        "devlab-loader-active"
+                    )
+                ) {
+
+                    lockLoaderFocus();
+
+                }
+
+            }
+        );
+
+
+    observer.observe(
+        document.body,
+        {
+            attributes: true,
+            attributeFilter: [
+                "class"
+            ]
+        }
+    );
+
+
+    /* =====================================================
+       NAVIGATION RECOVERY
+    ===================================================== */
+
+    window.addEventListener(
+        "pageshow",
+        function() {
+
+            if (!isMobile()) {
+                return;
+            }
+
+
+            if (
+                document.body.classList.contains(
+                    "devlab-loader-active"
+                )
+            ) {
+
+                lockLoaderFocus();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       REMOVE STALE NAVIGATION FLAG
+       AFTER LOADER IS FINISHED
+    ===================================================== */
+
+    function clearNavigationFlag() {
+
+        try {
+
+            sessionStorage.removeItem(
+                "devlabNavigation"
+            );
+
+        } catch (error) {}
+
+    }
+
+
+    /*
+     * Watch loader disappearing.
+     */
+
+    const loaderObserver =
+        new MutationObserver(
+            function() {
+
+                const style =
+                    window.getComputedStyle(
+                        loader
+                    );
+
+
+                const hidden =
+                    style.display === "none" ||
+                    style.visibility === "hidden" ||
+                    loader.classList.contains(
+                        "hidden"
+                    );
+
+
+                if (hidden) {
+
+                    clearNavigationFlag();
+
+                    observer.disconnect();
+
+                    loaderObserver.disconnect();
+
+                }
+
+            }
+        );
+
+
+    loaderObserver.observe(
+        loader,
+        {
+            attributes: true,
+            attributeFilter: [
+                "class",
+                "style"
+            ]
+        }
+    );
+
+
 })();
+
+
 
 
 

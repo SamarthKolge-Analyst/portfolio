@@ -1234,9 +1234,9 @@ let isHoveringChat = false;
 
 let isTyping = false;
 
-const AUTO_OPEN_DELAY = 5000;      // 5 seconds
+const AUTO_OPEN_DELAY = 20000;      // 5 seconds
 
-const INACTIVITY_DELAY = 25000;    // 25 seconds
+const INACTIVITY_DELAY = 30000;    // 25 seconds
 
 
 
@@ -11919,19 +11919,19 @@ window.scrollToTop = function(){
      */
 
     const FIRST_DELAY =
-        30000;
+        35000;
 
 
     const SECOND_DELAY =
-        60000;
+        80000;
 
 
     const REPEAT_DELAY =
-        90000;
+        130000;
 
 
     const PANEL_DISPLAY_TIME =
-        8500;
+        5500;
 
 
     /* =====================================================
@@ -12958,4 +12958,454 @@ window.scrollToTop = function(){
 
 
 
+(function protectDevLabNavigation() {
+
+    "use strict";
+
+
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
+
+    const devLabEnterButton =
+        document.querySelector(".devlab-enter-button");
+
+
+    if (!devLabEnterButton) {
+        return;
+    }
+
+
+    /* =====================================================
+       MOBILE CHECK
+    ===================================================== */
+
+    function isMobile() {
+
+        return window.matchMedia(
+            "(max-width: 767px)"
+        ).matches;
+
+    }
+
+
+    /* =====================================================
+       BLUR EVERYTHING THAT CAN TRIGGER KEYBOARD
+    ===================================================== */
+
+    function blurMobileInputs() {
+
+        const active =
+            document.activeElement;
+
+
+        if (
+            active &&
+            active !== document.body &&
+            typeof active.blur === "function"
+        ) {
+
+            active.blur();
+
+        }
+
+
+        document
+            .querySelectorAll(
+                "input, textarea, select, [contenteditable='true']"
+            )
+            .forEach(function(element) {
+
+                if (
+                    typeof element.blur === "function"
+                ) {
+
+                    element.blur();
+
+                }
+
+            });
+
+
+        /*
+         * Extra protection for common chat fields.
+         */
+
+        document
+            .querySelectorAll(
+                "#chatInput, " +
+                "#chatMessage, " +
+                "#chatTextarea, " +
+                ".chat-input, " +
+                ".chat-input textarea, " +
+                ".chat-input input"
+            )
+            .forEach(function(element) {
+
+                if (
+                    typeof element.blur === "function"
+                ) {
+
+                    element.blur();
+
+                }
+
+            });
+
+    }
+
+
+    /* =====================================================
+       CLOSE CHAT IF IT IS OPEN
+       ===================================================== */
+
+    function closeChatBeforeNavigation() {
+
+        /*
+         * Try existing close button first.
+         */
+
+        const closeButton =
+            document.querySelector(
+                "#chatClose, " +
+                "#closeChat, " +
+                ".chat-close"
+            );
+
+
+        if (closeButton) {
+
+            try {
+
+                closeButton.click();
+
+            } catch (error) {}
+
+        }
+
+
+        /*
+         * Remove active state if your chat uses it.
+         */
+
+        const chatWindow =
+            document.getElementById(
+                "chatWindow"
+            );
+
+
+        if (chatWindow) {
+
+            chatWindow.classList.remove(
+                "active"
+            );
+
+        }
+
+
+        /*
+         * Remove focus from chat toggle too.
+         */
+
+        const chatToggle =
+            document.getElementById(
+                "chatToggle"
+            );
+
+
+        if (chatToggle) {
+
+            chatToggle.blur();
+
+        }
+
+    }
+
+
+    /* =====================================================
+       LOCK CHAT INPUTS DURING DEVLAB NAVIGATION
+    ===================================================== */
+
+    function lockChatInputs() {
+
+        document.documentElement
+            .classList.add(
+                "devlab-navigation-active"
+            );
+
+
+        document.body
+            .classList.add(
+                "devlab-navigation-active"
+            );
+
+
+        /*
+         * Blur immediately.
+         */
+
+        blurMobileInputs();
+
+
+        /*
+         * Blur again because mobile browsers can
+         * restore focus at the end of the touch event.
+         */
+
+        requestAnimationFrame(function() {
+
+            blurMobileInputs();
+
+        });
+
+
+        setTimeout(function() {
+
+            blurMobileInputs();
+
+        }, 50);
+
+
+        setTimeout(function() {
+
+            blurMobileInputs();
+
+        }, 150);
+
+
+        setTimeout(function() {
+
+            blurMobileInputs();
+
+        }, 300);
+
+    }
+
+
+    /* =====================================================
+       IMPORTANT:
+       POINTERDOWN HAPPENS BEFORE CLICK
+       ===================================================== */
+
+    function prepareDevLabNavigation(event) {
+
+        if (!isMobile()) {
+            return;
+        }
+
+
+        /*
+         * Stop the browser from focusing the link/button.
+         */
+
+        if (event.cancelable) {
+
+            event.preventDefault();
+
+        }
+
+
+        /*
+         * Remove keyboard focus BEFORE navigation.
+         */
+
+        blurMobileInputs();
+
+
+        /*
+         * Close chatbot.
+         */
+
+        closeChatBeforeNavigation();
+
+
+        /*
+         * Lock chat system.
+         */
+
+        lockChatInputs();
+
+
+        /*
+         * Tell the loader page that navigation is coming.
+         */
+
+        try {
+
+            sessionStorage.setItem(
+                "devlabNavigation",
+                "true"
+            );
+
+        } catch (error) {}
+
+
+        /*
+         * Navigate manually.
+         *
+         * This replaces the normal anchor navigation,
+         * but keeps the exact same destination.
+         */
+
+        window.location.href =
+            devLabEnterButton.href;
+
+    }
+
+
+    /* =====================================================
+       MOBILE POINTER
+    ===================================================== */
+
+    devLabEnterButton.addEventListener(
+        "pointerdown",
+        prepareDevLabNavigation,
+        {
+            capture: true,
+            passive: false
+        }
+    );
+
+
+    /* =====================================================
+       FALLBACK FOR OLDER MOBILE BROWSERS
+    ===================================================== */
+
+    devLabEnterButton.addEventListener(
+        "touchstart",
+        function(event) {
+
+            /*
+             * pointerdown usually handles this already.
+             * This is only a fallback.
+             */
+
+            if (
+                !window.PointerEvent &&
+                isMobile()
+            ) {
+
+                prepareDevLabNavigation(
+                    event
+                );
+
+            }
+
+        },
+        {
+            capture: true,
+            passive: false
+        }
+    );
+
+
+    /* =====================================================
+       FINAL CLICK FALLBACK
+    ===================================================== */
+
+    devLabEnterButton.addEventListener(
+        "click",
+        function(event) {
+
+            if (!isMobile()) {
+                return;
+            }
+
+
+            /*
+             * pointerdown normally already navigated.
+             * This protects browsers where it didn't.
+             */
+
+            if (
+                sessionStorage.getItem(
+                    "devlabNavigation"
+                ) === "true"
+            ) {
+
+                event.preventDefault();
+
+                return;
+
+            }
+
+
+            event.preventDefault();
+
+            prepareDevLabNavigation(
+                event
+            );
+
+        },
+        {
+            capture: true
+        }
+    );
+
+
+    /* =====================================================
+       PREVENT FOCUS DURING NAVIGATION
+    ===================================================== */
+
+    document.addEventListener(
+        "focusin",
+        function(event) {
+
+            if (!isMobile()) {
+                return;
+            }
+
+
+            if (
+                !document.documentElement
+                    .classList
+                    .contains(
+                        "devlab-navigation-active"
+                    )
+            ) {
+
+                return;
+
+            }
+
+
+            const target =
+                event.target;
+
+
+            if (
+                target.matches &&
+                target.matches(
+                    "input, textarea, select, [contenteditable='true']"
+                )
+            ) {
+
+                target.blur();
+
+            }
+
+        },
+        true
+    );
+
+
+    /* =====================================================
+       ALSO HANDLE PAGE LEAVING
+    ===================================================== */
+
+    window.addEventListener(
+        "pagehide",
+        function() {
+
+            if (!isMobile()) {
+                return;
+            }
+
+            blurMobileInputs();
+
+        }
+    );
+
+
+})();
 
