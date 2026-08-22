@@ -2465,7 +2465,7 @@ function getPremiumReply(message){
             </div>
 
             <a
-                href="https://drive.google.com/file/d/1F8wEmkhaN6Dz8y9IfEI4lo9ab7vCSZbA/view?usp=drive_link"
+                href="https://drive.google.com/file/d/1SHMY1tKj3wHpTHRrOlp9livy9zo7B_8z/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="ai-btn">
