@@ -10314,15 +10314,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const roles = window.innerWidth <= 768
     ? [
-    "Data Analyst",
     "Product Engineer",
     "Tech Business Analyst",
+    "Data Analyst",
     "SQL • Python • Power BI",
 ]
     : [
-    "Data Analyst",
     "Product Engineer",
     "Tech Business Analyst",
+    "Data Analyst",
     "SQL • Python • Power BI",
     "AI / Machine Learning Enthusiast"
 ];
