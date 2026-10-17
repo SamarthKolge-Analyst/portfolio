@@ -38563,34 +38563,78 @@ font-size: 11px;
     visibility: hidden !important;
 
 }
-
-
 /* =========================================================
-   WHILE LOADER IS ACTIVE
-   Everything underneath is visually suppressed.
+   DEVLAB LOADER — CLEAR BACKGROUND
 ========================================================= */
 
 html.devlab-loader-active,
 body.devlab-loader-active {
-
     overflow: hidden !important;
 }
 
-
+/* Keep homepage content sharp and readable */
 body.devlab-loader-active > *:not(#devLoader) {
-
-    filter:
-        blur(14px)
-        brightness(.45)
-        saturate(.65) !important;
-
-    transform:
-        translateZ(0) !important;
-
-    transition:
-        filter .6s ease !important;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
 }
 
+/* Subtle dark overlay instead of excessive darkness */
+body.devlab-loader-active::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    background: rgba(0, 0, 0, 0.30);
+    pointer-events: none;
+}
+
+/* Keep loader above the overlay */
+#devLoader {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 10000 !important;
+}
+
+
+/* =========================================================
+   DEVLAB LOADER — VISIBILITY BOOST
+========================================================= */
+
+#devLoader .loader-content {
+    opacity: 1 !important;
+}
+
+#devLoader .loader-title {
+    color: #f3fbff !important;
+    text-shadow: 0 0 24px rgba(0, 220, 255, 0.12);
+}
+
+#devLoader .loader-subtitle {
+    color: rgba(200, 225, 235, 0.85) !important;
+}
+
+#devLoader .loader-status {
+    color: rgba(180, 225, 240, 0.9) !important;
+}
+
+#devLoader .loader-terminal {
+    background: rgba(2, 10, 17, 0.95) !important;
+    border-color: rgba(0, 220, 255, 0.3) !important;
+}
+
+#devLoader .loader-terminal-body {
+    color: rgba(210, 235, 245, 0.9) !important;
+}
+
+#devLoader .loader-percent {
+    color: #00d9ff !important;
+}
+
+#devLoader .loader-skip {
+    color: #d5f5ff !important;
+    background: rgba(4, 15, 23, 0.95) !important;
+}
 
 /* =========================================================
    RESPONSIVE
@@ -39191,7 +39235,7 @@ body.dev-home-ready #devMain {
         ================================================== -->
 
   <a
-    href="../Lentra/index.html"
+    href="../Lentra/index.html"  
     class="dev-brand"
     aria-label="Lentra Career Page">
 
@@ -39251,8 +39295,8 @@ body.dev-home-ready #devMain {
     </div>
 
     <div class="dev-brand-text">
-        <strong>DevLab</strong>
-        <span>SAMARTH KOLGE</span>
+        <strong>Lentra</strong>
+        <span>CAREER STORY</span>
     </div>
 
 </a>

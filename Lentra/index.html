@@ -1201,12 +1201,6 @@
 
         }
 
-        /*
-         * Close the final responsive block from Part 1.
-         */
-
-        }
-
 
 
 /* =====================================================
@@ -1361,6 +1355,9 @@
     letter-spacing: 0.08em;
 }
 
+
+
+
 /* =====================================================
    NAVIGATION LINKS
 ===================================================== */
@@ -1443,6 +1440,31 @@
     box-shadow: 0 0 9px rgba(57, 230, 170, 0.45);
 }
 
+
+
+
+/* =====================================================
+   DEFAULT ACTIVE NAVIGATION — HOME
+===================================================== */
+
+.lentra-page .nav-links .nav-link[href="#top"].active,
+.lentra-page .mobile-nav .nav-link[href="#top"].active {
+    color: #39e6aa;
+    background: rgba(57, 230, 170, 0.075);
+    border-color: rgba(57, 230, 170, 0.16);
+}
+
+.lentra-page .nav-links .nav-link[href="#top"].active::after {
+    content: "";
+    position: absolute;
+    left: 30%;
+    right: 30%;
+    bottom: 4px;
+    height: 2px;
+    border-radius: 5px;
+    background: #39e6aa;
+    box-shadow: 0 0 9px rgba(57, 230, 170, 0.45);
+}
 /* =====================================================
    PORTFOLIO BUTTON
 ===================================================== */
@@ -8330,6 +8352,70 @@ html {
 
 
 
+    
+/* =====================================================
+   IMPACT ANALYTICS — INTERACTIVE CHARTS
+===================================================== */
+.impact-analytics { --impact-line: rgba(174,198,225,.12); --impact-muted: #91a4bb; }
+.impact-analytics .impact-intro {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.impact-analytics .impact-topline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 24px;
+    width: 100%;
+}
+.impact-analytics .impact-chip { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; color:#bcefe0; background:rgba(57,230,170,.055); border:1px solid rgba(57,230,170,.16); border-radius:999px; font:11px/1.4 var(--font-mono); }
+.impact-analytics .impact-chip i { color:var(--accent); }
+.impact-analytics .impact-grid { display:grid; grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr); gap:22px; align-items:stretch; }
+.impact-analytics .impact-panel { position:relative; min-width:0; padding:clamp(20px,3vw,30px); overflow:hidden; background:radial-gradient(circle at 100% 0%,rgba(97,217,255,.07),transparent 34%),linear-gradient(145deg,rgba(18,29,44,.94),rgba(8,14,24,.97)); border:1px solid var(--impact-line); border-radius:22px; box-shadow:0 24px 75px rgba(0,0,0,.19); transition:transform 350ms var(--ease-standard),border-color 350ms ease,box-shadow 350ms ease; }
+@media(hover:hover){.impact-analytics .impact-panel:hover{transform:translateY(-4px);border-color:rgba(97,217,255,.25);box-shadow:0 28px 80px rgba(0,0,0,.26),0 0 35px rgba(97,217,255,.035);}}
+.impact-analytics .impact-panel::before { position:absolute;top:0;left:24px;right:24px;height:1px;content:"";background:linear-gradient(90deg,transparent,rgba(255,255,255,.17),transparent);pointer-events:none; }
+.impact-analytics .impact-panel-head { display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:22px; }
+.impact-analytics .impact-panel-title { margin:0;color:var(--text-primary);font:800 clamp(18px,2vw,22px)/1.3 var(--font-display);letter-spacing:-.035em; }
+.impact-analytics .impact-panel-subtitle { margin:8px 0 0;color:var(--impact-muted);font-size:12px;line-height:1.7; }
+.impact-analytics .impact-panel-icon { display:grid;flex:0 0 42px;place-items:center;width:42px;height:42px;color:var(--cyan);background:rgba(97,217,255,.075);border:1px solid rgba(97,217,255,.14);border-radius:13px; }
+.impact-analytics .impact-chart-tools { display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px; }
+.impact-analytics .impact-sort { display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:34px;padding:7px 11px;color:#a9bad0;background:rgba(255,255,255,.025);border:1px solid var(--impact-line);border-radius:9px;font-size:11px;font-weight:700;cursor:pointer;transition:color 200ms ease,background 200ms ease,border-color 200ms ease,transform 200ms ease; }
+.impact-analytics .impact-sort:hover,.impact-analytics .impact-sort[aria-pressed="true"] { color:#bfffe8;background:rgba(57,230,170,.08);border-color:rgba(57,230,170,.25); }
+.impact-analytics .impact-sort:active { transform:scale(.97); }
+.impact-analytics .impact-axis-labels { display:flex;justify-content:space-between;margin:0 42px 9px 112px;padding:0 1px;color:#61758e;font:10px/1.4 var(--font-mono); }
+.impact-analytics .impact-bars { display:grid;gap:13px; }
+.impact-analytics .impact-bar-row { display:grid;grid-template-columns:100px minmax(0,1fr) 42px;align-items:center;gap:12px;min-width:0; }
+.impact-analytics .impact-client { overflow:hidden;color:#b9c8da;font-size:12px;font-weight:650;text-overflow:ellipsis;white-space:nowrap; }
+.impact-analytics .impact-track { position:relative;height:10px;overflow:hidden;background:rgba(151,179,210,.085);border:1px solid rgba(151,179,210,.06);border-radius:99px; }
+.impact-analytics .impact-track::after { position:absolute;inset:0;content:"";pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(25% - 1px),rgba(5,12,21,.55) calc(25% - 1px),rgba(5,12,21,.55) 25%); }
+.impact-analytics .impact-fill { position:relative;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#2ccf9a,#61d9ff);box-shadow:0 0 18px rgba(57,230,170,.2);transition:width 1100ms cubic-bezier(.16,1,.3,1); }
+.impact-analytics .impact-fill::after { position:absolute;top:0;right:0;bottom:0;width:20px;content:"";background:linear-gradient(90deg,transparent,rgba(255,255,255,.65));opacity:.65; }
+.impact-analytics .impact-value { color:#e4fff6;font:700 12px/1.3 var(--font-mono);text-align:right;font-variant-numeric:tabular-nums; }
+.impact-analytics .impact-chart-footnote { margin:20px 0 0;padding-top:15px;color:#788da5;border-top:1px solid var(--impact-line);font-size:11px;line-height:1.7; }
+.impact-analytics .delivery-stack { display:grid;gap:12px; }
+.impact-analytics .delivery-card { --delivery-accent:#39e6aa;position:relative;display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;gap:14px;min-width:0;padding:15px;overflow:hidden;background:rgba(255,255,255,.022);border:1px solid rgba(174,198,225,.09);border-radius:15px;transition:background 250ms ease,border-color 250ms ease,transform 250ms var(--ease-standard); }
+.impact-analytics .delivery-card::before { position:absolute;inset:0 auto 0 0;width:2px;content:"";background:var(--delivery-accent);opacity:.85; }
+.impact-analytics .delivery-card:nth-child(2){--delivery-accent:#61d9ff}.impact-analytics .delivery-card:nth-child(3){--delivery-accent:#bb9aff}.impact-analytics .delivery-card:nth-child(4){--delivery-accent:#ffcf79}
+@media(hover:hover){.impact-analytics .delivery-card:hover{transform:translateX(3px);background:rgba(255,255,255,.045);border-color:var(--delivery-accent);}}
+.impact-analytics .delivery-icon { display:grid;place-items:center;width:44px;height:44px;color:var(--delivery-accent);background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);border-radius:13px;font-size:15px; }
+.impact-analytics .delivery-label { display:block;color:#cbd7e6;font-size:12px;font-weight:700;line-height:1.45; }
+.impact-analytics .delivery-detail { display:block;margin-top:4px;color:#788da5;font-size:11px;line-height:1.5; }
+.impact-analytics .delivery-number { color:var(--delivery-accent);font:800 clamp(19px,2.3vw,26px)/1.1 var(--font-display);letter-spacing:-.04em;text-align:right;white-space:nowrap; }
+.impact-analytics .delivery-number small { display:block;margin-top:5px;color:#71849a;font:10px/1.3 var(--font-mono);letter-spacing:.02em;text-transform:uppercase; }
+.impact-analytics .impact-callout { display:flex;align-items:flex-start;gap:12px;margin-top:18px;padding:14px 15px;color:#a6bad0;background:rgba(97,217,255,.045);border:1px solid rgba(97,217,255,.11);border-radius:13px;font-size:11px;line-height:1.75; }
+.impact-analytics .impact-callout i { margin-top:3px;color:var(--cyan); }.impact-analytics .impact-callout strong{color:#d8f7ff}
+.impact-analytics [data-impact-reveal] { opacity:1;transform:none; }
+.motion-ready .impact-analytics [data-impact-reveal] { opacity:0;transform:translateY(20px);transition:opacity 700ms var(--ease-standard),transform 700ms var(--ease-standard); }
+.motion-ready .impact-analytics [data-impact-reveal].is-visible { opacity:1;transform:translateY(0); }
+@media(max-width:1000px){.impact-analytics .impact-grid{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:560px){.impact-analytics .impact-bar-row{grid-template-columns:82px minmax(0,1fr) 39px;gap:8px}.impact-analytics .impact-axis-labels{margin-left:90px;margin-right:39px}.impact-analytics .impact-client{font-size:11px}.impact-analytics .impact-value{font-size:11px}.impact-analytics .delivery-card{grid-template-columns:38px minmax(0,1fr) auto;gap:10px;padding:12px}.impact-analytics .delivery-icon{width:38px;height:38px}.impact-analytics .delivery-label{font-size:11px}.impact-analytics .delivery-detail{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.impact-analytics .impact-fill,.impact-analytics .impact-panel,.impact-analytics .delivery-card,.motion-ready .impact-analytics [data-impact-reveal]{transition:none!important;animation:none!important;transform:none!important}}
+
     </style>
 </head>
 
@@ -8950,6 +9036,8 @@ html {
 </a>
 
 
+
+
                 <!-- Desktop navigation -->
 
                 <nav
@@ -8970,6 +9058,13 @@ html {
                         href="#career"
                     >
                         Career
+                    </a>
+
+                    <a
+                        class="nav-link"
+                        href="#impact-analytics"
+                    >
+                        Impact Analytics
                     </a>
 
                     <a
@@ -9072,6 +9167,18 @@ html {
                     ></i>
 
                     Career Timeline
+                </a>
+
+                <a
+                    class="nav-link"
+                    href="#impact-analytics"
+                >
+                    <i
+                        class="fa-solid fa-chart-column"
+                        aria-hidden="true"
+                    ></i>
+
+                    Impact Analytics
                 </a>
 
                 <a
@@ -9357,11 +9464,11 @@ html {
                                 <div>
 
                                     <span>
-                                        16 JUNE 2025
+                                        2025
                                     </span>
 
                                     <h2>
-                                        Tech Business Analyst Trainee
+                                        Tech Business Analyst
                                     </h2>
 
                                     <p>
@@ -9396,11 +9503,11 @@ html {
                                 <div>
 
                                     <span>
-                                        01 JULY 2026
+                                        2026
                                     </span>
 
                                     <h2>
-                                        Associate Product Engineer
+                                        Product Engineer
                                     </h2>
 
                                     <p>
@@ -9468,11 +9575,11 @@ html {
                         <div class="hero-bottom-item">
 
                             <span class="hero-bottom-number">
-                                07.2026
+                                2026
                             </span>
 
                             <span>
-                                Moved into product engineering
+                                Rapid Progression into Product Engineering
                             </span>
 
                         </div>
@@ -10030,6 +10137,68 @@ html {
 
     </section>
 
+
+
+
+    <!-- =============================================
+         IMPACT ANALYTICS
+    ============================================== -->
+    <section class="story-section impact-analytics" id="impact-analytics" aria-labelledby="impact-analytics-title">
+        <div class="container">
+            <header class="section-heading impact-intro" data-reveal>
+                <span class="section-eyebrow">ENGINEERING IMPACT / ANALYTICS</span>
+                <h2 class="section-title" id="impact-analytics-title">Impact, made <span class="highlight">visible.</span></h2>
+                <p class="section-description">A snapshot of client contribution and the engineering work behind delivery: implementation, iterative improvements, production support, and journey ownership.</p>
+                <div class="impact-topline" aria-label="Analytics highlights">
+                    <span class="impact-chip"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i> 11 client contribution profiles</span>
+                    <span class="impact-chip"><i class="fa-solid fa-code-branch" aria-hidden="true"></i> Build · Improve · Support · Own</span>
+                </div>
+            </header>
+
+            <div class="impact-grid">
+                <article class="impact-panel" data-impact-reveal aria-labelledby="client-chart-title">
+                    <div class="impact-panel-head">
+                        <div><h3 class="impact-panel-title" id="client-chart-title">Client contribution</h3><p class="impact-panel-subtitle">Supplied contribution levels · scale from 0% to 100%</p></div>
+                        <span class="impact-panel-icon" aria-hidden="true"><i class="fa-solid fa-chart-column"></i></span>
+                    </div>
+                    <div class="impact-chart-tools" role="group" aria-label="Sort client contribution chart">
+                        <button class="impact-sort" type="button" data-sort="default" aria-pressed="true">Original order</button>
+                        <button class="impact-sort" type="button" data-sort="high" aria-pressed="false"><i class="fa-solid fa-arrow-down-wide-short" aria-hidden="true"></i> Highest first</button>
+                        <button class="impact-sort" type="button" data-sort="low" aria-pressed="false"><i class="fa-solid fa-arrow-up-wide-short" aria-hidden="true"></i> Lowest first</button>
+                    </div>
+                    <div class="impact-axis-labels" aria-hidden="true"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
+                    <div class="impact-bars" id="client-contribution-chart" role="list" aria-label="Client contribution percentages">
+                        <div class="impact-bar-row" role="listitem" data-client="INDB" data-value="80"><span class="impact-client">INDB</span><div class="impact-track" role="img" aria-label="INDB: 80 percent"><div class="impact-fill" data-width="80"></div></div><span class="impact-value">80%</span></div>
+                        <div class="impact-bar-row" role="listitem" data-client="HDFC" data-value="60"><span class="impact-client">HDFC</span><div class="impact-track" role="img" aria-label="HDFC: 60 percent"><div class="impact-fill" data-width="60"></div></div><span class="impact-value">60%</span></div>
+                        <div class="impact-bar-row" role="listitem" data-client="BANDHAN" data-value="30"><span class="impact-client">BANDHAN</span><div class="impact-track" role="img" aria-label="BANDHAN: 30 percent"><div class="impact-fill" data-width="30"></div></div><span class="impact-value">30%</span></div>
+                        <div class="impact-bar-row" role="listitem" data-client="CBOI" data-value="35"><span class="impact-client">CBOI</span><div class="impact-track" role="img" aria-label="CBOI: 35 percent"><div class="impact-fill" data-width="35"></div></div><span class="impact-value">35%</span></div>
+                        <div class="impact-bar-row" role="listitem" data-client="Federal" data-value="70"><span class="impact-client">Federal</span><div class="impact-track" role="img" aria-label="Federal: 70 percent"><div class="impact-fill" data-width="70"></div></div><span class="impact-value">70%</span></div>
+                        <div class="impact-bar-row" role="listitem" data-client="HDBFS" data-value="45"><span class="impact-client">HDBFS</span><div class="impact-track" role="img" aria-label="HDBFS: 45 percent"><div class="impact-fill" data-width="45"></div></div><span class="impact-value">45%</span></div>
+                        <div class="impact-bar-row" role="listitem" data-client="RCBC" data-value="90"><span class="impact-client">RCBC</span><div class="impact-track" role="img" aria-label="RCBC: 90 percent"><div class="impact-fill" data-width="90"></div></div><span class="impact-value">90%</span></div>
+                        <div class="impact-bar-row" role="listitem" data-client="PNB" data-value="100"><span class="impact-client">PNB</span><div class="impact-track" role="img" aria-label="PNB: 100 percent"><div class="impact-fill" data-width="100"></div></div><span class="impact-value">100%</span></div>
+                        <div class="impact-bar-row" role="listitem" data-client="CTBC" data-value="100"><span class="impact-client">CTBC</span><div class="impact-track" role="img" aria-label="CTBC: 100 percent"><div class="impact-fill" data-width="100"></div></div><span class="impact-value">100%</span></div>
+                        <div class="impact-bar-row" role="listitem" data-client="Security Bank" data-value="35"><span class="impact-client">Security Bank</span><div class="impact-track" role="img" aria-label="Security Bank: 35 percent"><div class="impact-fill" data-width="35"></div></div><span class="impact-value">35%</span></div>
+                        <div class="impact-bar-row" role="listitem" data-client="TVS" data-value="10"><span class="impact-client">TVS</span><div class="impact-track" role="img" aria-label="TVS: 10 percent"><div class="impact-fill" data-width="10"></div></div><span class="impact-value">10%</span></div>
+                    </div>
+                    <p class="impact-chart-footnote">Percentages are the contribution estimates supplied for this portfolio. They are not a company-wide allocation and are not intended to add up to 100%.</p>
+                </article>
+
+                <article class="impact-panel" data-impact-reveal aria-labelledby="delivery-chart-title">
+                    <div class="impact-panel-head">
+                        <div><h3 class="impact-panel-title" id="delivery-chart-title">Engineering delivery profile</h3><p class="impact-panel-subtitle">Work delivered across four responsibility areas</p></div>
+                        <span class="impact-panel-icon" aria-hidden="true"><i class="fa-solid fa-layer-group"></i></span>
+                    </div>
+                    <div class="delivery-stack">
+                        <div class="delivery-card"><span class="delivery-icon" aria-hidden="true"><i class="fa-solid fa-code"></i></span><span><span class="delivery-label">Development &amp; implementation</span><span class="delivery-detail">Journey builds and implementation work</span></span><span class="delivery-number">10+<small>journeys</small></span></div>
+                        <div class="delivery-card"><span class="delivery-icon" aria-hidden="true"><i class="fa-solid fa-wand-magic-sparkles"></i></span><span><span class="delivery-label">Enhancements &amp; optimization</span><span class="delivery-detail">Improvements to existing journeys and features</span></span><span class="delivery-number">100+<small>enhancements</small></span></div>
+                        <div class="delivery-card"><span class="delivery-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></span><span><span class="delivery-label">Production support &amp; bug fixing</span><span class="delivery-detail">Issue investigation, fixes and production support</span></span><span class="delivery-number">2K+<small>bugs handled</small></span></div>
+                        <div class="delivery-card"><span class="delivery-icon" aria-hidden="true"><i class="fa-solid fa-route"></i></span><span><span class="delivery-label">End-to-end ownership</span><span class="delivery-detail">Responsibility across complete journeys</span></span><span class="delivery-number">4<small>journeys</small></span></div>
+                    </div>
+                    <div class="impact-callout"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span><strong>How to read this:</strong> each metric keeps its original unit. These are separate counts, not percentages of one shared total, so the dashboard avoids implying a misleading distribution.</span></div>
+                </article>
+            </div>
+        </div>
+    </section>
 
 
     <!-- =============================================
@@ -12690,20 +12859,15 @@ html {
                     data-reveal
                 >
 
-                    <div class="gallery-placeholder">
+<div class="gallery-photo">
 
-                        <i
-                            class="fa-solid fa-people-group"
-                            aria-hidden="true"
-                        ></i>
+    <img
+        src="../assets/Anniversary.jpeg"
+        alt="Lentra team anniversary celebration"
+        loading="lazy"
+    >
 
-                        <span>
-                            Add an approved team-event photo here.
-                        </span>
-
-                    </div>
-
-
+</div>
                     <div class="gallery-caption">
 
                         Team & Collaboration
@@ -12718,152 +12882,125 @@ html {
 
 
 
-                <!-- GALLERY 02 -->
+<!-- GALLERY 02 -->
 
-                <div
-                    class="gallery-item"
-                    role="img"
-                    aria-label="Placeholder for a traditional-day photograph"
-                    data-reveal
-                >
+<div
+    class="gallery-item"
+    role="group"
+    aria-label="Traditional Day photograph"
+    data-reveal
+>
 
-                    <div class="gallery-placeholder">
+    <div class="gallery-photo">
 
-                        <i
-                            class="fa-solid fa-camera"
-                            aria-hidden="true"
-                        ></i>
+        <img
+            src="../assets/Traditional.jpg"
+            alt="Lentra team celebrating Traditional Day"
+            loading="lazy"
+        >
 
-                        <span>
-                            Add your traditional-day photo here.
-                        </span>
+        <div class="gallery-photo-overlay">
 
-                    </div>
+            <span class="gallery-photo-caption">
+                <i
+                    class="fa-solid fa-camera"
+                    aria-hidden="true"
+                ></i>
 
+                Traditional Day
+            </span>
 
-                    <div class="gallery-caption">
+        </div>
 
-                        Traditional Day
+    </div>
 
-                        <small>
-                            Celebrating culture and community.
-                        </small>
+    <div class="gallery-caption">
 
-                    </div>
+        Traditional Day
 
-                </div>
+        <small>
+            Celebrating culture and community.
+        </small>
 
+    </div>
 
+</div>
+<!-- GALLERY 03 -->
+<div
+    class="gallery-item"
+    role="group"
+    aria-label="Team cricket photograph"
+    data-reveal
+>
+    <div class="gallery-photo">
+        <img
+            src="../assets/Cricket.jpeg"
+            alt="Lentra team enjoying a cricket moment"
+            loading="lazy"
+        >
+    </div>
 
-                <!-- GALLERY 03 -->
+    <div class="gallery-caption">
+        <i class="fa-solid fa-champagne-glasses" aria-hidden="true"></i>
+        Team Moments
+        <small>
+            Shared milestones and memories.
+        </small>
+    </div>
+</div>
 
-                <div
-                    class="gallery-item"
-                    role="img"
-                    aria-label="Placeholder for a company celebration photograph"
-                    data-reveal
-                >
+<!-- GALLERY 04 -->
+<div
+    class="gallery-item"
+    role="group"
+    aria-label="Solo workplace photograph"
+    data-reveal
+>
+    <div class="gallery-photo">
+        <img
+            src="../assets/Solo.jpg"
+            alt="Solo photograph at the Lentra workplace"
+            loading="lazy"
+        >
 
-                    <div class="gallery-placeholder">
+        <div class="gallery-photo-overlay">
+            <span class="gallery-photo-caption">
+                <i class="fa-solid fa-building" aria-hidden="true"></i>
+                Everyday Work
+            </span>
+        </div>
+    </div>
 
-                        <i
-                            class="fa-solid fa-champagne-glasses"
-                            aria-hidden="true"
-                        ></i>
+    <div class="gallery-caption">
+        Everyday Work
+        <small>
+            Learning through daily collaboration.
+        </small>
+    </div>
+</div>
+<!-- GALLERY 05 -->
+<div
+    class="gallery-item"
+    role="group"
+    aria-label="Memories at Lentra"
+    data-reveal
+>
+    <div class="gallery-photo">
+        <img
+            src="../assets/INDB.jpeg"
+            alt="Professional group photograph at Lentra"
+            loading="lazy"
+        >
 
-                        <span>
-                            Add an approved celebration photo here.
-                        </span>
+    </div>
 
-                    </div>
-
-
-                    <div class="gallery-caption">
-
-                        Team Moments
-
-                        <small>
-                            Shared milestones and memories.
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- GALLERY 04 -->
-
-                <div
-                    class="gallery-item"
-                    role="img"
-                    aria-label="Placeholder for a workplace photograph"
-                    data-reveal
-                >
-
-                    <div class="gallery-placeholder">
-
-                        <i
-                            class="fa-solid fa-building"
-                            aria-hidden="true"
-                        ></i>
-
-                        <span>
-                            Add a suitable workplace photo here.
-                        </span>
-
-                    </div>
-
-
-                    <div class="gallery-caption">
-
-                        Everyday Work
-
-                        <small>
-                            Learning through daily collaboration.
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- GALLERY 05 -->
-
-                <div
-                    class="gallery-item"
-                    role="img"
-                    aria-label="Placeholder for a professional group photograph"
-                    data-reveal
-                >
-
-                    <div class="gallery-placeholder">
-
-                        <i
-                            class="fa-solid fa-image"
-                            aria-hidden="true"
-                        ></i>
-
-                        <span>
-                            Add an approved group photograph here.
-                        </span>
-
-                    </div>
-
-
-                    <div class="gallery-caption">
-
-                        Memories at Lentra
-
-                        <small>
-                            A journey shaped by people.
-                        </small>
-
-                    </div>
-
-                </div>
-
+    <div class="gallery-caption">
+        INDB Client Visit
+        <small>
+            Major Milestone for Lentra
+        </small>
+    </div>
+</div>
 
 
             </div>
@@ -12872,9 +13009,7 @@ html {
 
             <p class="recognition-footnote">
 
-                Gallery images are placeholders. Replace them with
-                your own approved photographs before publishing
-                the page publicly.
+                Many more memories processing...
 
             </p>
 
@@ -13381,34 +13516,39 @@ html {
                     }
                 });
             }
+function updateActiveNavigation() {
 
+    /* Keep Home active when the page first loads at the top */
+    if (
+        window.scrollY <= 10 &&
+        (
+            !window.location.hash ||
+            window.location.hash === "#top"
+        )
+    ) {
+        setActiveNavigation("top");
+        return;
+    }
 
-            function updateActiveNavigation() {
-                const sections = Array.from(
-                    page.querySelectorAll(
-                        ".story-section[id], .closing-section[id]"
-                    )
-                );
+    const sections = Array.from(
+        page.querySelectorAll(
+            ".story-section[id], .closing-section[id]"
+        )
+    );
 
-                let activeId = "top";
+    let activeId = "top";
 
-                /*
-                 * Find the last major section that has reached
-                 * the upper portion of the viewport.
-                 */
+    sections.forEach((section) => {
+        const position =
+            section.getBoundingClientRect().top;
 
-                sections.forEach((section) => {
-                    const position =
-                        section.getBoundingClientRect().top;
+        if (position <= 170) {
+            activeId = section.id;
+        }
+    });
 
-                    if (position <= 170) {
-                        activeId = section.id;
-                    }
-                });
-
-                setActiveNavigation(activeId);
-            }
-
+    setActiveNavigation(activeId);
+}
 
             /* =============================================
                05. SCROLL POSITION & BACK-TO-TOP
@@ -13900,5 +14040,55 @@ html {
          FINAL HTML DOCUMENT CLOSING TAGS.
     ====================================================== -->
 
-    </body>
+    
+<script>
+(() => {
+    "use strict";
+    const section = document.getElementById("impact-analytics");
+    if (!section) return;
+    const chart = section.querySelector("#client-contribution-chart");
+    const rows = Array.from(chart.querySelectorAll(".impact-bar-row"));
+    const sortButtons = Array.from(section.querySelectorAll("[data-sort]"));
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function animateBars() {
+        rows.forEach((row, index) => {
+            const fill = row.querySelector(".impact-fill");
+            if (!fill) return;
+            fill.style.transitionDelay = reduceMotion ? "0ms" : `${Math.min(index * 45, 360)}ms`;
+            fill.style.width = `${row.dataset.value}%`;
+            row.querySelector(".impact-track")?.setAttribute("aria-label", `${row.dataset.client}: ${row.dataset.value} percent`);
+        });
+    }
+
+    function sortRows(mode) {
+        const sorted = [...rows];
+        if (mode === "high") sorted.sort((a,b) => Number(b.dataset.value)-Number(a.dataset.value) || a.dataset.client.localeCompare(b.dataset.client));
+        else if (mode === "low") sorted.sort((a,b) => Number(a.dataset.value)-Number(b.dataset.value) || a.dataset.client.localeCompare(b.dataset.client));
+        else sorted.sort((a,b) => rows.indexOf(a)-rows.indexOf(b));
+        sorted.forEach(row => chart.appendChild(row));
+        sortButtons.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.sort === mode)));
+        animateBars();
+    }
+
+    sortButtons.forEach(button => button.addEventListener("click", () => sortRows(button.dataset.sort)));
+    const revealTargets = section.querySelectorAll("[data-impact-reveal]");
+    if ("IntersectionObserver" in window && !reduceMotion) {
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add("is-visible");
+                if (entry.target.contains(chart)) animateBars();
+                obs.unobserve(entry.target);
+            });
+        }, { threshold: 0.14, rootMargin: "0px 0px -30px 0px" });
+        revealTargets.forEach(target => observer.observe(target));
+    } else {
+        revealTargets.forEach(target => target.classList.add("is-visible"));
+        animateBars();
+    }
+})();
+</script>
+
+</body>
 </html>

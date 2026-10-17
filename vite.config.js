@@ -9,7 +9,12 @@ export default defineConfig({
         dashboard: resolve(__dirname, 'Dashboard/index.html'),
         devLab: resolve(__dirname, 'DevLab/index.html'),
         studyMaterial: resolve(__dirname, 'Study-Material/index.html'),
+        lentra: resolve(__dirname, 'Lentra/index.html'),
       },
     },
   },
 });
+
+
+
+
