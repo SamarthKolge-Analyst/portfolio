@@ -9,7 +9,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <meta
+    <metaa
         name="theme-color"
         content="#050b14">
 
@@ -39056,7 +39056,49 @@ body.dev-home-ready #devMain {
 
 
 
+/* Lentra logo inside DevLab branding */
+.dev-brand-icon.lentra-dev-brand-icon {
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    padding: 7px;
+    box-sizing: border-box;
+    transition:
+        transform 350ms ease,
+        box-shadow 350ms ease,
+        border-color 350ms ease;
+}
 
+.lentra-dev-logo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    overflow: visible;
+    filter: drop-shadow(0 0 5px rgba(97, 217, 255, 0.14));
+    transition:
+        transform 450ms cubic-bezier(.22, 1, .36, 1),
+        filter 450ms ease;
+}
+
+@media (hover: hover) {
+    .dev-brand:hover .lentra-dev-brand-icon {
+        transform: translateY(-2px);
+        box-shadow: 0 0 22px rgba(57, 120, 246, 0.18);
+    }
+
+    .dev-brand:hover .lentra-dev-logo {
+        transform: rotate(-8deg) scale(1.08);
+        filter: drop-shadow(0 0 8px rgba(97, 217, 255, 0.35));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lentra-dev-brand-icon,
+    .lentra-dev-logo {
+        transition: none !important;
+    }
+}
 
 
 
@@ -39148,39 +39190,72 @@ body.dev-home-ready #devMain {
              BRAND
         ================================================== -->
 
-        <a
-            href="../"
-            class="dev-brand"
-            aria-label="DevLab Home">
+  <a
+    href="../Lentra/index.html"
+    class="dev-brand"
+    aria-label="Lentra Career Page">
 
+    <div
+        class="dev-brand-icon lentra-dev-brand-icon"
+        aria-hidden="true">
 
-            <div
-                class="dev-brand-icon"
-                aria-hidden="true">
+        <svg
+            class="lentra-dev-logo"
+            viewBox="0 0 100 100"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg">
 
-                <span>&lt;</span>
+            <defs>
+                <linearGradient id="dev-logo-blue"
+                    x1="15" y1="10" x2="75" y2="65"
+                    gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#3978F6"/>
+                    <stop offset="100%" stop-color="#61D9FF"/>
+                </linearGradient>
 
-                <strong>SK</strong>
+                <linearGradient id="dev-logo-red"
+                    x1="12" y1="50" x2="68" y2="68"
+                    gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#E94B55"/>
+                    <stop offset="100%" stop-color="#FF7777"/>
+                </linearGradient>
 
-                <span>/&gt;</span>
+                <linearGradient id="dev-logo-gold"
+                    x1="60" y1="35" x2="85" y2="80"
+                    gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#FFE08A"/>
+                    <stop offset="100%" stop-color="#F4BE45"/>
+                </linearGradient>
+            </defs>
 
-            </div>
+            <path
+                d="M66 12 C55 12 47 18 41 29 L31 47
+                   C27 54 21 58 12 58 L35 58
+                   C44 58 50 53 55 44 L65 25
+                   C68 19 73 15 80 13 Z"
+                fill="url(#dev-logo-blue)"/>
 
+            <path
+                d="M12 52 C16 56 22 58 29 58 H52
+                   C59 58 64 55 68 50 L62 61
+                   C58 67 52 70 44 70 H29
+                   C19 70 13 64 12 52 Z"
+                fill="url(#dev-logo-red)"/>
 
-            <div
-                class="dev-brand-text">
+            <path
+                d="M61 39 L72 55 C76 62 80 69 82 78
+                   C85 68 84 59 79 50 L70 35 Z"
+                fill="url(#dev-logo-gold)"/>
 
-                <strong>
-                    DevLab
-                </strong>
+        </svg>
+    </div>
 
-                <span>
-                    SAMARTH KOLGE
-                </span>
+    <div class="dev-brand-text">
+        <strong>DevLab</strong>
+        <span>SAMARTH KOLGE</span>
+    </div>
 
-            </div>
-
-        </a>
+</a>
 
 
 
